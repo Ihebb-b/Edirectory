@@ -37,13 +37,31 @@
   }
 }
 
+.search-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.search-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-top: -10px;
+
+}
+
 .search-bar-container {
   text-align: center;
-  padding: 20px;
+  padding: 40px 20px;
   background: url('../public/homepages/restaurant/images/foodiesfeed.com_paleo-chicken-skewers-with-plantains3.jpg')  center/cover no-repeat;
   color: white;
   border-radius: 20px;
 }
+
+
 
 .search-bar-title {
   font-size: 27px;
@@ -62,6 +80,7 @@
 .input-group {
   display: flex;
   width: 100%;
+  max-width: 600px;
 }
 
 .search-input {
@@ -82,6 +101,7 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+ 
 }
 
 .search-btn i {
@@ -107,5 +127,54 @@
   }
 }
 
+@media (max-width: 768px) {
+ 
+
+  .search-bar-container {
+    position: relative;
+    padding: 40px 20px;
+    border-radius: 20px;
+  }
+
+  .search-bar-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+  }
+
+  .input-group {
+      flex-direction: column;
+      width: 100%;
+  }
+
+  .search-input {
+      border-radius: 20px;
+      margin-bottom: 10px;
+      width: 100%;
+      border-right: 1px solid #ddd; /* Resetting border for a stacked layout */
+      background-color: rgba(255, 255, 255, 0.8); /* Slight transparency for better visibility */
+  }
+
+  .search-btn {
+      border-radius: 20px;
+      width: 100%;
+  }
+
+  .search-bar-container form {
+    position: relative;
+    z-index: 10;
+}
+
+.search-bar-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: 20px;
+}
+
+}
 
 

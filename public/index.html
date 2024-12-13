@@ -1,59 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Metadata -->
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    
-    <!-- Stylesheets & Fonts -->
-    <link href="css/plugins.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <meta name="description" content="Web site created using create-react-app" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
 
-    <!-- CSS HOTEL STYLE -->
+    <!-- Stylesheets -->
+    <link href="css/plugins.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="homepages/hotel/css/hotel-style.css" media="screen" />
-    
-    
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css" />
+
+    <!-- JavaScript Libraries -->
     <script src="js/jquery.js"></script>
     <script src="js/plugins.js"></script>
-
-    <!--Template functions-->
     <script src="js/functions.js"></script>
-
-    <!--Google Maps files-->
-    <script type='text/javascript' src='//maps.googleapis.com/maps/api/js?key=AIzaSyBOksKHb9HyydVB-mcrqKUVfA_LeB79jcQ'>
-    </script>
-    <script type="text/javascript" src="plugins/gmap3/gmap3.min.js"></script>
-    <script type="text/javascript" src="plugins/gmap3/map-styles.js"></script>
+    
+    <!-- Google Maps -->
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBOksKHb9HyydVB-mcrqKUVfA_LeB79jcQ"></script>
+    <script src="plugins/gmap3/gmap3.min.js"></script>
+    <script src="plugins/gmap3/map-styles.js"></script>
 
     <!-- Date & Time Picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css" type="text/css" />
     <script src="plugins/moment/moment.min.js"></script>
     <script src="plugins/daterangepicker/daterangepicker.js"></script>
 
-    <!-- Date Range Picker trigger code -->
+    <!-- Date Picker Initialization -->
     <script>
-        $(function () {
-            $('input[name="fromDate"]').daterangepicker({
-                singleDatePicker: true,
-                /* showDropdowns: true,*/
-            });
-
-            $('input[name="toDate"]').daterangepicker({
-                singleDatePicker: true,
-                /* showDropdowns: true,*/
-            });
-
+      $(function () {
+        $('input[name="fromDate"]').daterangepicker({
+          singleDatePicker: true,
         });
+
+        $('input[name="toDate"]').daterangepicker({
+          singleDatePicker: true,
+        });
+      });
     </script>
   </head>
   <body>
+    <!-- Fallback for Disabled JavaScript -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <!-- React Root Element -->
     <div id="root"></div>
+
+    <!-- Instructions -->
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

@@ -832,14 +832,14 @@ export default function Home() {
 
                     <div class="slide" data-bg-image="homepages/restaurant/images/main-2.jpg">
                         <div class="bg-overlay"></div>
-                        {/* <div class="container">
+                        <div class="container">
                             <div class="slide-captions">
 
                                 <h2 class="text-medium no-margin">5 star Hotel</h2>
                                 <h2 class="text-lg no-margin">Wonderful Feelings</h2>
 
                             </div>
-                        </div> */}
+                        </div>
                     </div>
 
                     <div class="slide" data-bg-image="homepages/hotel/images/2.jpg">
@@ -860,10 +860,10 @@ export default function Home() {
                 <section class="pb-0">
                     <div class="container">
                         <div class="card mt-n10">
-                            {/* <div class="card-body">
+                            <div class="card-body">
                                 <form>
                                     <div class="row justify-content-center">
-                                        <div class="col-lg-3">
+                                        {/* <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label>Check in</label>
                                                 <div class="input-group">
@@ -872,8 +872,8 @@ export default function Home() {
                                                         class="fas fa-calendar"></i></span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-3">
+                                        </div> */}
+                                        {/* <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label>Check out</label>
                                                 <div class="input-group">
@@ -882,39 +882,50 @@ export default function Home() {
                                                         class="fas fa-calendar"></i></span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-1 col-6">
+                                        </div> */}
+                                        <div class="col-lg-3 col-6">
                                             <div class="form-group">
-                                                <label>Adults</label>
+                                                <label class="font-size-lg">Country</label>
                                                 <select class="form-select">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
+                                                    <option>Tunisia</option>
+                                                    <option>Algeria</option>
+                                                    <option>Morroco</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-1 col-6">
+                                        <div class="col-lg-3 col-6">
                                             <div class="form-group">
-                                                <label>Children</label>
+                                                <label class="font-size-lg">Region</label>
                                                 <select class="form-select">
-                                                    <option>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                    <option>Sidi Bouzid</option>
+                                                    <option>Casablanca</option>
+                                                    <option>Wahran</option>
+                                                    <option>Tahran</option>
+                                                    <option>Ariana</option>
+                                                    <option>Manouba</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-6">
+                                            <div class="form-group">
+                                                <label class="font-size-lg">Zip</label>
+                                                <select class="form-select">
+                                                    <option>9100</option>
+                                                    <option>2080</option>
+                                                    <option>2800</option>
+                                                    <option>2022</option>
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-3 align-self-end">
-                                            <button type="button" class="btn btn-primary mb-3">Check availability</button>
+                                            <button type="button" class="btn btn-primary mb-3">Check restaurant</button>
                                         </div>
                                     </div>
                                 </form>
-                            </div> */}
+                            </div>
 
-                            <div class="search-bar-container">
+                            {/* <div class="search-bar-container">
                                 <h2 class="search-bar-title">Find Restaurants Nearby</h2>
                                 <form class="search-bar-form" role="search">
                                     <div class="input-group">
@@ -929,10 +940,7 @@ export default function Home() {
                                         </button>
                                     </div>
                                 </form>
-                            </div>
-
-
-
+                            </div> */}
                         </div>
                     </div>
                 </section>
@@ -947,64 +955,64 @@ export default function Home() {
                                     favourable situation close to the beach, the woods and the village centre, it is an ideal
                                     hotel, where you will certainly feel at home.</p>
                             </div>
-                            {/* <div class="col-lg-8">
-                        <div class="rooms carousel" data-items="2" data-margin="20" data-dots="false">
-                            <div class="room">
-                                <div class="room-image">
-                                    <img src="homepages/hotel/images/rooms/1.jpg" alt="#"/>
-                                    <div class="room-title">Luxury Room</div>
-                                    <span class="room-badge">save 60%</span>
-                                </div>
-                                <div class="room-details">
-                                    <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                        ornare sem lacinia quam venenatis vestibulum.</p>
-                                    <div class="float-left">
-                                        <h4>89$<small>/ Day</small></h4>
+                            <div class="col-lg-8">
+                                <div class="rooms carousel" data-items="2" data-margin="20" data-dots="false">
+                                    <div class="room">
+                                        <div class="room-image">
+                                            <img src="homepages/hotel/images/rooms/1.jpg" alt="#" />
+                                            <div class="room-title">Luxury Room</div>
+                                            <span class="room-badge">save 60%</span>
+                                        </div>
+                                        <div class="room-details">
+                                            <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
+                                                ornare sem lacinia quam venenatis vestibulum.</p>
+                                            <div class="float-left">
+                                                <h4>89$<small>/ Day</small></h4>
+                                            </div>
+                                            <div class="float-right">
+                                                <a href="#" class="btn btn-primary">Book</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="float-right">
-                                        <a href="#" class="btn btn-primary">Book</a>
+                                    <div class="room">
+                                        <div class="room-image">
+                                            <img src="homepages/hotel/images/rooms/2.jpg" alt="#" />
+                                            <div class="room-title">Deluxe Room</div>
+                                        </div>
+                                        <div class="room-details">
+                                            <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
+                                                ornare sem lacinia quam venenatis vestibulum.</p>
+                                            <div class="float-left">
+                                                <h4>89$<small>/ Day</small></h4>
+                                            </div>
+                                            <div class="float-right">
+                                                <a href="#" class="btn btn-primary">Book</a>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="room">
+                                        <div class="room-image">
+                                            <img src="homepages/hotel/images/rooms/3.jpg" alt="#" />
+                                            <div class="room-title">Standard Room</div>
+                                            <span class="room-badge">save 60%</span>
+                                        </div>
+                                        <div class="room-details">
+                                            <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
+                                                ornare sem lacinia quam venenatis vestibulum.</p>
+                                            <div class="float-left">
+                                                <h4>89$<small>/ Day</small></h4>
+                                            </div>
+                                            <div class="float-right">
+                                                <a href="#" class="btn btn-primary">Book</a>
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="room">
-                                <div class="room-image">
-                                    <img src="homepages/hotel/images/rooms/2.jpg" alt="#"/>
-                                    <div class="room-title">Deluxe Room</div>
-                                </div>
-                                <div class="room-details">
-                                    <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                        ornare sem lacinia quam venenatis vestibulum.</p>
-                                    <div class="float-left">
-                                        <h4>89$<small>/ Day</small></h4>
-                                    </div>
-                                    <div class="float-right">
-                                        <a href="#" class="btn btn-primary">Book</a>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="room">
-                                <div class="room-image">
-                                    <img src="homepages/hotel/images/rooms/3.jpg" alt="#"/>
-                                    <div class="room-title">Standard Room</div>
-                                    <span class="room-badge">save 60%</span>
-                                </div>
-                                <div class="room-details">
-                                    <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                        ornare sem lacinia quam venenatis vestibulum.</p>
-                                    <div class="float-left">
-                                        <h4>89$<small>/ Day</small></h4>
-                                    </div>
-                                    <div class="float-right">
-                                        <a href="#" class="btn btn-primary">Book</a>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div> */}
                         </div>
                         <div class="seperator"><i class="fa fa-check-circle-o"></i></div>
                         <div class="row m-t-60">
