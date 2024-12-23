@@ -12,6 +12,7 @@ import RestaurantList from './Pages/RestaurantList';
 import MenusList from './Pages/MenusList';
 import RecipesList from './Pages/RecipesList';
 import RestaurantDetail from './Pages/RestaurantDetail';
+import RecipeDetail from './Pages/RecipeDetail';
 
 function App() {
 
@@ -23,8 +24,9 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/rlist" element={<RestaurantList />} />
                 <Route path="/menulist" element= { <MenusList/> } />
-                <Route path="/recepielist" element= { <RecipesList/> } />
+                <Route path="/recipelist" element= { <RecipesList/> } />
                 <Route path="/restaurantdetail" element= { <RestaurantDetail/> } />
+                <Route path="/recipedetail" element= { <RecipeDetail/> } />
                 
             </Routes>
         </BrowserRouter>

@@ -214,119 +214,50 @@ function RestaurantDetail() {
                 <section id="section-gallery" className="p-t-150 p-b-150">
                     <div className="container">
                         <div className="row">
-                            <div data-animate-delay="100" data-animate="animate__fadeInUp" className="col-lg-4">
+                            <div className="col-lg-4">
                                 <h5 className="m-b-0">The food</h5>
                                 <h2 className="text-lg font-herr-von-muellerhoff text-colored">Gallery</h2>
-                                <p>The most happiest time of the day!. Morbi sagittis, sem quis lacinia faucibus, orci ipsum gravida tortor, vel interdum mi sapien ut justo. Nulla varius consequat magna, id molestie ipsum volutpat quis.
+                                <p style={{textAlign:"justify"}}>Step into a visual feast with our gallery of meals, 
+                                    showcasing the vibrant and mouthwatering dishes that
+                                     define our restaurant. From beautifully plated Mediterranean
+                                      classics to creative modern delights, 
+                                      each image captures the artistry, freshness,
+                                       and passion that go into every meal we serve. 
+                                       Let your eyes savor the rich colors of our dishes, 
+                                       the perfect sear on our meats, the freshness of our salads, 
+                                       and the indulgent allure of our desserts. It's not just food; 
+                                       it's an experience waiting to be savored.
                                 </p>
                             </div>
 
-                            <div data-animate-delay="300" data-animate="animate__fadeInUp" className="col-lg-8">
+                            <div className="col-lg-8">
 
-                                <div id="portfolio" className="grid-layout portfolio-3-columns" data-margin="10">
-
-
-                                    <div className="portfolio-item img-zoom ct-photography ct-marketing ct-media">
-                                        <div className="portfolio-item-wrap">
-                                            <div className="portfolio-image">
-                                                <a href="#"><img src="homepages/restaurant/images/gallery/8.jpg" alt="" /></a>
-                                            </div>
-                                            <div className="caption">
-                                                <a href="homepages/restaurant/images/gallery/8.jpg" className="btn btn-light btn-roundeded">Zoom</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="portfolio-item img-zoom ct-photography ct-media ct-branding ct-Media">
-                                        <div className="portfolio-item-wrap">
-                                            <div className="portfolio-image">
-                                                <a href="#"><img src="homepages/restaurant/images/gallery/7.jpg" alt="" /></a>
-                                            </div>
-                                            <div className="portfolio-description">
-                                                <a title="Paper Pouch!" data-lightbox="image" href="homepages/restaurant/images/gallery/7.jpg" className="btn btn-light btn-roundeded">Zoom</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                                        <div className="portfolio-item-wrap">
-                                            <div className="portfolio-image">
-                                                <a href="#"><img src="homepages/restaurant/images/gallery/6.jpg" alt="" /></a>
-                                            </div>
-                                            <div className="portfolio-description">
-                                                <a title="Paper Pouch!" data-lightbox="image" href="homepages/restaurant/images/gallery/6.jpg" className="btn btn-light btn-roundeded">Zoom</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="portfolio-item img-zoom ct-marketing ct-media ct-branding ct-marketing ct-webdesign">
-                                        <div className="portfolio-item-wrap">
-                                            <div className="portfolio-image">
-                                                <a href="#"><img src="homepages/restaurant/images/gallery/5.jpg" alt="" /></a>
-                                            </div>
-                                            <div className="portfolio-description">
-                                                <a title="Paper Pouch!" data-lightbox="image" href="homepages/restaurant/images/gallery/5.jpg" className="btn btn-light btn-roundeded">Zoom</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                                        <div className="portfolio-item-wrap">
-                                            <div className="portfolio-image">
-                                                <a href="#"><img src="homepages/restaurant/images/gallery/5.jpg" alt="" /></a>
-                                            </div>
-                                            <div className="portfolio-description">
-                                                <a title="Paper Pouch!" data-lightbox="image" href="homepages/restaurant/images/gallery/5.jpg" className="btn btn-light btn-roundeded">Zoom</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="portfolio-item img-zoom ct-photography ct-media ct-branding ct-Media ct-marketing ct-webdesign">
-                                        <div className="portfolio-item-wrap">
-                                            <div className="portfolio-image">
-                                                <a href="#"><img src="homepages/restaurant/images/gallery/4.jpg" alt="" /></a>
-                                            </div>
-                                            <div className="portfolio-description">
-                                                <a title="Paper Pouch!" data-lightbox="image" href="homepages/restaurant/images/gallery/4.jpg" className="btn btn-light btn-roundeded">Zoom</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="portfolio-item img-zoom ct-photography ct-marketing ct-media">
-                                        <div className="portfolio-item-wrap">
-                                            <div className="portfolio-image">
-                                                <a href="#"><img src="homepages/restaurant/images/gallery/3.jpg" alt="" /></a>
-                                            </div>
-                                            <div className="portfolio-description">
-                                                <a title="Paper Pouch!" data-lightbox="image" href="homepages/restaurant/images/gallery/3.jpg" className="btn btn-light btn-roundeded">Zoom</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="portfolio-item img-zoom ct-marketing ct-media ct-branding ct-marketing ct-webdesign">
-                                        <div className="portfolio-item-wrap">
-                                            <div className="portfolio-image">
-                                                <a href="#"><img src="homepages/restaurant/images/gallery/2.jpg" alt="" /></a>
-                                            </div>
-                                            <div className="portfolio-description">
-                                                <img src="homepages/restaurant/images/gallery/2.jpg" className="btn btn-light btn-roundeded" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="portfolio-item img-zoom ct-photography ct-media ct-branding ct-marketing ct-webdesign">
-                                        <div className="portfolio-item-wrap">
-                                            <div className="portfolio-image">
-                                                <a href="#"><img src="homepages/restaurant/images/gallery/1.jpg" alt="" /></a>
-                                            </div>
-                                            <div className="portfolio-description">
-                                                <a title="Paper Pouch!" data-lightbox="image" href="homepages/restaurant/images/gallery/1.jpg" className="btn btn-light btn-roundeded">Zoom</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </div>
+                            <div className="row">
+                    
+                    <div className="col-md-4 mb-3">
+                        <img src="homepages/restaurant/images/gallery/8.jpg" alt="Gallery Image 1" className="img-fluid" />
+                    </div>
+                   
+                    <div className="col-md-4 mb-3">
+                        <img src="homepages/restaurant/images/gallery/7.jpg" alt="Gallery Image 2" className="img-fluid" />
+                    </div>
+                  
+                    <div className="col-md-4 mb-3">
+                        <img src="homepages/restaurant/images/gallery/6.jpg" alt="Gallery Image 3" className="img-fluid" />
+                    </div>
+                   
+                    <div className="col-md-4 mb-3">
+                        <img src="homepages/restaurant/images/gallery/5.jpg" alt="Gallery Image 4" className="img-fluid" />
+                    </div>
+                   
+                    <div className="col-md-4 mb-3">
+                        <img src="homepages/restaurant/images/gallery/4.jpg" alt="Gallery Image 5" className="img-fluid" />
+                    </div>
+                   
+                    <div className="col-md-4 mb-3">
+                        <img src="homepages/restaurant/images/gallery/3.jpg" alt="Gallery Image 6" className="img-fluid" />
+                    </div>
+                </div>
 
                             </div>
                         </div>
@@ -342,108 +273,6 @@ function RestaurantDetail() {
                         </div>
                     </div>
                 </section>
-
-                {/* <section id="section-contact" className="background-grey p-t-40 p-b-0">
-                    <div className="container">
-                        <div className="row">
-
-                            <div className="col-lg-4">
-                                <div className="icon-box effect small clean">
-                                    <div className="icon-wrapper">
-                                        <div className="icon">
-                                            <a href="#"><i className="far fa-clock"></i></a>
-                                        </div>
-                                    </div>
-                                    <h3>Working Days</h3>
-                                    <div className="icon-text">
-                                        <p><strong>Monday - Friday</strong><br />10:00 AM - 11:00 PM</p>
-                                        <p><strong>Saturday - Sunday</strong><br />10:00 AM - 04:00 PM</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4">
-                                <div className="icon-box effect small clean">
-                                    <div className="icon-wrapper">
-                                        <div className="icon">
-                                            <a href="#"><i className="fa fa-map-marker-alt"></i></a>
-                                        </div>
-                                    </div>
-                                    <h3>Restaurant Location</h3>
-                                    <div className="icon-text">
-                                        <p><strong>Restaurant Address:</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4">
-                                <div className="icon-box effect small clean">
-                                    <div className="icon-wrapper">
-                                        <div className="icon">
-                                            <a href="#"><i className="fa fa-phone"></i></a>
-                                        </div>
-                                    </div>
-                                    <h3>Restaurant Contact</h3>
-                                    <div className="icon-text">
-                                        <p><strong>Phone:</strong><br /> (123) 456-7890<br /> (987) 654-3210</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section> */}
-
-
-                {/* <section id="section-contact" class="background-grey p-t-40 p-b-0">
-                    <div class="container">
-                        <div class="row">
-
-                            <div class="col-lg-4">
-                                <div class="icon-box effect small clean">
-                                    <div class="icon">
-                                        <a href="#"><i class="far fa-clock"></i></a>
-                                    </div>
-                                    <h3>Working Days</h3>
-                                    <p><strong>Monday - Friday</strong>
-                                        <br/>10:00 AM - 11:00 PM</p>
-                                    <p><strong>Saturday - Sunday</strong>
-                                    <br/>10:00 AM - 04:00 PM</p>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="icon-box effect small clean">
-                                    <div class="icon">
-                                        <a href="#"><i class="fa fa-map-marker-alt"></i></a>
-                                    </div>
-                                    <h3>Restaurant Location</h3>
-                                    <p><strong>Restaurant Address:</strong>
-                                        <br/> 795 Folsom Ave, Suite 600
-                                            <br/> San Francisco, CA 94107
-                                            <br/>
-                                                    </p>
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="col-lg-4">
-                                                <div class="icon-box effect small clean">
-                                                    <div class="icon">
-                                                        <a href="#"><i class="fa fa-phone"></i></a>
-                                                    </div>
-                                                    <h3>restaurant Contact</h3>
-                                                    <p><strong>Phone:</strong>
-                                                        <br/> (123) 456-7890
-                                                            <br/> (987) 654-3210
-                                                            <br/>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                </div>
-                                            </div>
-                                        </section> */}
 
                 <section id="section-contact" class="background-grey p-t-40 p-b-0">
                     <div class="container">
@@ -489,62 +318,6 @@ function RestaurantDetail() {
                         </div>
                     </div>
                 </section>
-
-
-
-
-
-                {/* <section id="section-contact" className="background-grey p-t-40 p-b-0">
-                    <div className="container">
-                        <div className="row">
-
-                            <div className="col-lg-4">
-                                <div className="icon-box effect small clean">
-                                    <div className="icon">
-                                        <a href="#"><i className="far fa-clock"></i></a>
-                                    </div>
-                                    <h3>Working Days</h3>
-                                    <div className="icon-text">
-                                        <p><strong>Monday - Friday</strong><br />10:00 AM - 11:00 PM</p>
-                                        <p><strong>Saturday - Sunday</strong><br />10:00 AM - 04:00 PM</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-4">
-                                <div className="icon-box effect small clean">
-                                    <div className="icon">
-                                        <a href="#"><i className="fa fa-map-marker-alt"></i></a>
-                                    </div>
-                                    <h3>Restaurant Location</h3>
-                                    <p><strong>Restaurant Address:</strong>
-                                        <br /> 795 Folsom Ave, Suite 600
-                                        <br /> San Francisco, CA 94107
-                                        <br />
-                                        <br />
-                                    </p>
-                                </div>
-                            </div>
-
-
-
-                            <div className="col-lg-4">
-                                <div className="icon-box effect small clean">
-                                    <div className="icon">
-                                        <a href="#"><i className="fa fa-phone"></i></a>
-                                    </div>
-                                    <h3>restaurant Contact</h3>
-                                    <p><strong>Phone:</strong>
-                                        <br /> (123) 456-7890
-                                        <br /> (987) 654-3210
-                                        <br />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section> */}
-
 
                 <div classNameName="seperator"><i classNameName="fa fa-dot-circle-o"></i></div>
 

@@ -160,7 +160,7 @@ export default function Home() {
                                                 preparations. </p>
 
                                             <div className="flex justify-center items-center h-full">
-                                                <a href="#" className="btn btn-roundeded btn-outline">Show all</a>
+                                            <NavLink to ="/recipelist" className="btn btn-roundeded btn-outline">Show all</NavLink>
                                             </div>
                                         </div>
                                     </div>
@@ -562,7 +562,7 @@ export default function Home() {
                                             ornare sem lacinia quam venenatis vestibulum.</p>
 
                                         <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
+                                        <NavLink to ="/recipedetail" className="btn btn-outline btn-dark ">details</NavLink>
                                         </div>
                                     </div>
                                 </div>
@@ -616,7 +616,7 @@ export default function Home() {
                                             ornare sem lacinia quam venenatis vestibulum.</p>
 
                                         <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
+                                            <NavLink to ="/recipelist" className="btn btn-outline btn-dark ">details</NavLink>
                                         </div>
                                     </div>
                                 </div>

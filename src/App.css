@@ -251,5 +251,73 @@
   padding: 0 !important;
 }
 
+.instructions-container {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.instruction-list {
+  list-style: decimal inside;
+  line-height: 1.6;
+  font-size: 16px;
+  color: #333;
+  padding-left: 20px;
+}
+
+.instruction-list li {
+  margin-bottom: 10px;
+}
+
+.ingredients-list {
+  margin-top: 40px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ingredients-list h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+.ingredients {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ingredients li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.ingredients li:last-child {
+  border-bottom: none;
+}
+
+.ingredient-name {
+  font-weight: bold;
+  color: #555;
+}
+
+.ingredient-quantity {
+  font-style: italic;
+  color: #777;
+}
+
+
+
+
+
 
 

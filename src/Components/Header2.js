@@ -51,7 +51,7 @@ function Header2() {
                                         <a id="btn-search" href="#"> <i class="icon-search"></i></a>
                                     </li>
                                     <li> <NavLink to="/">Home</NavLink></li>
-                                    <li className="dropdown"><a href="#">Restaurants</a>
+                                    <li className="dropdown"><NavLink to="/rlist">Restaurants</NavLink>
                                         <ul className="dropdown-menu">
                                             <li className="dropdown-submenu"><a href="#">categ1</a>
                                                 <ul className="dropdown-menu">
@@ -102,7 +102,7 @@ function Header2() {
 
                                         </ul>
                                     </li>
-                                    <li className="dropdown mega-menu-item"><a href="#">Recipes</a>
+                                    <li className="dropdown mega-menu-item"><NavLink to="/recipelist">Recipes</NavLink>
                                         <ul className="dropdown-menu">
                                             <li className="mega-menu-content">
                                                 <div className="row">
