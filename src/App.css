@@ -50,18 +50,16 @@
   padding: 20px;
   margin-bottom: 20px;
   margin-top: -10px;
-
 }
 
 .search-bar-container {
   text-align: center;
   padding: 40px 20px;
-  background: url('../public/homepages/restaurant/images/foodiesfeed.com_paleo-chicken-skewers-with-plantains3.jpg')  center/cover no-repeat;
+  background: url("../public/homepages/restaurant/images/foodiesfeed.com_paleo-chicken-skewers-with-plantains3.jpg")
+    center/cover no-repeat;
   color: white;
   border-radius: 20px;
 }
-
-
 
 .search-bar-title {
   font-size: 27px;
@@ -101,7 +99,6 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
- 
 }
 
 .search-btn i {
@@ -121,15 +118,14 @@
 }
 
 /* Responsive font size for smaller screens */
-@media (max-width: 600px) { /* Adjust the max-width as needed */
+@media (max-width: 600px) {
+  /* Adjust the max-width as needed */
   .logo-title {
     font-size: 1.5rem; /* Adjust this to your desired smaller size */
   }
 }
 
 @media (max-width: 768px) {
- 
-
   .search-bar-container {
     position: relative;
     padding: 40px 20px;
@@ -137,34 +133,39 @@
   }
 
   .search-bar-title {
-      font-size: 20px;
-      margin-bottom: 15px;
+    font-size: 20px;
+    margin-bottom: 15px;
   }
 
   .input-group {
-      flex-direction: column;
-      width: 100%;
+    flex-direction: column;
+    width: 100%;
   }
 
   .search-input {
-      border-radius: 20px;
-      margin-bottom: 10px;
-      width: 100%;
-      border-right: 1px solid #ddd; /* Resetting border for a stacked layout */
-      background-color: rgba(255, 255, 255, 0.8); /* Slight transparency for better visibility */
+    border-radius: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-right: 1px solid #ddd; /* Resetting border for a stacked layout */
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.8
+    ); /* Slight transparency for better visibility */
   }
 
   .search-btn {
-      border-radius: 20px;
-      width: 100%;
+    border-radius: 20px;
+    width: 100%;
   }
 
   .search-bar-container form {
     position: relative;
     z-index: 10;
-}
+  }
 
-.search-bar-container::before {
+  .search-bar-container::before {
     content: "";
     position: absolute;
     top: 0;
@@ -173,8 +174,82 @@
     height: 100%;
     z-index: 1;
     border-radius: 20px;
+  }
 }
 
+.widget-sidebar {
+  background: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-bottom: 25px;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  border: 1px solid #ddd;
 }
+
+.widget-title {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.filter_type h6 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #050000;
+}
+
+.filter_type ul {
+  list-style: none;
+  padding: 0;
+}
+
+.filter_type li {
+  display: flex;
+  align-items: center;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+  font-size: 0.95rem;
+  color: #0f0000;
+}
+
+.box_style_2 {
+  background: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-bottom: 25px;
+  padding: 20px;
+  position: relative;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.box_style_2 i {
+  font-size: 52px;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.box_style_2 a.phone {
+  font-size: 26px;
+  display: block;
+  margin-bottom: 20px;
+  color: #008489;
+}
+
+.hide-content {
+  padding-right: 25px;
+  margin-bottom: 1px;
+}
+
+.no-padding-section {
+  padding: 0 !important;
+}
+
 
 
