@@ -31,7 +31,10 @@ export default function Home() {
                                         <div className="col-lg-3 col-6">
                                             <div className="form-group">
                                                 <label className="font-size-lg">Country</label>
-                                                <select className="form-select">
+                                                <select className="form-select" defaultValue="">
+                                                    <option value="" disabled hidden>
+                                                        Select a country
+                                                    </option>
                                                     <option>Tunisia</option>
                                                     <option>Algeria</option>
                                                     <option>Morroco</option>
@@ -41,7 +44,10 @@ export default function Home() {
                                         <div className="col-lg-3 col-6">
                                             <div className="form-group">
                                                 <label className="font-size-lg">Region</label>
-                                                <select className="form-select">
+                                                <select className="form-select" defaultValue="">
+                                                    <option value="" disabled hidden>
+                                                        Select a region
+                                                    </option>
                                                     <option>Sidi Bouzid</option>
                                                     <option>Casablanca</option>
                                                     <option>Wahran</option>
@@ -54,7 +60,10 @@ export default function Home() {
                                         <div className="col-lg-3 col-6">
                                             <div className="form-group">
                                                 <label className="font-size-lg">Zip</label>
-                                                <select className="form-select">
+                                                <select className="form-select" defaultValue="">
+                                                    <option value="" disabled hidden>
+                                                        Select a zip code
+                                                    </option>
                                                     <option>9100</option>
                                                     <option>2080</option>
                                                     <option>2800</option>
@@ -112,13 +121,13 @@ export default function Home() {
                                 <div className="col-lg-3">
                                     <div className="room">
                                         <div className="room-image">
-                                            <img src="homepages/restaurant/images/envt.jpg" alt="#" />
-                                            <div className="room-title">Environments</div>
+                                            <img src="homepages/restaurant/images/chefs.jpg" alt="#" />
+                                            <div className="room-title">Chefs</div>
                                         </div>
                                         <div className="room-details">
-                                            <p>The environment of the Mediterranean promotes a sense of community and relaxation.
-                                                Soft lighting, a natural blend of modern
-                                                and traditional aesthetics create a perfect environment.</p>
+                                            <p>Mediterranean traditions promotes a sense of community.
+                                                Our expert chefs, inspired by these authentic traditions,
+                                                craft each dish with passion and precision, ensuring a delightful culinary experience.</p>
 
                                             <div className="flex justify-center items-center h-full">
                                                 <a href="#" className="btn btn-roundeded btn-outline">Show all</a>
@@ -160,7 +169,7 @@ export default function Home() {
                                                 preparations. </p>
 
                                             <div className="flex justify-center items-center h-full">
-                                            <NavLink to ="/recipelist" className="btn btn-roundeded btn-outline">Show all</NavLink>
+                                                <NavLink to="/recipelist" className="btn btn-roundeded btn-outline">Show all</NavLink>
                                             </div>
                                         </div>
                                     </div>
@@ -333,12 +342,12 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section>
+                <section className="red-bg">
                     <div className="container">
                         <div className="text-center m-b-40">
                             <div className="d-flex align-items-center justify-content-between mb-3">
 
-                                <h2 className="text-medium m-t-0 mb-0">Restaurants</h2>
+                                <h2 className="text-medium m-t-0 mb-0">Popular Restaurants</h2>
 
 
                                 <button type="button" className="btn btn-outline btn-dark">Explore More</button>
@@ -357,13 +366,37 @@ export default function Home() {
                             <div className="col-lg-3">
                                 <div className="room">
                                     <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
+                                        <img src="homepages/restaurant/images/restaurantmed1.jpg" alt="#" />
+                                        <div className="room-title">Dar Belhadj</div>
+                                        {/* <span className="room-badge">save 60%</span> */}
+                                    </div>
+                                    <div className="room-details">
+                                        <h5 >Tunisian</h5>
+                                        <p>An upscale restaurant in a typical Tunisian setting,
+                                             located in the medina between the two souks
+                                              “El Attarine “ and “El Balgagia”, 
+                                              with a view over the Great Mosque “Ezzitouna”.</p>
+                                        <h6 >€29 average price</h6>
+                                        <div className="float-center">
+                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-3">
+                                <div className="room">
+                                    <div className="room-image">
+                                        <img src="homepages/restaurant/images/restaurantmed4.jpg" alt="#" />
+                                        <div className="room-title">Le Petit Verre</div>
                                         <span className="room-badge">save 60%</span>
                                     </div>
                                     <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
+                                        <h5 >French</h5>
+
+                                        <p>“The Little Glass,” this name evokes a cozy, intimate dining 
+                                            experience. it suggests a time of elegance and refinement, also it conveys a sophisticated and chic atmosphere.</p>
+                                        <h6 >€89 average price</h6>
 
                                         <div className="float-center">
                                             <a href="#" className="btn btn-outline btn-dark ">details</a>
@@ -375,13 +408,16 @@ export default function Home() {
                             <div className="col-lg-3">
                                 <div className="room">
                                     <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
+                                        <img src="homepages/restaurant/images/restaurantmed2.jpg" alt="#" />
+                                        <div className="room-title">La Festa in Cucina</div>
                                     </div>
                                     <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
+                                        <h5 >Italian</h5>
+
+                                        <p>Meaning “The Kitchen Party,” this name evokes a lively and festive atmosphere.
+                                            it also implies satisfaction and joy from the food. this restaurant  brings to mind hearty, comforting meals.
+                                        </p>
+                                        <h6 >€69 average price</h6>
 
                                         <div className="float-center">
                                             <a href="#" className="btn btn-outline btn-dark ">details</a>
@@ -393,31 +429,17 @@ export default function Home() {
                             <div className="col-lg-3">
                                 <div className="room">
                                     <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
+                                        <img src="homepages/restaurant/images/restaurantmed3.jpg" alt="#" />
+                                        <div className="room-title">Taj Mahal</div>
                                     </div>
                                     <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
+                                        <h5 >Algerian</h5>
 
-                                        <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        <p>A highly-recommended restaurant in Algiers, known for serving excellent food.
+                                        It provides a nice environment and good service, with a staff that treats customers kindly.
 
-                            <div className="col-lg-3">
-                                <div className="room">
-                                    <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
-                                    </div>
-                                    <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
+                                        </p>
+                                        <h6 >€39 average price</h6>
 
                                         <div className="float-center">
                                             <a href="#" className="btn btn-outline btn-dark ">details</a>
@@ -432,12 +454,118 @@ export default function Home() {
 
 
 
-                <section>
+                <section className='gray-bg'>
                     <div className="container">
                         <div className="text-center m-b-40">
                             <div className="d-flex align-items-center justify-content-between mb-3">
 
-                                <h2 className="text-medium m-t-0 mb-0">Menus</h2>
+                                <h2 className="text-medium m-t-0 mb-0">Popular Menus</h2>
+
+
+                                <button type="button" className="btn btn-outline btn-dark">Explore More</button>
+                            </div>
+                            <div className="seperator"><i className="fa fa-dot-circle-o"></i></div>
+                            <p className="lead mb-0">
+                            Menus at Mediterranean restaurants are a vibrant celebration of 
+                            the rich culinary traditions of countries bordering the Mediterranean Sea, 
+                            such as Greece, Italy, Spain, Turkey, Morocco, and Lebanon. 
+                            They typically feature a diverse range of dishes that emphasize fresh, 
+                            wholesome ingredients. Diners can expect an array of flavorful options, 
+                            including crisp salads like Greek or tabbouleh, hearty pastas and risottos, 
+                            tender grilled meats and seafood, and savory vegetarian dishes. 
+                            </p>
+
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-3">
+                                <div className="room">
+                                    <div className="room-image">
+                                        <img src="homepages/restaurant/images/menumed1.jpg" alt="#" />
+                                        <div className="room-title">Mediterranean Mezze Platter</div>
+                                    </div>
+                                    <div className="room-details">
+                                        <p>A signature menu offering a selection of small dishes, 
+                                            ideal for sharing. It typically includes creamy hummus, 
+                                            baba ghanoush, stuffed grape leaves, falafel, tzatziki, 
+                                            olives, and warm pita bread. Perfect for starting a meal or enjoying
+                                             as a light fare.</p>
+
+                                        <div className="float-center">
+                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-3">
+                                <div className="room">
+                                    <div className="room-image">
+                                        <img src="homepages/restaurant/images/menumed2.jpg" alt="#" />
+                                        <div className="room-title">Grilled Seafood Feast</div>
+                                    </div>
+                                    <div className="room-details">
+                                        <p>A menu centered around fresh, grilled seafood such as octopus, 
+                                            shrimp, calamari, and whole fish like branzino or sea bass. 
+                                            Served with lemon wedges, olive oil, and a side of roasted 
+                                            vegetables or herb-infused rice.
+                                            These are often served drizzled with olive oil.</p>
+
+                                        <div className="float-center">
+                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-3">
+                                <div className="room">
+                                    <div className="room-image">
+                                        <img src="homepages/restaurant/images/menumed3.jpg" alt="#" />
+                                        <div className="room-title">Kebab & Skewer Platters</div>
+                                    </div>
+                                    <div className="room-details">
+                                        <p>A menu featuring skewered meats such as lamb, chicken, or beef, 
+                                            marinated with Mediterranean spices and herbs. 
+                                            Served with side dishes like couscous, rice pilaf, 
+                                            or grilled vegetables, and paired with yogurt or tahini sauces.
+                                           </p>
+
+                                        <div className="float-center">
+                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-3">
+                                <div className="room">
+                                    <div className="room-image">
+                                        <img src="homepages/restaurant/images/menumed4.jpg" alt="#" />
+                                        <div className="room-title">Moroccan Tagine Delights</div>
+                                    </div>
+                                    <div className="room-details">
+                                        <p>A menu featuring slow-cooked stews served in traditional tagine dishes. 
+                                            Options include lamb with prunes, chicken with preserved lemons, and 
+                                            vegetarian tagines with chickpeas and root vegetables. 
+                                            Typically served with couscous or flatbread.</p>
+
+                                        <div className="float-center">
+                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <section className='yellow-bg'>
+                    <div className="container">
+                        <div className="text-center m-b-40">
+                            <div className="d-flex align-items-center justify-content-between mb-3">
+
+                                <h2 className="text-medium m-t-0 mb-0">Popular Recipes</h2>
 
 
                                 <button type="button" className="btn btn-outline btn-dark">Explore More</button>
@@ -456,13 +584,35 @@ export default function Home() {
                             <div className="col-lg-3">
                                 <div className="room">
                                     <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
+                                        <img src="homepages/restaurant/images/recipemed1.jpg" alt="#" />
+                                        <div className="room-title">Baked Cod Recipe with Lemon and Garlic</div>
                                     </div>
                                     <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
+                                        <p>This easy baked cod recipe comes together in just over 20 minutes, 
+                                            but there is a reason it is a big fan favorite! Tender, perfectly flaky cod, 
+                                            tossed in bold Mediterranean spices and baked with a tasty garlic and lemon
+                                             sauce.</p>
+
+                                        <div className="float-center">
+                                            <NavLink to="/recipedetail" className="btn btn-outline btn-dark ">details</NavLink>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-lg-3">
+                                <div className="room">
+                                    <div className="room-image">
+                                        <img src="homepages/restaurant/images/recipemed2.jpg" alt="#" />
+                                        <div className="room-title">Authentic Falafel Recipe Step-by-Step</div>
+                                    </div>
+                                    <div className="room-details">
+                                        <p>Falafel is a popular Middle Eastern 
+                                            “fast food” made of a mixture of chickpeas, 
+                                            fresh herbs, and spices that are formed into a small patties or balls.
+                                            It's thought that falafel originated in Egypt as Coptic Christians
+                                            looked for a hearty replacement for meat.            
+                                        </p>
 
                                         <div className="float-center">
                                             <a href="#" className="btn btn-outline btn-dark ">details</a>
@@ -474,13 +624,14 @@ export default function Home() {
                             <div className="col-lg-3">
                                 <div className="room">
                                     <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
+                                        <img src="homepages/restaurant/images/recipemed3.jpg" alt="#" />
+                                        <div className="room-title">Homemade Pita Bread Recipe</div>
                                     </div>
                                     <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
+                                        <p>This homemade pita bread recipe is easy to make and requires 
+                                            a few ingredients you may already have on hand!  Mix up the 
+                                            very simple dough, let it rise, and experience the magic of fresh, 
+                                            warm, perfectly puffy homemade pita bread. </p>
 
                                         <div className="float-center">
                                             <a href="#" className="btn btn-outline btn-dark ">details</a>
@@ -492,131 +643,17 @@ export default function Home() {
                             <div className="col-lg-3">
                                 <div className="room">
                                     <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
+                                        <img src="homepages/restaurant/images/recipemed4.jpg" alt="#" />
+                                        <div className="room-title">Greek Avgolemono Soup Recipe</div>
                                     </div>
                                     <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
+                                        <p>Chicken soup is one of those nostalgic dishes known as a home remedy
+                                        to comfort the sick or relief the cold chill in the air. 
+                                        It's also one of those universal foods every culture, and every household,
+                                        has some version of noodles or not.</p>
 
                                         <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-3">
-                                <div className="room">
-                                    <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
-                                    </div>
-                                    <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
-
-                                        <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-
-                <section>
-                    <div className="container">
-                        <div className="text-center m-b-40">
-                            <div className="d-flex align-items-center justify-content-between mb-3">
-
-                                <h2 className="text-medium m-t-0 mb-0">Recipes</h2>
-
-
-                                <button type="button" className="btn btn-outline btn-dark">Explore More</button>
-                            </div>
-                            <div className="seperator"><i className="fa fa-dot-circle-o"></i></div>
-                            <p className="lead mb-0">
-                                Mediterranean restaurants offer a culinary experience inspired by the diverse and vibrant
-                                flavors of countries bordering the Mediterranean Sea, such as Greece, Italy, Spain, Turkey,
-                                Morocco, and Lebanon. These establishments typically focus on fresh, wholesome ingredients,
-                                including olive oil, fresh vegetables, herbs, legumes, lean proteins like fish and chicken,
-                                and whole grains.
-                            </p>
-
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-3">
-                                <div className="room">
-                                    <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
-                                    </div>
-                                    <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
-
-                                        <div className="float-center">
-                                        <NavLink to ="/recipedetail" className="btn btn-outline btn-dark ">details</NavLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-3">
-                                <div className="room">
-                                    <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
-                                    </div>
-                                    <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
-
-                                        <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-3">
-                                <div className="room">
-                                    <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
-                                    </div>
-                                    <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
-
-                                        <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-3">
-                                <div className="room">
-                                    <div className="room-image">
-                                        <img src="homepages/hotel/images/rooms/4.jpg" alt="#" />
-                                        <div className="room-title">Deluxe Room</div>
-                                        <span className="room-badge">save 60%</span>
-                                    </div>
-                                    <div className="room-details">
-                                        <p>Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque
-                                            ornare sem lacinia quam venenatis vestibulum.</p>
-
-                                        <div className="float-center">
-                                            <NavLink to ="/recipelist" className="btn btn-outline btn-dark ">details</NavLink>
+                                            <NavLink to="/recipelist" className="btn btn-outline btn-dark ">details</NavLink>
                                         </div>
                                     </div>
                                 </div>
@@ -628,7 +665,6 @@ export default function Home() {
 
 
 
-                <div className="seperator"><i className="fa fa-dot-circle-o"></i></div>
 
 
 

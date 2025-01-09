@@ -1,8 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header2 from '../Components/Header2'
 import Footer2 from '../Components/Footer2'
 
 function RestaurantDetail() {
+
+    useEffect(() => {
+        const elements = document.querySelectorAll('[data-animate]');
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const element = entry.target;
+                const animation = element.getAttribute('data-animate');
+                const delay = element.getAttribute('data-animate-delay');
+                element.classList.add('animate__animated', animation);
+                if (delay) {
+                  element.style.animationDelay = `${delay}ms`;
+                }
+                observer.unobserve(element); // Stop observing once animated
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+    
+        elements.forEach((el) => observer.observe(el));
+        return () => observer.disconnect(); // Clean up observer
+      }, []);
+
+      
     return (
 
         <>
@@ -274,13 +300,13 @@ function RestaurantDetail() {
                     </div>
                 </section>
 
-                <section id="section-contact" class="background-grey p-t-40 p-b-0">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="icon-box effect small clean text-center">
-                                    <div class="icon mb-3">
-                                        <a href="#"><i class="far fa-clock fa-2x"></i></a>
+                <section id="section-contact" className="background-grey p-t-40 p-b-0">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-4">
+                                <div className="icon-box effect small clean text-center">
+                                    <div className="icon mb-3">
+                                        <a href="#"><i className="far fa-clock fa-2x"></i></a>
                                     </div>
                                     <h3>Working Days</h3>
                                     <p><strong>Monday - Friday</strong>
@@ -290,10 +316,10 @@ function RestaurantDetail() {
                                 </div>
                             </div>
 
-                            <div class="col-lg-4">
-                                <div class="icon-box effect small clean text-center">
-                                    <div class="icon mb-3">
-                                        <a href="#"><i class="fa fa-map-marker-alt fa-2x"></i></a>
+                            <div className="col-lg-4">
+                                <div className="icon-box effect small clean text-center">
+                                    <div className="icon mb-3">
+                                        <a href="#"><i className="fa fa-map-marker-alt fa-2x"></i></a>
                                     </div>
                                     <h3>Restaurant Location</h3>
                                     <p><strong>Restaurant Address:</strong>
@@ -303,10 +329,10 @@ function RestaurantDetail() {
                                 </div>
                             </div>
 
-                            <div class="col-lg-4">
-                                <div class="icon-box effect small clean text-center">
-                                    <div class="icon mb-3">
-                                        <a href="#"><i class="fa fa-phone fa-2x"></i></a>
+                            <div className="col-lg-4">
+                                <div className="icon-box effect small clean text-center">
+                                    <div className="icon mb-3">
+                                        <a href="#"><i className="fa fa-phone fa-2x"></i></a>
                                     </div>
                                     <h3>Restaurant Contact</h3>
                                     <p><strong>Phone:</strong>

@@ -1249,7 +1249,7 @@ var INSPIRO = {},
             INSPIRO.elements.bootstrapSwitch();
             INSPIRO.elements.countdown();
             INSPIRO.elements.other();
-            // INSPIRO.elements.videoBackground();
+            INSPIRO.elements.videoBackground();
             INSPIRO.elements.forms();
             INSPIRO.elements.formValidation();
             INSPIRO.elements.formAjaxProcessing();
@@ -3127,76 +3127,83 @@ var INSPIRO = {},
                 });
             }
         },
-        // videoBackground: function() {
-        //     var $videoBackground = $("[data-bg-video]");
-        //     if ($videoBackground.length > 0) {
-        //         $videoBackground.each(function() {
-        //             var elem = $(this);
-        //             elem.options = {
-        //                 autoplay: elem.data("autoplay") == false ? false : true,
-        //                 controls: elem.attr("data-controls"),
-        //                 loop: elem.data("loop") == true ? true : false,
-        //                 muted: elem.data("muted") == false ? false : true,
-        //                 poster: elem.attr("data-poster") || "",
-        //                 preload: elem.attr("data-preload") || "auto",
-        //                 src: elem.attr("data-bg-video"),
-        //                 randomId: Math.random().toString(36).substr(2, 5),
-        //             };
+        videoBackground: function() {
+            var $videoBackground = $("[data-bg-video]");
+            if ($videoBackground.length > 0) {
+                $videoBackground.each(function() {
+                    var elem = $(this);
+                    elem.options = {
+                        autoplay: elem.data("autoplay") == false ? false : true,
+                        controls: elem.attr("data-controls"),
+                        loop: elem.data("loop") == true ? true : false,
+                        muted: elem.data("muted") == false ? false : true,
+                        poster: elem.attr("data-poster") || "",
+                        preload: elem.attr("data-preload") || "auto",
+                        src: elem.attr("data-bg-video"),
+                        randomId: Math.random().toString(36).substr(2, 5),
+                    };
 
-        //             if (elem.options.controls) {
-        //                 elem.options.controls =
-        //                     ' controls="' + elem.options.controls + '" ';
-        //             } else {
-        //                 elem.options.controls = "";
-        //             }
-        //             elem.prepend(
-        //                 '<div class="html5vid" id="video-' +
-        //                 elem.options.randomId +
-        //                 '">' +
-        //                 "<video playsinline " +
-        //                 elem.options.controls +
-        //                 ' loop="' +
-        //                 elem.options.loop +
-        //                 '" muted="' +
-        //                 elem.options.muted +
-        //                 '" poster="' +
-        //                 elem.options.poster +
-        //                 '" preload="' +
-        //                 elem.options.preload +
-        //                 '">' +
-        //                 '<source src="' +
-        //                 elem.options.src +
-        //                 '" type="video/mp4">' +
-        //                 "</video>" +
-        //                 "</div>"
-        //             );
-        //             if (elem.options.autoplay) {
-        //                 setTimeout(function() {
-        //                     $("#video-" + elem.options.randomId).waypoint(
-        //                         function(direction) {
-        //                             if (direction === "down") {
-        //                                 $("#video-" + elem.options.randomId)
-        //                                     .find("video")
-        //                                     .get(0)
-        //                                     .play();
-        //                             } else {
-        //                                 $("#video-" + elem.options.randomId)
-        //                                     .find("video")
-        //                                     .get(0)
-        //                                     .pause();
-        //                             }
-        //                         }, {
-        //                             offset: "50%",
-        //                         }
-        //                     );
-        //                 }, 100);
-        //             }
-        //             setTimeout(function() {
-        //                 $("#video-" + elem.options.randomId).addClass("video-loaded");
-        //             }, 300);
-        //         });
-        //     }
-        // },
+                    if (elem.options.controls) {
+                        elem.options.controls =
+                            ' controls="' + elem.options.controls + '" ';
+                    } else {
+                        elem.options.controls = "";
+                    }
+                    elem.prepend(
+                        '<div class="html5vid" id="video-' +
+                        elem.options.randomId +
+                        '">' +
+                        "<video playsinline " +
+                        elem.options.controls +
+                        ' loop="' +
+                        elem.options.loop +
+                        '" muted="' +
+                        elem.options.muted +
+                        '" poster="' +
+                        elem.options.poster +
+                        '" preload="' +
+                        elem.options.preload +
+                        '">' +
+                        '<source src="' +
+                        elem.options.src +
+                        '" type="video/mp4">' +
+                        "</video>" +
+                        "</div>"
+                    );
+                    if (elem.options.autoplay) {
+                        setTimeout(function() {
+                            const videoElement = $("#video-" + elem.options.randomId).find("video").get(0);
+                    
+                            if (!videoElement) {
+                                console.error("Video element not found for ID:", elem.options.randomId);
+                                return; // Exit if video element is not found
+                            }
+                    
+                            $("#video-" + elem.options.randomId).waypoint(
+                                function(direction) {
+                                    if (direction === "down") {
+                                        videoElement.play();
+                                    } else {
+                                        videoElement.pause();
+                                    }
+                                },
+                                {
+                                    offset: "50%",
+                                }
+                            );
+                        }, 100);
+                    }
+                    setTimeout(function() {
+                        const container = $("#video-" + elem.options.randomId);
+                        if (container.length > 0) {
+                            container.addClass("video-loaded");
+                        } else {
+                            console.error("Video container not found for ID:", elem.options.randomId);
+                        }
+                    }, 300);
+                });
+            }
+        },
     };
     INSPIRO.widgets = {
         functions: function() {

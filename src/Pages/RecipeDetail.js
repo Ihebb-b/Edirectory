@@ -113,7 +113,7 @@ function RecipeDetail() {
                         </div>
 
                         <div class="profile-bio-footer">
-                            <div class="text-center"> &copy; 2021 POLO - Responsive Multi-Purpose HTML5 Template. All Rights Reserved.INSPIRO</div>
+                            <div class="text-center"> &copy; © 2024 E-Directory - All Rights Reserved.</div>
                         </div>
                     </div>
                 </section>

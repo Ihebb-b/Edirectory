@@ -39,8 +39,22 @@ function RestaurantList() {
                 <section>
                     <div class="border">
                         {isMapVisible && (
-                            <div class="map" data-latitude="-37.817240" data-longitude="144.955826" data-style="light" data-info="Hello from &lt;br&gt; Inspiro Themes"></div>
+                            <iframe
+                                title="Google Map"
+                                className="embedded-map"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093747!2d144.95373531531675!3d-37.81720997975185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577f29cda1d45e1!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1699871345668!5m2!1sen!2sau"
+                                width="600"
+                                height="450"
+                                style={{ border: 0 }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                            ></iframe>
                         )}
+
+                        {/* <div class="map" data-latitude="-37.817240" data-longitude="144.955826" data-style="light" data-info="Hello from &lt;br&gt; Inspiro Themes"></div> */}
+
+
                     </div>
 
                 </section>
@@ -77,18 +91,18 @@ function RestaurantList() {
                                         <div class="post-item-wrap">
                                             <div class="post-image">
                                                 <a href="#">
-                                                <img alt="" src="/homepages/restaurant/images/restaurant1.jpg" />
+                                                    <img alt="" src="/homepages/restaurant/images/restaurant1.jpg" />
                                                 </a>
                                             </div>
                                             <div class="post-item-description">
 
                                                 <h2><a href="#">Teoric Taverna Gastronomica - Barcelona, Spain
                                                 </a></h2>
-                                                <p style={{textAlign: "justify"}}>This classic Spanish restaurant serves some of the best Mediterranean food you'll ever taste. 
-                                                    With great service, amazing food and a friendly atmosphere, 
-                                                    Teoric Taverna Gastronomica is a must-visit for the next time 
+                                                <p style={{ textAlign: "justify" }}>This classic Spanish restaurant serves some of the best Mediterranean food you'll ever taste.
+                                                    With great service, amazing food and a friendly atmosphere,
+                                                    Teoric Taverna Gastronomica is a must-visit for the next time
                                                     you find yourself in Barcelona.</p>
-                                                    <i class="icon-chevron-right"> <NavLink to="/restaurantdetail" class="item-link">Read More</NavLink></i>
+                                                <i class="icon-chevron-right"> <NavLink to="/restaurantdetail" class="item-link">Read More</NavLink></i>
 
                                             </div>
                                         </div>
@@ -103,18 +117,18 @@ function RestaurantList() {
                                         <div class="post-item-wrap">
                                             <div class="post-image">
                                                 <a href="#">
-                                                <img alt="" src="/homepages/restaurant/images/restaurant2.jpg" />
+                                                    <img alt="" src="/homepages/restaurant/images/restaurant2.jpg" />
                                                 </a>
                                             </div>
                                             <div class="post-item-description">
 
                                                 <h2><a href="#">La Montgolfiere Henri Geraci - Manoca
                                                 </a></h2>
-                                                <p style={{textAlign: "justify"}}>This restaurant is a true Monaco staple,
-                                                     serving excellent French, Mediterranean, 
-                                                     and Western-European menu options. Everything
-                                                      they create at the world-class La Montgolfiere
-                                                       Henri Geraci is made with care and precision, giving an end result that is sure to satisfy.</p>
+                                                <p style={{ textAlign: "justify" }}>This restaurant is a true Monaco staple,
+                                                    serving excellent French, Mediterranean,
+                                                    and Western-European menu options. Everything
+                                                    they create at the world-class La Montgolfiere
+                                                    Henri Geraci is made with care and precision, giving an end result that is sure to satisfy.</p>
                                                 <a href="#" class="item-link">Read More <i class="icon-chevron-right"></i></a>
                                             </div>
                                         </div>
@@ -124,17 +138,17 @@ function RestaurantList() {
                                         <div class="post-item-wrap">
                                             <div class="post-image">
                                                 <a href="#">
-                                                <img alt="" src="/homepages/restaurant/images/restaurant3.jpg" />
+                                                    <img alt="" src="/homepages/restaurant/images/restaurant3.jpg" />
                                                 </a>
                                             </div>
                                             <div class="post-item-description">
 
                                                 <h2><a href="#">La Vague d'OR - St Tropez, France
                                                 </a></h2>
-                                                <p style={{textAlign: "justify"}}>St. Tropez only has two Michelin-starred restaurants, and La Vague d'Or is one of them. 
-                                                    Meaning 'the golden wave' in English, this three-Michelin 
-                                                    star restaurant is at the top of its class. 
-                                                    With a menu rooted in Mediterranean origins, this destination 
+                                                <p style={{ textAlign: "justify" }}>St. Tropez only has two Michelin-starred restaurants, and La Vague d'Or is one of them.
+                                                    Meaning 'the golden wave' in English, this three-Michelin
+                                                    star restaurant is at the top of its class.
+                                                    With a menu rooted in Mediterranean origins, this destination
                                                     on the French Riviera is sure to provide a feast for your palate.</p>
                                                 <a href="#" class="item-link">Read More <i class="icon-chevron-right"></i></a>
                                             </div>
@@ -145,14 +159,14 @@ function RestaurantList() {
                                         <div class="post-item-wrap">
                                             <div class="post-image">
                                                 <a href="#">
-                                                <img alt="" src="/homepages/restaurant/images/restaurant4.jpg" />
+                                                    <img alt="" src="/homepages/restaurant/images/restaurant4.jpg" />
                                                 </a>
                                             </div>
                                             <div class="post-item-description">
 
                                                 <h2><a href="#">Ricks Cafe - Casablanca, Morocco
                                                 </a></h2>
-                                                <p style={{textAlign: "justify"}}>Rick's Café is a complete recreation of the bar made famous by Humphrey Bogart and Ingrid Bergman so many years ago in the movie Casablanca. Large staircases, classic Moroccan architecture and a grand piano on display add to the incredible food served at Rick's.</p>
+                                                <p style={{ textAlign: "justify" }}>Rick's Café is a complete recreation of the bar made famous by Humphrey Bogart and Ingrid Bergman so many years ago in the movie Casablanca. Large staircases, classic Moroccan architecture and a grand piano on display add to the incredible food served at Rick's.</p>
                                                 <a href="#" class="item-link">Read More <i class="icon-chevron-right"></i></a>
                                             </div>
                                         </div>
@@ -589,12 +603,12 @@ function RestaurantList() {
                                                     <input class="form-check-input" type="checkbox" name="wifi" id="wifi" />
                                                 </div>
                                             </li>
-                                            <li class="d-flex align-items-center mb-2">
+                                            {/* <li class="d-flex align-items-center mb-2">
                                                 <span class="flex-grow-1">Restaurant</span>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" type="checkbox" name="restaurant" id="restaurant" />
                                                 </div>
-                                            </li>
+                                            </li> */}
                                         </ul>
                                     </div>
 

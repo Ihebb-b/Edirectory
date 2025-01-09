@@ -1,19 +1,57 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { NavLink, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, setCredentials } from '../slices/authSlice';
+
 
 function Header2() {
+
+    const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(false);
+
+    const { userInfo } = useSelector((state) => state.auth);
+
+    const handleLogout = () => {
+        dispatch(logout());
+        setShowModal(false);
+        setShowSpinner(true);
+
+        setTimeout(() => {
+            setShowSpinner(false);
+            // You can redirect the user or perform any other action here
+        }, 2000); // 2000 milliseconds = 2 seconds
+    };
+
+
+
     return (
-
-
         <header id="header" class="dark" data-fullwidth="true">
             <div class="header-inner">
                 <div class="container">
 
                     <div id="logo">
-                        <NavLink to="/">
+                        {/* <NavLink to="/">
                             <span class="logo-default">E-Directory</span>
                             <span class="logo-dark">E-Directory</span>
-                        </NavLink>
+                        </NavLink> */}
+
+
+                        <a href='/'>
+                            <img
+                                src="images/moremeddietlogo.png"
+                                alt="E-Directory Logo"
+                                style={{
+                                    width: "100px",
+                                    height: "70px",
+                                    marginLeft: "2px",
+                                    display: "inline-block"
+                                }}
+
+                            //className="logo-image" 
+                            />
+                        </a>
+
                     </div>
 
                     <div id="search"><a id="btn-search-close" class="btn-search-close" aria-label="Close search form"><i class="icon-x"></i></a>
@@ -23,21 +61,90 @@ function Header2() {
                         </form>
                     </div>
 
-                    <div class="header-extras">
+                    <div className="header-extras">
                         <ul>
-
                             <li>
-                                <div class="p-dropdown">
-                                    <a href="#"><i class="icon-globe"></i><span>EN</span></a>
-                                    <ul class="p-dropdown-content">
+                                <div className="p-dropdown"> <a href="#"><i className="icon-globe"></i></a>
+                                    <ul className="p-dropdown-content">
                                         <li><a href="#">French</a></li>
                                         <li><a href="#">Spanish</a></li>
                                         <li><a href="#">English</a></li>
                                     </ul>
                                 </div>
                             </li>
+                            {/* Sign In Icon */}
+                            <li>
+                                {userInfo ? (
+                                    // Logged-in user dropdown menu
+                                    <div className="p-dropdown">
+                                        <a className="btn-rounded btn-icon">
+                                            <i className="icon-user"></i>
+                                        </a>
+                                        <div className="p-dropdown-content">
+                                            <div className="widget-myaccount">
+                                                <div className="d-block">
+                                                    <img
+                                                        className="avatar avatar-lg"
+                                                        src="images/team/6.jpg"
+                                                        alt="User Avatar"
+                                                    />
+                                                </div>
+                                                <span>{userInfo.name}</span>
+                                                <p className="text-muted">{userInfo.role || "Chef"}</p>
+                                                <ul className="text-center">
+                                                    <li>
+                                                        <NavLink to="/profile">
+                                                            <i className="icon-user" style={{ color: 'black' }}></i> My Profile
+                                                        </NavLink>
+                                                    </li>
+                                                    <li><a href="#"><i className="icon-clock" style={{ color: 'black' }} > </i>Activity logs</a></li>
+                                                    <li>
+                                                        <a onClick={() => setShowModal(true)}
+                                                            style={{ cursor: "pointer" }}>
+                                                            <i className="icon-log-out" style={{ color: 'black' }}></i> Log Out
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    // Sign-in icon for unauthenticated users
+                                    <NavLink to="/authpage" className="sign-in-link">
+                                        <i className="fas fa-sign-in-alt"></i>
+                                    </NavLink>
+                                )}
+                            </li>
                         </ul>
                     </div>
+
+                    {/* Logout Modal */}
+                    {showModal && (
+                        <div className="alert-modal-overlay">
+                            <div className="alert-modal">
+                                <p>Are you sure you want to log out?</p>
+                                <div className="alert-modal-actions">
+                                    <button
+                                        className="btn alert-cancel-btn"
+                                        onClick={() => setShowModal(false)}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button className="btn alert-logout-btn" onClick={handleLogout}>
+                                        Log Out
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {showSpinner && (
+                        <div className="backdrop-overlay">
+                            <div className="spinner-border" role="status">
+                                <span className="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    )}
 
                     <div id="mainMenu-trigger">
                         <a class="lines-button x"><span class="lines"></span></a>
@@ -51,7 +158,7 @@ function Header2() {
                                         <a id="btn-search" href="#"> <i class="icon-search"></i></a>
                                     </li>
                                     <li> <NavLink to="/">Home</NavLink></li>
-                                    <li className="dropdown"><NavLink to="/rlist">Restaurants</NavLink>
+                                    {/* <li className="dropdown"><NavLink to="/rlist">Restaurants</NavLink>
                                         <ul className="dropdown-menu">
                                             <li className="dropdown-submenu"><a href="#">categ1</a>
                                                 <ul className="dropdown-menu">
@@ -80,9 +187,9 @@ function Header2() {
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> */}
 
-                                    <li className="dropdown"><a href="#">Menus</a>
+                                    {/* <li className="dropdown"><a href="#">Menus</a>
                                         <ul className="dropdown-menu">
                                             <li className="dropdown-submenu"><a href="#">categ1</a>
                                                 <ul className="dropdown-menu">
@@ -101,8 +208,8 @@ function Header2() {
 
 
                                         </ul>
-                                    </li>
-                                    <li className="dropdown mega-menu-item"><NavLink to="/recipelist">Recipes</NavLink>
+                                    </li> */}
+                                    {/* <li className="dropdown mega-menu-item"><NavLink to="/recipelist">Recipes</NavLink>
                                         <ul className="dropdown-menu">
                                             <li className="mega-menu-content">
                                                 <div className="row">
@@ -151,7 +258,11 @@ function Header2() {
                                                 </div>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> */}
+                                    <li> <NavLink to="/rlist">Restaurants</NavLink></li>
+                                    <li> <NavLink to="/">Menus</NavLink></li>
+                                    <li> <NavLink to="/">Recipes</NavLink></li>
+
 
 
 

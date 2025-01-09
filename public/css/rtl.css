@@ -576,9 +576,6 @@ form a small {
   float: left !important;
 }
 
-
-
-
 .widget-shop .product .product-image {
   float: right;
   padding-left: 10px;
@@ -607,7 +604,6 @@ form a small {
   border-bottom-right-radius: 4px;
 }
 
-
 .list-icon li {
   margin-right: 20px;
   margin-left: 0;
@@ -632,7 +628,6 @@ form a small {
   float: right;
 }
 
-
 .p-dropdown {
   float: right;
 }
@@ -656,7 +651,6 @@ form a small {
   margin-right: 0px;
 }
 
-
 .icon-set-container .icon-preview .icon-class {
   padding-left: 0px;
   padding-right: 50px;
@@ -665,7 +659,6 @@ form a small {
 .icon-set-container .row>[class^="col-"] {
   flex: 1 1 calc(20% - 19px);
 }
-
 
 #scrollTop {
   left: 26px;
@@ -677,3 +670,4 @@ form a small {
   right: auto !important;
   top: 0px !important;
 }
+

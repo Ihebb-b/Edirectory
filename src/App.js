@@ -13,6 +13,11 @@ import MenusList from './Pages/MenusList';
 import RecipesList from './Pages/RecipesList';
 import RestaurantDetail from './Pages/RestaurantDetail';
 import RecipeDetail from './Pages/RecipeDetail';
+import SignIn from './Pages/SignIn';
+import SignUp from './Pages/SignUp';
+import Profile from './Pages/Profile';
+import Role from './Pages/Role';
+import AuthPage from './Pages/AuthPage';
 
 function App() {
 
@@ -27,6 +32,13 @@ function App() {
                 <Route path="/recipelist" element= { <RecipesList/> } />
                 <Route path="/restaurantdetail" element= { <RestaurantDetail/> } />
                 <Route path="/recipedetail" element= { <RecipeDetail/> } />
+                <Route path="/signin" element= { <SignIn/> } />
+                <Route path="/signup" element= { <SignUp/> } />
+                <Route path="/profile" element= { <Profile/> } />
+                <Route path="/authpage" element= { <AuthPage/> } />
+                <Route path="/role" element= { <Role/> } />
+                
+
                 
             </Routes>
         </BrowserRouter>

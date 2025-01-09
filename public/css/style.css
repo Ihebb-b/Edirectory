@@ -1500,7 +1500,7 @@ Topbar
 #header #header-wrap #logo a,
 #header #header-wrap #logo a span {
   font-family: inherit;
-  font-size: 40px;
+ /* font-size: 40px;*/
   color: #1e2022;
   font-weight: 800;
   letter-spacing: 1.5px;
