@@ -133,52 +133,7 @@ function ProfileR() {
                     </a>
                 </div>
 
-                {/* <section className="box-fancy section-fullwidth text-light p-b-0">
-
-                    <div className="row">
-                        <div style={{ textAlign: "left", backgroundColor: "#917d5d" }} className="col-lg-4">
-                            <h1 className="text-l text-uppercase">Mediterranean Delight</h1>
-                            <h3>A mix of fresh salads, hummus, and pita bread. </h3>
-                            <span>Principle Plates:</span>
-                            <ul>
-                                {plates.map((plate, index) => (
-                                    <li key={index}>
-                                        {plate.name} - {plate.price}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div style={{ textAlign: "left", backgroundColor: "#a08c6c" }} className="col-lg-4">
-                            <h1 className="text-l text-uppercase">Seafood Special</h1>
-                            <h3>Grilled salmon with lemon butter sauce and steamed veggies.</h3>
-                            <span>Principle Plates:</span>
-                            <ul>
-                                {plates.map((plate, index) => (
-                                    <li key={index}>
-                                        {plate.name} - {plate.price}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <div style={{ textAlign: "left", backgroundColor: "#ad9979" }} className="col-lg-4">
-                            <h1 className="text-l text-uppercase">Vegetarian Feast</h1>
-                            <h3>Stuffed bell peppers with a side of quinoa. </h3>
-                            <span>Principle Plates:</span>
-                            <ul>
-                                {plates.map((plate, index) => (
-                                    <li key={index}>
-                                        {plate.name} - {plate.price}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-
-                </section> */}
-
-                {/* <section className="box-fancy section-fullwidth text-light p-b-0">
+                <section className="box-fancy section-fullwidth text-light p-b-0">
                     <div className="row">
                         {menus.length === 0 ? (
                             <p>No menus found for your account.</p>
@@ -207,232 +162,7 @@ function ProfileR() {
                         )}
                     </div>
 
-                </section> */}
-
-
-                <section className="box-fancy section-fullwidth text-light p-b-0">
-                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            {menus.length === 0 ? (
-                                <p>No menus found for your account.</p>
-                            ) : (
-                                menus.map((menu, index) => (
-                                    <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={menu._id}>
-                                        <div class="row">
-                                            <div
-                                                className="col-lg-4"
-                                                style={{
-                                                    textAlign: "left",
-                                                    backgroundColor: index % 2 === 0 ? "#917d5d" : index % 3 === 0 ? "#a08c6c" : "#ad9979",
-                                                }}
-                                            >
-                                                <h1 className="text-l text-uppercase">{menu.name}</h1>
-                                                <h3>{menu.description}</h3>
-                                                <span>Principle Plates:</span>
-                                                <ul>
-                                                    {menu.plates.map((plate, i) => (
-                                                        <li key={i}>
-                                                            {plate.name} - ${plate.price.toFixed(2)}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            )}
-                        </div>
-                    </div>
                 </section>
-
-
-
-                <section class="pt-5 pb-5">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-6">
-                                <h3 class="mb-3">Multi Item Carousel cards</h3>
-                            </div>
-                            <div class="col-6 text-right">
-                                <a class="btn btn-primary mb-3 mr-1"
-                                    href="#carouselExampleIndicators2"
-                                    role="button"
-                                    data-slide="prev">
-                                    <i class="fa fa-arrow-left"></i>
-                                </a>
-                                <a class="btn btn-primary mb-3"
-                                    href="#carouselExampleIndicators2"
-                                    role="button"
-                                    data-slide="next">
-                                    <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </div>
-                            <div class="col-12">
-                                <div id="carouselExampleIndicators2"
-                                    class="carousel slide"
-                                    data-ride="carousel">
-
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <div class="row">
-                                                {menus.length === 0 ? (
-                                                    <p>No menus found for your account.</p>
-                                                ) : (
-                                                    menus.map((menu, index) => (
-                                                        <div
-                                                            key={menu._id}
-                                                            className={`col-lg-4`}
-                                                            style={{
-                                                                textAlign: "left",
-                                                                backgroundColor: index % 2 === 0 ? "#917d5d" : index % 3 === 0 ? "#a08c6c" : "#ad9979",
-                                                            }}
-                                                        >
-                                                            <h1 className="text-l text-uppercase">{menu.name}</h1>
-                                                            <h3>{menu.description}</h3>
-                                                            <span>Principle Plates:</span>
-                                                            <ul>
-                                                                {menu.plates.map((plate, i) => (
-                                                                    <li key={i}>
-                                                                        {plate.name} - ${plate.price.toFixed(2)}
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        </div>
-                                                    ))
-                                                )}
-
-                                                {/* <div class="col-md-4 mb-3">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">
-                                                                Special title treatment</h4>
-                                                            <p class="card-text">With supporting text
-                                                                below as a natural lead-in</p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">Special title
-                                                                treatment</h4>
-                                                            <p class="card-text">With supporting
-                                                                text below as a natural
-                                                                lead-in to additional
-                                                                content.</p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">Special title treatment</h4>
-                                                            <p class="card-text">With supporting text below
-                                                                as a natural lead-in to
-                                                                additional content.</p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <div class="row">
-
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">Special title treatment</h4>
-                                                            <p class="card-text">With supporting text below
-                                                                as a natural lead-in to
-                                                                additional content.</p>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">Special title treatment</h4>
-                                                            <p class="card-text">With supporting text below
-                                                                as a natural lead-in to
-                                                                additional content.</p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">Special title treatment</h4>
-                                                            <p class="card-text">With supporting text below
-                                                                as a natural lead-in to
-                                                                additional content.</p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <div class="row">
-
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">Special title treatment</h4>
-                                                            <p class="card-text">With supporting text below
-                                                                as a natural lead-in to
-                                                                additional content.</p>
-
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">Special title treatment</h4>
-                                                            <p class="card-text">With supporting text below
-                                                                as a natural lead-in to
-                                                                additional content.</p>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="card">
-
-                                                        <div class="card-body">
-                                                            <h4 class="card-title">Special title treatment</h4>
-                                                            <p class="card-text">With supporting text below
-                                                                as a natural lead-in to
-                                                                additional content.</p>
-                                                        </div>
-                                                    </div>
-                                                </div> */}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
 
 
                 <section>
@@ -469,6 +199,40 @@ function ProfileR() {
 
                         </div>
 
+                    </div>
+                </section>
+
+                <section id="page-content">
+                    <div class="container">
+                        <div class="grid-layout grid-2-columns" data-margin="20" data-item="grid-item" data-lightbox="gallery">
+                            <div class="grid-item">
+                                <a class="image-hover-zoom" href="images/gallery/1.jpg" data-lightbox="gallery-image"><img src="images/gallery/1.jpg"/></a>
+                            </div>
+                            <div class="grid-item">
+                                <a class="image-hover-zoom" href="images/gallery/2.jpg" data-lightbox="gallery-image"><img src="images/gallery/2.jpg"/></a>
+                            </div>
+                            <div class="grid-item">
+                                <a class="image-hover-zoom" href="images/gallery/3.jpg" data-lightbox="gallery-image"><img src="images/gallery/3.jpg"/></a>
+                            </div>
+                            <div class="grid-item">
+                                <a class="image-hover-zoom" href="images/gallery/4.jpg" data-lightbox="gallery-image"><img src="images/gallery/4.jpg"/></a>
+                            </div>
+                            <div class="grid-item">
+                                <a class="image-hover-zoom" href="images/gallery/5.jpg" data-lightbox="gallery-image"><img src="images/gallery/5.jpg"/></a>
+                            </div>
+                            <div class="grid-item">
+                                <a class="image-hover-zoom" href="images/gallery/6.jpg" data-lightbox="gallery-image"><img src="images/gallery/6.jpg"/></a>
+                            </div>
+                            <div class="grid-item">
+                                <a class="image-hover-zoom" href="images/gallery/7.jpg" data-lightbox="gallery-image"><img src="images/gallery/7.jpg"/></a>
+                            </div>
+                            <div class="grid-item">
+                                <a class="image-hover-zoom" href="images/gallery/8.jpg" data-lightbox="gallery-image"><img src="images/gallery/8.jpg"/></a>
+                            </div>
+                            <div class="grid-item">
+                                <a class="image-hover-zoom" href="images/gallery/9.jpg" data-lightbox="gallery-image"><img src="images/gallery/9.jpg"/></a>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
