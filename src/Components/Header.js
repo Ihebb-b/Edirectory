@@ -1,26 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import './Slider.css'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate} from 'react-router-dom'
 import { logout, setCredentials } from '../slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetUserProfileQuery } from '../slices/userApiSlice';
+
 
 function Header() {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
+
+    const navigate = useNavigate();
     const { userInfo } = useSelector((state) => state.auth);
 
+
+    
+
     const handleLogout = () => {
-        dispatch(logout());
-        setShowModal(false);
-        setShowSpinner(true);
+        dispatch(logout());       
+        setShowModal(false);   
+        setShowSpinner(true);   
+        navigate('/');  
 
         setTimeout(() => {
             setShowSpinner(false);
-        }, 2000); 
+            navigate('/');
+            // You can redirect the user or perform any other action here
+        }, 2000); // 2000 milliseconds = 2 seconds
     };
-
 
 
     return (
@@ -51,19 +59,20 @@ function Header() {
                 <div className="header-inner">
                     <div className="container">
                         <div id="logo">
-                        <a href="/">
-                            <img
-                                src="images/moremeddietlogo.png"
-                                alt="E-Directory Logo"
-                                style={{ 
-                                    width: "120px", 
-                                    height: "120px", 
-                                    marginLeft: "2px",
-                                    display: "inline-block" }} // Adjust width, height, and spacing as needed
+                            <a href="/">
+                                <img
+                                    src="images/moremeddietlogo.png"
+                                    alt="E-Directory Logo"
+                                    style={{
+                                        width: "120px",
+                                        height: "120px",
+                                        marginLeft: "2px",
+                                        display: "inline-block"
+                                    }} // Adjust width, height, and spacing as needed
 
-                               // className="logo-image" // Optional: Add a class for styling
-                            />
-                        </a>
+                                // className="logo-image" // Optional: Add a class for styling
+                                />
+                            </a>
 
                         </div>
 
@@ -103,10 +112,12 @@ function Header() {
                                                         />
                                                     </div>
                                                     <span>{userInfo.name}</span>
-                                                    <p className="text-muted">{userInfo.role || "Chef"}</p>
+                                                    <p className="text-muted">{userInfo.role}</p>
                                                     <ul className="text-center">
                                                         <li>
-                                                            <NavLink to="/profile">
+                                                            <NavLink
+                                                                to={userInfo.role === "customer" ? "/profileC" : "/profileR"}
+                                                            >
                                                                 <i className="icon-user" style={{ color: 'black' }}></i> My Profile
                                                             </NavLink>
                                                         </li>
@@ -171,7 +182,7 @@ function Header() {
                                         <li> <NavLink to="/">Home</NavLink></li>
                                         <li> <NavLink to="/rlist">Restaurants</NavLink></li>
                                         {/* <li className="dropdown"><NavLink to="/rlist">Restaurant</NavLink> */}
-                                            {/* <ul className="dropdown-menu">
+                                        {/* <ul className="dropdown-menu">
                                                 <li className="dropdown-submenu"><a href="#">categ1</a>
                                                     <ul className="dropdown-menu">
                                                         <li><a href="header-topbar.html">Light</a></li>
@@ -187,7 +198,7 @@ function Header() {
                                         <li> <NavLink to="/">Recipes</NavLink></li>
 
                                         {/* <li className="dropdown"><a href="#">Menus</a> */}
-                                            {/* <ul className="dropdown-menu">
+                                        {/* <ul className="dropdown-menu">
                                                 <li className="dropdown-submenu"><a href="#">categ1</a>
                                                     <ul className="dropdown-menu">
                                                         <li><a href="slider-revolution-slider.html">subcateg1</a>

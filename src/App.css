@@ -571,6 +571,46 @@
   border-width: 0.3rem;
 }
 
+.carousel-container-classic {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-classic {
+  display: flex;
+  transition: scroll-left 0.5s ease;
+  scroll-behavior: smooth;
+}
+
+.carousel-item-classic {
+  min-width: calc(100% / 3); /* Show 3 items at a time */
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.carousel-control-classic {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+
+
 
 
 

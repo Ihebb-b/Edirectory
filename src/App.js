@@ -15,9 +15,11 @@ import RestaurantDetail from './Pages/RestaurantDetail';
 import RecipeDetail from './Pages/RecipeDetail';
 import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
-import Profile from './Pages/Profile';
 import Role from './Pages/Role';
 import AuthPage from './Pages/AuthPage';
+import ProfileC from './Pages/ProfileC';
+import ProfileR from './Pages/ProfileR';
+import AddMenu from './Pages/AddMenu';
 
 function App() {
 
@@ -34,11 +36,11 @@ function App() {
                 <Route path="/recipedetail" element= { <RecipeDetail/> } />
                 <Route path="/signin" element= { <SignIn/> } />
                 <Route path="/signup" element= { <SignUp/> } />
-                <Route path="/profile" element= { <Profile/> } />
+                <Route path="/profileC" element= { <ProfileC/> } />
+                <Route path="/profileR" element= { <ProfileR/> } />
                 <Route path="/authpage" element= { <AuthPage/> } />
                 <Route path="/role" element= { <Role/> } />
-                
-
+                <Route path="/addmenu" element= { <AddMenu/> } />
                 
             </Routes>
         </BrowserRouter>

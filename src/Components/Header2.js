@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, setCredentials } from '../slices/authSlice';
+
 
 
 function Header2() {
@@ -9,18 +10,26 @@ function Header2() {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
+    const navigate = useNavigate();
+
 
     const { userInfo } = useSelector((state) => state.auth);
 
-    const handleLogout = () => {
-        dispatch(logout());
-        setShowModal(false);
-        setShowSpinner(true);
+    if (!userInfo) {
+        return <div>Please log in to view your profile.</div>; // Or redirect to login
+    }
 
-        setTimeout(() => {
-            setShowSpinner(false);
-            // You can redirect the user or perform any other action here
-        }, 2000); // 2000 milliseconds = 2 seconds
+    const handleLogout = () => {
+        dispatch(logout());       
+        setShowModal(false);   
+        setShowSpinner(true);   
+        navigate('/');  
+
+        // setTimeout(() => {
+        //     setShowSpinner(false);
+        //     navigate('/');
+        //     // You can redirect the user or perform any other action here
+        // }, 2000); // 2000 milliseconds = 2 seconds
     };
 
 
@@ -90,10 +99,12 @@ function Header2() {
                                                     />
                                                 </div>
                                                 <span>{userInfo.name}</span>
-                                                <p className="text-muted">{userInfo.role || "Chef"}</p>
+                                                <p className="text-muted">{userInfo.role }</p>
                                                 <ul className="text-center">
                                                     <li>
-                                                        <NavLink to="/profile">
+                                                        <NavLink
+                                                            to={userInfo.role === "customer" ? "/profileC" : "/profileR"}
+                                                        >
                                                             <i className="icon-user" style={{ color: 'black' }}></i> My Profile
                                                         </NavLink>
                                                     </li>
