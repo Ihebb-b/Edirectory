@@ -31,6 +31,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 url: `${USERS_URL}/profile`,
                 method: 'PUT',
                 body: data,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`, 
+                  },
             }),
         }),
 
@@ -50,6 +53,27 @@ export const userApiSlice = apiSlice.injectEndpoints({
             invalidatesTags: ["User"], // Invalidate cache if needed
           }),
 
+
+        getAllRestaurants: builder.query({
+            query: () => ({
+                url: `${USERS_URL}/getAllRestaurants`,
+                method: 'GET',
+            }),
+          }),
+
+        getAllRestaurantsPagi: builder.query({
+            query: ({ page = 1, limit = 5 }) => ({
+              url: `${USERS_URL}/getAllRestaurantsPagi?page=${page}&limit=${limit}`,
+              method: "GET",
+            }),
+          }),
+
+          getrestaurantById: builder.query({
+            query: (id) => ({
+                url: `${USERS_URL}/restaurant/${id}`,
+                method: 'GET',
+            }),
+        }),
     }),
 });
 
@@ -58,4 +82,7 @@ export const {
     useLogoutMutation,
     useRegisterMutation,
     useUpdateUserMutation,
-    useGetUserProfileQuery, } = userApiSlice;
+    useGetUserProfileQuery,
+    useGetAllRestaurantsQuery,
+    useGetAllRestaurantsPagiQuery,
+    useGetrestaurantByIdQuery, } = userApiSlice;

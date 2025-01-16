@@ -22,7 +22,52 @@ export const restaurantApiSlice = apiSlice.injectEndpoints({
             }),
         }),
 
-    }),
+        getMenuList: builder.query({
+            query: () => ({
+                url: `${RESTAURANTS_URL}/getAllmenus`,
+                method: 'GET',
+            }),
+        }),
+
+        getAllMenuPagi: builder.query({
+            query: ({ page = 1, limit = 5 }) => ({
+              url: `${RESTAURANTS_URL}/getAllmenusPagi?page=${page}&limit=${limit}`,
+              method: "GET",
+            }),
+          }),
+
+        
+        getMenuById: builder.query({
+        
+            query: (id) => ({
+                url: `${RESTAURANTS_URL}/getMenu/${id}`,
+                method: 'GET',
+            }),
+        }),
+
+        getMenuByUserId: builder.query({
+            query: (userId) => ({
+                url: `${RESTAURANTS_URL}/getMenuByUserId/${userId}`,
+                method: 'GET',
+            }),
+        }),
+
+        getMenuById: builder.query({
+            query: (id) => ({
+                url: `${RESTAURANTS_URL}/getMenu/${id}`,
+                method: 'GET',
+            }),
+        }),
+
+
+}),
+
 });
 
-export const { useAddMenuMutation, useGetMenuListQuery } = restaurantApiSlice;
+export const { 
+    useAddMenuMutation,
+    useGetMenuListQuery,
+    useGetAllMenuPagiQuery,
+    useGetMenuByIdQuery,
+    useGetMenuByUserIdQuery,
+ } = restaurantApiSlice;

@@ -13,6 +13,7 @@ function Role() {
     const [showDetailsForm, setShowDetailsForm] = useState(false); // To toggle the detailed form
     const [localisation, setLocalisation] = useState('');
     const [averageBill, setAverageBill] = useState('');
+    const [description, setDescription] = useState('');
     const [diet, setDiet] = useState('');
     const [updateUser] = useUpdateUserMutation();
     const dispatch = useDispatch();
@@ -37,9 +38,9 @@ function Role() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const updatedUser = await updateUser({ role, localisation, averageBill, diet }).unwrap();
+            const updatedUser = await updateUser({ role, localisation, averageBill, description, diet }).unwrap();
             dispatch(setCredentials(updatedUser));
-            setAlert({ show: true, type: 'success', message: 'Login successful!' });
+            setAlert({ show: true, type: 'success', message: 'Registration completed successful!' });
             setShowSpinner(true);
 
             setTimeout(() => {
@@ -156,17 +157,47 @@ function Role() {
                                                     >
                                                         <label htmlFor="local">Restaurant Details</label>
 
+
                                                         <div className="form-group">
-                                                            <label htmlFor="localisation" >Localisation</label>
+                                                            <label htmlFor="description" >Description</label>
                                                             <div className="input-group">
                                                                 <input
                                                                     type="text"
                                                                     className="form-control"
-                                                                    name="localisation"
-                                                                    placeholder="Enter localisation"
+                                                                    name="description"
+                                                                    placeholder="Enter description"
+                                                                    value={description}
+                                                                    onChange={(e) => setDescription(e.target.value)}
                                                                     required
                                                                 />
-                                                                <span className="input-group-text"><i className="icon-map-pin"></i></span>
+                                                                <span className="input-group-text"><i className="icon-align-justify"></i></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="form-group">
+                                                            <label htmlFor="localisation">Localisation</label>
+                                                            <div className="input-group">
+                                                                <select
+                                                                    className="form-control"
+                                                                    name="localisation"
+                                                                    value={localisation}
+                                                                    onChange={(e) => setLocalisation(e.target.value)}
+                                                                    required
+                                                                >
+                                                                    <option value="" disabled>
+                                                                        Select localisation
+                                                                    </option>
+                                                                    {["Algeria", "Tunisia", "France", "Italy", "Spain", "Albania", "Herzegovina", "Croatia", "Cyprus", "Greece", "Lebanon", "Syria", "Morocco", "Egypt", "Libya"].map(
+                                                                        (location) => (
+                                                                            <option key={location} value={location}>
+                                                                                {location}
+                                                                            </option>
+                                                                        )
+                                                                    )}
+                                                                </select>
+                                                                <span className="input-group-text">
+                                                                    <i className="icon-map-pin"></i>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                         <div className="form-group">
@@ -177,6 +208,8 @@ function Role() {
                                                                     className="form-control"
                                                                     name="averageBill"
                                                                     placeholder="Enter average bill"
+                                                                    value={averageBill}
+                                                                    onChange={(e) => setAverageBill(e.target.value)}
                                                                     required
                                                                 />
                                                                 <span className="input-group-text"><i className="icon-dollar-sign"></i></span>
@@ -206,30 +239,53 @@ function Role() {
                                                     >
                                                         <label htmlFor="local">Costumer Details</label>
                                                         <div className="form-group">
-                                                            <label htmlFor="dietType" >Diet Type</label>
+                                                            <label htmlFor="diet">Diet Type</label>
                                                             <div className="input-group">
-                                                                <input
-                                                                    type="text"
+                                                                <select
                                                                     className="form-control"
-                                                                    name="dietType"
-                                                                    placeholder="Enter diet type"
+                                                                    name="diet"
+                                                                    value={diet}
+                                                                    onChange={(e) => setDiet(e.target.value)} // Bind to state
                                                                     required
-                                                                />
-                                                                <span className="input-group-text"><i className="icon-tag"></i></span>
+                                                                >
+                                                                    <option value="" disabled>
+                                                                        Select diet type
+                                                                    </option>
+                                                                    {["Vegetarian", "Vegan", "Pescatarian", "Omnivore", "Carnivore"].map((dietOption) => (
+                                                                        <option key={dietOption} value={dietOption}>
+                                                                            {dietOption}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
+                                                                <span className="input-group-text">
+                                                                    <i className="icon-tag"></i>
+                                                                </span>
                                                             </div>
-
                                                         </div>
                                                         <div className="form-group">
-                                                            <label htmlFor="localisation" >Localisation</label>
+                                                            <label htmlFor="localisation">Localisation</label>
                                                             <div className="input-group">
-                                                                <input
-                                                                    type="text"
+                                                                <select
                                                                     className="form-control"
                                                                     name="localisation"
-                                                                    placeholder="Enter localisation"
+                                                                    value={localisation}
+                                                                    onChange={(e) => setLocalisation(e.target.value)}
                                                                     required
-                                                                />
-                                                                <span className="input-group-text"><i className="icon-map-pin"></i></span>
+                                                                >
+                                                                    <option value="" disabled>
+                                                                        Select localisation
+                                                                    </option>
+                                                                    {["Algeria", "Tunisia", "France", "Italy", "Spain", "Albania", "Herzegovina", "Croatia", "Cyprus", "Greece", "Lebanon", "Syria", "Morocco", "Egypt", "Libya"].map(
+                                                                        (location) => (
+                                                                            <option key={location} value={location}>
+                                                                                {location}
+                                                                            </option>
+                                                                        )
+                                                                    )}
+                                                                </select>
+                                                                <span className="input-group-text">
+                                                                    <i className="icon-map-pin"></i>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                         <div className="mt-4">

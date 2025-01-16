@@ -4,18 +4,90 @@ import Header from '../Components/Header';
 import RevolutionSlider from '../Components/RevolutionSlider';
 import Slider from '../Components/Slider';
 import logo from '../logo.svg';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams, NavLink } from "react-router-dom";
+import { useGetMenuListQuery } from '../slices/restaurantSlice';
+import { useGetAllRestaurantsQuery } from '../slices/userApiSlice';
+import { useDispatch } from 'react-redux';
 
 
 
 export default function Home() {
+    //const [restaurants, setRestaurants] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
+
+    const { data: restaurants = [], isLoadingResto, errorResto } = useGetAllRestaurantsQuery();
+
+    const { data: menus = [], isLoading, error } = useGetMenuListQuery();
+
+    const [showSpinner, setShowSpinner] = useState(false);
+
+    useEffect(() => {
+        if (!isLoadingResto && !isLoading) {
+            setShowSpinner(false); // Hide spinner when data is loaded
+        }
+    }, [isLoadingResto, isLoading]);
+
+
+
+
+
+    const menuImages = [
+        "homepages/restaurant/images/menumed1.jpg",
+        "homepages/restaurant/images/menumed2.jpg",
+        "homepages/restaurant/images/menumed3.jpg",
+        "homepages/restaurant/images/menumed4.jpg",
+    ];
+    const menuDescriptions = [
+        "A selection of traditional Tunisian dishes, including couscous, kebabs, and pastries.",
+        "A variety of salads, including tabbouleh, couscous, and falafel.",
+        "A selection of traditional Tunisian dishes, including couscous, kebabs, and pastries.",
+        "A variety of salads, including tabbouleh, couscous, and falafel.",
+    ];
+    const staticData = [
+        {
+            image: "homepages/restaurant/images/restaurantmed1.jpg",
+            description:
+                "An upscale restaurant in a typical Tunisian setting, located in the medina between the two souks “El Attarine“ and “El Balgagia”.",
+        },
+        {
+            image: "homepages/restaurant/images/restaurantmed4.jpg",
+            description:
+                "This name evokes a cozy, intimate dining experience, suggesting elegance and refinement.",
+        },
+        {
+            image: "homepages/restaurant/images/restaurantmed2.jpg",
+            description:
+                "Meaning 'The Kitchen Party,' this name evokes a lively and festive atmosphere.",
+        },
+        {
+            image: "homepages/restaurant/images/restaurantmed3.jpg",
+            description:
+                "A highly-recommended restaurant in Algiers, known for serving excellent food.",
+        },
+    ];
+
+
+
+    if (isLoading) return <p>Loading menus...</p>;
+    if (error) return <p>Error loading menus: {error.message}</p>;
+
+    // Get the last 4 menus
+    const lastFourMenus = menus.slice(-4);
 
 
     return (
 
         <>
             <div className="body-inner">
+                {showSpinner && (
+                    <div className="backdrop-overlay">
+                        <div className="spinner-border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                )}
 
                 <Header />
 
@@ -149,7 +221,7 @@ export default function Home() {
                                                 seasonal ingredients.  </p>
 
                                             <div className="flex justify-center items-center h-full">
-                                                <a href="#" className="btn btn-roundeded btn-outline">Show all</a>
+                                                <a href="/menulist" className="btn btn-roundeded btn-outline">Show all</a>
                                             </div>
                                         </div>
                                     </div>
@@ -332,17 +404,41 @@ export default function Home() {
                     </div>
                 </section>
 
-                <section className="section-video text-light" data-bg-video="homepages/restaurant/video/restaurant.mp4">
+                {/* <section className="section-video text-light" data-bg-video="homepages/restaurant/video/restaurant.mp4">
                     <div className="container container-fullscreen">
                         <div className="text-middle text-center text-light">
                             <h1 className="text-uppercase text-lg">E-Directory</h1>
                             <p className="lead">Don't waste any more time and energy, dive in and enjoy our menus and recipes</p>
+
+
                         </div>
 
                     </div>
+                    
+                </section> */}
+
+                <section className="section-video text-light">
+                    <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="bg-video"
+                    >
+                        <source src="homepages/restaurant/video/restaurant.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    <div className="container container-fullscreen">
+                        <div className="text-middle text-center text-light">
+                            <h1 className="text-uppercase text-lg">E-Directory</h1>
+                            <p className="lead">
+                                Don't waste any more time and energy, dive in and enjoy our menus and recipes
+                            </p>
+                        </div>
+                    </div>
                 </section>
 
-                <section className="red-bg">
+                {/* <section className="red-bg">
                     <div className="container">
                         <div className="text-center m-b-40">
                             <div className="d-flex align-items-center justify-content-between mb-3">
@@ -368,14 +464,13 @@ export default function Home() {
                                     <div className="room-image">
                                         <img src="homepages/restaurant/images/restaurantmed1.jpg" alt="#" />
                                         <div className="room-title">Dar Belhadj</div>
-                                        {/* <span className="room-badge">save 60%</span> */}
                                     </div>
                                     <div className="room-details">
                                         <h5 >Tunisian</h5>
                                         <p>An upscale restaurant in a typical Tunisian setting,
-                                             located in the medina between the two souks
-                                              “El Attarine “ and “El Balgagia”, 
-                                              with a view over the Great Mosque “Ezzitouna”.</p>
+                                            located in the medina between the two souks
+                                            “El Attarine “ and “El Balgagia”,
+                                            with a view over the Great Mosque “Ezzitouna”.</p>
                                         <h6 >€29 average price</h6>
                                         <div className="float-center">
                                             <a href="#" className="btn btn-outline btn-dark ">details</a>
@@ -394,7 +489,7 @@ export default function Home() {
                                     <div className="room-details">
                                         <h5 >French</h5>
 
-                                        <p>“The Little Glass,” this name evokes a cozy, intimate dining 
+                                        <p>“The Little Glass,” this name evokes a cozy, intimate dining
                                             experience. it suggests a time of elegance and refinement, also it conveys a sophisticated and chic atmosphere.</p>
                                         <h6 >€89 average price</h6>
 
@@ -436,7 +531,7 @@ export default function Home() {
                                         <h5 >Algerian</h5>
 
                                         <p>A highly-recommended restaurant in Algiers, known for serving excellent food.
-                                        It provides a nice environment and good service, with a staff that treats customers kindly.
+                                            It provides a nice environment and good service, with a staff that treats customers kindly.
 
                                         </p>
                                         <h6 >€39 average price</h6>
@@ -450,112 +545,97 @@ export default function Home() {
 
                         </div>
                     </div>
+                </section> */}
+
+                <section className="red-bg">
+                    <div className="container">
+                        <div className="text-center m-b-40">
+                            <div className="d-flex align-items-center justify-content-between mb-3">
+                                <h2 className="text-medium m-t-0 mb-0">Popular Restaurants</h2>
+                                <NavLink to="/rlist" className="btn btn-outline btn-dark">
+                                    Explore More
+                                </NavLink>
+                            </div>
+                            <div className="seperator">
+                                <i className="fa fa-dot-circle-o"></i>
+                            </div>
+                            <p className="lead mb-0">
+                                Mediterranean restaurants offer a culinary experience inspired by
+                                the diverse and vibrant flavors of countries bordering the
+                                Mediterranean Sea, such as Greece, Italy, Spain, Turkey, Morocco,
+                                and Lebanon.
+                            </p>
+                        </div>
+                        <div className="row">
+                            {Array.isArray(restaurants) && restaurants.slice(0, 4).map((restaurant, index) => (
+                                <div className="col-lg-3" key={restaurant._id}>
+                                    <div className="room">
+                                        <div className="room-image">
+                                            <img
+                                                src={staticData[index]?.image}
+                                                alt={restaurant.name}
+                                                className="img-fluid"
+                                            />
+                                            <div className="room-title">{restaurant.name}</div>
+                                        </div>
+                                        <div className="room-details">
+                                            <h5>{restaurant.localisation}</h5>
+                                            <p>{restaurant.description}</p>
+                                            <h6>average price: €{restaurant.averageBill}</h6>
+                                            <div className="float-center">
+                                                <a href={`/restaurant/${restaurant?._id}`} className="btn btn-outline btn-dark">
+                                                    Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </section>
 
 
 
-                <section className='gray-bg'>
+                <section className="gray-bg">
                     <div className="container">
                         <div className="text-center m-b-40">
                             <div className="d-flex align-items-center justify-content-between mb-3">
-
                                 <h2 className="text-medium m-t-0 mb-0">Popular Menus</h2>
-
-
-                                <button type="button" className="btn btn-outline btn-dark">Explore More</button>
+                                <NavLink to="/menulist" className="btn btn-outline btn-dark">
+                                    Explore More
+                                </NavLink>
                             </div>
-                            <div className="seperator"><i className="fa fa-dot-circle-o"></i></div>
+                            <div className="seperator">
+                                <i className="fa fa-dot-circle-o"></i>
+                            </div>
                             <p className="lead mb-0">
-                            Menus at Mediterranean restaurants are a vibrant celebration of 
-                            the rich culinary traditions of countries bordering the Mediterranean Sea, 
-                            such as Greece, Italy, Spain, Turkey, Morocco, and Lebanon. 
-                            They typically feature a diverse range of dishes that emphasize fresh, 
-                            wholesome ingredients. Diners can expect an array of flavorful options, 
-                            including crisp salads like Greek or tabbouleh, hearty pastas and risottos, 
-                            tender grilled meats and seafood, and savory vegetarian dishes. 
+                                Menus at Mediterranean restaurants are a vibrant celebration of the
+                                rich culinary traditions of countries bordering the Mediterranean
+                                Sea, such as Greece, Italy, Spain, Turkey, Morocco, and Lebanon.
+                                They typically feature a diverse range of dishes that emphasize
+                                fresh, wholesome ingredients.
                             </p>
-
                         </div>
                         <div className="row">
-                            <div className="col-lg-3">
-                                <div className="room">
-                                    <div className="room-image">
-                                        <img src="homepages/restaurant/images/menumed1.jpg" alt="#" />
-                                        <div className="room-title">Mediterranean Mezze Platter</div>
-                                    </div>
-                                    <div className="room-details">
-                                        <p>A signature menu offering a selection of small dishes, 
-                                            ideal for sharing. It typically includes creamy hummus, 
-                                            baba ghanoush, stuffed grape leaves, falafel, tzatziki, 
-                                            olives, and warm pita bread. Perfect for starting a meal or enjoying
-                                             as a light fare.</p>
-
-                                        <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
+                            {lastFourMenus.map((menu, index) => (
+                                <div className="col-lg-3" key={menu.id}>
+                                    <div className="room">
+                                        <div className="room-image">
+                                            <img src={menuImages[index]} alt={menu.name} />
+                                            <div className="room-title">{menu.name}</div>
+                                        </div>
+                                        <div className="room-details">
+                                            <p>{menu.description}</p>
+                                            <div className="float-center">
+                                                <a href={`/getMenu/${menu?._id}`} className="btn btn-outline btn-dark">
+                                                    Details
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="col-lg-3">
-                                <div className="room">
-                                    <div className="room-image">
-                                        <img src="homepages/restaurant/images/menumed2.jpg" alt="#" />
-                                        <div className="room-title">Grilled Seafood Feast</div>
-                                    </div>
-                                    <div className="room-details">
-                                        <p>A menu centered around fresh, grilled seafood such as octopus, 
-                                            shrimp, calamari, and whole fish like branzino or sea bass. 
-                                            Served with lemon wedges, olive oil, and a side of roasted 
-                                            vegetables or herb-infused rice.
-                                            These are often served drizzled with olive oil.</p>
-
-                                        <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-3">
-                                <div className="room">
-                                    <div className="room-image">
-                                        <img src="homepages/restaurant/images/menumed3.jpg" alt="#" />
-                                        <div className="room-title">Kebab & Skewer Platters</div>
-                                    </div>
-                                    <div className="room-details">
-                                        <p>A menu featuring skewered meats such as lamb, chicken, or beef, 
-                                            marinated with Mediterranean spices and herbs. 
-                                            Served with side dishes like couscous, rice pilaf, 
-                                            or grilled vegetables, and paired with yogurt or tahini sauces.
-                                           </p>
-
-                                        <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-lg-3">
-                                <div className="room">
-                                    <div className="room-image">
-                                        <img src="homepages/restaurant/images/menumed4.jpg" alt="#" />
-                                        <div className="room-title">Moroccan Tagine Delights</div>
-                                    </div>
-                                    <div className="room-details">
-                                        <p>A menu featuring slow-cooked stews served in traditional tagine dishes. 
-                                            Options include lamb with prunes, chicken with preserved lemons, and 
-                                            vegetarian tagines with chickpeas and root vegetables. 
-                                            Typically served with couscous or flatbread.</p>
-
-                                        <div className="float-center">
-                                            <a href="#" className="btn btn-outline btn-dark ">details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -588,10 +668,10 @@ export default function Home() {
                                         <div className="room-title">Baked Cod Recipe with Lemon and Garlic</div>
                                     </div>
                                     <div className="room-details">
-                                        <p>This easy baked cod recipe comes together in just over 20 minutes, 
-                                            but there is a reason it is a big fan favorite! Tender, perfectly flaky cod, 
+                                        <p>This easy baked cod recipe comes together in just over 20 minutes,
+                                            but there is a reason it is a big fan favorite! Tender, perfectly flaky cod,
                                             tossed in bold Mediterranean spices and baked with a tasty garlic and lemon
-                                             sauce.</p>
+                                            sauce.</p>
 
                                         <div className="float-center">
                                             <NavLink to="/recipedetail" className="btn btn-outline btn-dark ">details</NavLink>
@@ -607,11 +687,11 @@ export default function Home() {
                                         <div className="room-title">Authentic Falafel Recipe Step-by-Step</div>
                                     </div>
                                     <div className="room-details">
-                                        <p>Falafel is a popular Middle Eastern 
-                                            “fast food” made of a mixture of chickpeas, 
+                                        <p>Falafel is a popular Middle Eastern
+                                            “fast food” made of a mixture of chickpeas,
                                             fresh herbs, and spices that are formed into a small patties or balls.
                                             It's thought that falafel originated in Egypt as Coptic Christians
-                                            looked for a hearty replacement for meat.            
+                                            looked for a hearty replacement for meat.
                                         </p>
 
                                         <div className="float-center">
@@ -628,9 +708,9 @@ export default function Home() {
                                         <div className="room-title">Homemade Pita Bread Recipe</div>
                                     </div>
                                     <div className="room-details">
-                                        <p>This homemade pita bread recipe is easy to make and requires 
-                                            a few ingredients you may already have on hand!  Mix up the 
-                                            very simple dough, let it rise, and experience the magic of fresh, 
+                                        <p>This homemade pita bread recipe is easy to make and requires
+                                            a few ingredients you may already have on hand!  Mix up the
+                                            very simple dough, let it rise, and experience the magic of fresh,
                                             warm, perfectly puffy homemade pita bread. </p>
 
                                         <div className="float-center">
@@ -648,9 +728,9 @@ export default function Home() {
                                     </div>
                                     <div className="room-details">
                                         <p>Chicken soup is one of those nostalgic dishes known as a home remedy
-                                        to comfort the sick or relief the cold chill in the air. 
-                                        It's also one of those universal foods every culture, and every household,
-                                        has some version of noodles or not.</p>
+                                            to comfort the sick or relief the cold chill in the air.
+                                            It's also one of those universal foods every culture, and every household,
+                                            has some version of noodles or not.</p>
 
                                         <div className="float-center">
                                             <NavLink to="/recipelist" className="btn btn-outline btn-dark ">details</NavLink>

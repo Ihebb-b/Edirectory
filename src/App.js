@@ -20,6 +20,7 @@ import AuthPage from './Pages/AuthPage';
 import ProfileC from './Pages/ProfileC';
 import ProfileR from './Pages/ProfileR';
 import AddMenu from './Pages/AddMenu';
+import MenuDetail from './Pages/MenuDetail';
 
 function App() {
 
@@ -32,7 +33,8 @@ function App() {
                 <Route path="/rlist" element={<RestaurantList />} />
                 <Route path="/menulist" element= { <MenusList/> } />
                 <Route path="/recipelist" element= { <RecipesList/> } />
-                <Route path="/restaurantdetail" element= { <RestaurantDetail/> } />
+                <Route path="/restaurant/:id" element= { <RestaurantDetail/> } />
+                <Route path="/getMenu/:id" element= { <MenuDetail/> } />
                 <Route path="/recipedetail" element= { <RecipeDetail/> } />
                 <Route path="/signin" element= { <SignIn/> } />
                 <Route path="/signup" element= { <SignUp/> } />

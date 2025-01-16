@@ -1,34 +1,68 @@
 import React, { useEffect } from 'react'
 import Header2 from '../Components/Header2'
 import Footer2 from '../Components/Footer2'
+import { useParams } from 'react-router-dom';
+import { useGetrestaurantByIdQuery, useGetUserProfileQuery } from '../slices/userApiSlice';
+import { useGetMenuByUserIdQuery } from '../slices/restaurantSlice';
 
 function RestaurantDetail() {
 
     useEffect(() => {
         const elements = document.querySelectorAll('[data-animate]');
         const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const element = entry.target;
-                const animation = element.getAttribute('data-animate');
-                const delay = element.getAttribute('data-animate-delay');
-                element.classList.add('animate__animated', animation);
-                if (delay) {
-                  element.style.animationDelay = `${delay}ms`;
-                }
-                observer.unobserve(element); // Stop observing once animated
-              }
-            });
-          },
-          { threshold: 0.1 }
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const animation = element.getAttribute('data-animate');
+                        const delay = element.getAttribute('data-animate-delay');
+                        element.classList.add('animate__animated', animation);
+                        if (delay) {
+                            element.style.animationDelay = `${delay}ms`;
+                        }
+                        observer.unobserve(element); // Stop observing once animated
+                    }
+                });
+            },
+            { threshold: 0.1 }
         );
-    
+
         elements.forEach((el) => observer.observe(el));
         return () => observer.disconnect(); // Clean up observer
-      }, []);
+    }, []);
 
-      
+
+
+
+
+
+    const { id } = useParams();
+    const { data: restaurant, isLoading: isRestaurantLoading, error: restaurantError } = useGetrestaurantByIdQuery(id);
+    const { data: menuItems, isLoading: isMenuLoading, error: menuError } = useGetMenuByUserIdQuery(id);
+
+
+    if (isRestaurantLoading || isMenuLoading) return <div>Loading...</div>;
+    if (restaurantError || menuError) return <div>Error loading restaurant or menu details.</div>;
+
+    const restaurantImages = [
+        // "/homepages/restaurant/images/restaurantmed1.jpg",
+        // "/homepages/restaurant/images/restaurantmed2.jpg",
+        // "/homepages/restaurant/images/restaurantmed3.jpg",
+        // "/homepages/restaurant/images/restaurantmed4.jpg",
+        "/homepages/restaurant/images/restaurant1.jpg",
+        "/homepages/restaurant/images/restaurant2.jpg",
+        "/homepages/restaurant/images/restaurant3.jpg",
+        "/homepages/restaurant/images/restaurant4.jpg",
+    ];
+
+    const getRandomImage = () => {
+        const randomIndex = Math.floor(Math.random() * restaurantImages.length);
+        return restaurantImages[randomIndex];
+    };
+
+    const randomImage = getRandomImage();
+
+
     return (
 
         <>
@@ -36,24 +70,43 @@ function RestaurantDetail() {
 
                 <Header2 />
 
+            
+
                 <div id="slider" className="inspiro-slider dots-creative" data-height-xs="360">
-                    <div className="slide kenburns" style={{ backgroundImage: "url('homepages/restaurant/images/restaurant1.jpg')" }}>
+                    {/* <div
+                        className="slide kenburns"
+                        style={{ backgroundImage: "url('/homepages/restaurant/images/restaurant1.jpg')" }}
+                    > */}
+
+                    <div
+                        className="slide kenburns"
+                        style={{ backgroundImage: `url('${randomImage}')` }} // Set the dynamic background image here
+                    >
+
+
                         <div className="bg-overlay"></div>
                         <div className="container">
                             <div className=" text-center text-light">
 
-                                <span className="strong">Barcelona, Spain</span>
-                                <h1>Teoric Taverna Gastronomica</h1>
+                                <span className="strong">{restaurant?.localisation}</span>
+                                <h1>{restaurant?.name}</h1>
 
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <section>
+                
+
+                <div className="seperator"><i className="fa fa-check-circle"></i></div>
+
+
+
+
+                <section className="mt-5">
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-3">
+                            <div className="col-lg-6">
                                 <div className="heading-text heading-section">
                                     <h2>Our restaurant</h2>
 
@@ -61,7 +114,13 @@ function RestaurantDetail() {
                             </div>
                             <div className="col-lg-9">
                                 <div className="row">
-                                    <div className="col-lg-6" style={{ textAlign: "justify" }}>Welcome to Teoric Taverna Gastronomica,
+                                    <div
+                                        className="col-lg-12 "
+                                        style={{ textAlign: "justify", fontSize: "18px" }}>
+
+                                        {restaurant?.description}
+
+                                        {/* Welcome to Teoric Taverna Gastronomica,
                                         where the heart of Mediterranean cuisine comes alive.
                                         Nestled in the vibrant streets of Barcelona, our restaurant
                                         isn't just a place to eat it's an experience. Imagine the aroma
@@ -72,18 +131,18 @@ function RestaurantDetail() {
                                         blending bold flavors with delicate artistry.
                                         Whether it's the crisp, golden tapas or the melt in
                                         your-mouth seafood paella, each bite is a journey into
-                                        the soul of Spain.
+                                        the soul of Spain. */}
 
                                     </div>
 
-                                    <div className="col-lg-6" style={{ textAlign: "justify" }} >But it's not just about the food it's about the feeling.
+                                    {/* <div className="col-lg-6" style={{ textAlign: "justify" }} >But it's not just about the food it's about the feeling.
                                         The warm smiles of our staff, the gentle hum of
                                         conversation, and the cozy, welcoming atmosphere make
                                         Teoric Taverna a home away from home.
                                         So whether you're celebrating a special moment or simply
                                         exploring the magic of Barcelona, we invite you to join us.
                                         Come taste the Mediterranean, one unforgettable bite at a
-                                        time.</div>
+                                        time.</div> */}
 
                                 </div>
                             </div>
@@ -93,7 +152,7 @@ function RestaurantDetail() {
                 </section>
 
 
-                <section id="section-about" className="p-t-150">
+                <section id="section-about" className="p-t-10">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-6" >
@@ -121,7 +180,7 @@ function RestaurantDetail() {
                             </div>
                             <div className="col-lg-6">
                                 <div className="float-right">
-                                    <img className="img-fluid" src="homepages/restaurant/images/teoric1.jpg" alt="" />
+                                    <img className="img-fluid" src="/homepages/restaurant/images/teoric1.jpg" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -131,9 +190,9 @@ function RestaurantDetail() {
                 <section>
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-3" data-animate="animate__fadeIn" data-animate-delay="300">
+                            <div className="col-lg-3 animate-fade-in delay-300">
                                 <div className="text-center">
-                                    <img src="homepages/restaurant/images/icons/1.png" style={{ marginBottom: '16px' }} alt="" />
+                                    <img src="/homepages/restaurant/images/icons/1.png" style={{ marginBottom: '16px' }} alt="" />
                                     <h4>Unique Recipets</h4>
                                     <p>
                                         Each dish tells a story, crafted by chefs who pour their heart into reinventing
@@ -141,27 +200,27 @@ function RestaurantDetail() {
                                     </p>
                                 </div>
                             </div>
-                            <div className="col-lg-3" data-animate="animate__fadeIn" data-animate-delay="500">
+                            <div className="col-lg-3 animate-fade-in delay-500">
                                 <div className="text-center">
-                                    <img src="homepages/restaurant/images/icons/2.png" style={{ marginBottom: '16px' }} alt="" />
+                                    <img src="/homepages/restaurant/images/icons/2.png" style={{ marginBottom: '16px' }} alt="" />
                                     <h4>Fresh food</h4>
                                     <p>Freshness is at the heart of everything we serve. We source our ingredients
                                         daily from local farmers and trusted suppliers to ensure the highest quality.
                                     </p>
                                 </div>
                             </div>
-                            <div className="col-lg-3" data-animate="animate__fadeIn" data-animate-delay="700">
+                            <div className="col-lg-3 animate-fade-in delay-700">
                                 <div className="text-center">
-                                    <img src="homepages/restaurant/images/icons/3.png" style={{ marginBottom: '16px' }} alt="" />
+                                    <img src="/homepages/restaurant/images/icons/3.png" style={{ marginBottom: '16px' }} alt="" />
                                     <h4>Drinks</h4>
                                     <p>Our drink menu is a perfect companion to your dining experience.
                                         each drink is carefully curated to pair harmoniously with our dishes.</p>
                                 </div>
                             </div>
 
-                            <div className="col-lg-3" data-animate="animate__fadeIn" data-animate-delay="700">
+                            <div className="col-lg-3 animate-fade-in delay-700">
                                 <div className="text-center">
-                                    <img src="homepages/restaurant/images/icons/4.png" style={{ marginBottom: '16px' }} alt="" />
+                                    <img src="/homepages/restaurant/images/icons/4.png" style={{ marginBottom: '16px' }} alt="" />
                                     <h4>Fastfood</h4>
                                     <p>Even our fast food is a cut above the rest. Designed for those on the go,
                                         our fast food offerings never compromise on quality or taste.
@@ -172,70 +231,128 @@ function RestaurantDetail() {
                     </div>
                 </section>
 
-                <section id="section-menu" className="p-t-100 p-b-100 text-light" style={{ backgroundImage: "url('homepages/restaurant/images/menu2.jpg')" }}>
+                {/* <div className="col-lg-6" data-animate="animate__fadeIn">
+
+
+                                <ul className="price-menu-list">
+                                    <li>
+                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
+                                        <p>Vivamus sit amet felis</p>
+                                        <h3>$19.9</h3>
+                                    </li>
+                                    <li>
+                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
+                                        <p>Vivamus sit amet felis</p>
+                                        <h3>$19.9</h3>
+                                    </li>
+                                    <li>
+                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
+                                        <p>Vivamus sit amet felis</p>
+                                        <h3>$19.9</h3>
+                                    </li>
+                                    <li>
+                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
+                                        <p>Vivamus sit amet felis</p>
+                                        <h3>$19.9</h3>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                            <div className="col-lg-6" data-animate="animate__fadeIn">
+
+                                <ul className="price-menu-list">
+                                    <li>
+                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
+                                        <p>Vivamus sit amet felis</p>
+                                        <h3>$19.9</h3>
+                                    </li>
+                                    <li>
+                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
+                                        <p>Vivamus sit amet felis</p>
+                                        <h3>$19.9</h3>
+                                    </li>
+                                    <li>
+                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
+                                        <p>Vivamus sit amet felis</p>
+                                        <h3>$19.9</h3>
+                                    </li>
+                                    <li>
+                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
+                                        <p>Vivamus sit amet felis</p>
+                                        <h3>$19.9</h3>
+                                    </li>
+                                </ul>
+
+
+                            </div> */}
+
+                <section
+                    id="section-menu"
+                    className="p-t-100 p-b-100 text-light"
+                    style={{ backgroundImage: "url('/homepages/restaurant/images/menu2.jpg')" }}
+                >
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
-                                <h2 className="text-medium m-b-40">MENU</h2>
+                                <h2 className="text-medium m-b-40">MENUS</h2>
                             </div>
-                            <div className="col-lg-6" data-animate="animate__fadeIn">
 
+                            {menuItems?.length > 0 ? (
+                                <>
+                                    {/* First Column */}
+                                    <div className="col-lg-6 animate-fade-in ">
+                                        <ul className="price-menu-list">
+                                            {menuItems.slice(0, Math.ceil(menuItems.length / 2)).map((item) => (
+                                                <li key={item._id}>
+                                                    <h2 className="font-nothing-you-could-do">{item.name}</h2>
+                                                    <p>{item.description}</p>
+                                                    {item.plates.length > 0 ? (
+                                                        item.plates.map((plate) => (
+                                                            <div key={plate._id}>
+                                                                <h3>{plate.name}</h3>
+                                                                <h4>${plate.price.toFixed(2)}</h4>
+                                                            </div>
+                                                        ))
+                                                    ) : (
+                                                        <p>No plates available.</p>
+                                                    )}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
 
-                                <ul className="price-menu-list">
-                                    <li>
-                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
-                                        <p>Vivamus sit amet felis</p>
-                                        <h3>$19.9</h3>
-                                    </li>
-                                    <li>
-                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
-                                        <p>Vivamus sit amet felis</p>
-                                        <h3>$19.9</h3>
-                                    </li>
-                                    <li>
-                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
-                                        <p>Vivamus sit amet felis</p>
-                                        <h3>$19.9</h3>
-                                    </li>
-                                    <li>
-                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
-                                        <p>Vivamus sit amet felis</p>
-                                        <h3>$19.9</h3>
-                                    </li>
-                                </ul>
-
-
-                            </div>
-                            <div className="col-lg-6" data-animate="animate__fadeIn">
-
-                                <ul className="price-menu-list">
-                                    <li>
-                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
-                                        <p>Vivamus sit amet felis</p>
-                                        <h3>$19.9</h3>
-                                    </li>
-                                    <li>
-                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
-                                        <p>Vivamus sit amet felis</p>
-                                        <h3>$19.9</h3>
-                                    </li>
-                                    <li>
-                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
-                                        <p>Vivamus sit amet felis</p>
-                                        <h3>$19.9</h3>
-                                    </li>
-                                    <li>
-                                        <h2 className="font-nothing-you-could-do">Etiam dictum Nunc enim</h2>
-                                        <p>Vivamus sit amet felis</p>
-                                        <h3>$19.9</h3>
-                                    </li>
-                                </ul>
-
-
-                            </div>
+                                    {/* Second Column */}
+                                    <div className="col-lg-6" data-animate="animate__fadeIn">
+                                        <ul className="price-menu-list">
+                                            {menuItems.slice(Math.ceil(menuItems.length / 2)).map((item) => (
+                                                <li key={item._id}>
+                                                    <h2 className="font-nothing-you-could-do">{item.name}</h2>
+                                                    <p>{item.description}</p>
+                                                    {item.plates.length > 0 ? (
+                                                        item.plates.map((plate) => (
+                                                            <div key={plate._id}>
+                                                                <h3>{plate.name}</h3>
+                                                                <h4>${plate.price.toFixed(2)}</h4>
+                                                            </div>
+                                                        ))
+                                                    ) : (
+                                                        <p>No plates available.</p>
+                                                    )}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="col-lg-12">
+                                    <p>No menu items available.</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </section>
+
 
                 <section id="section-gallery" className="p-t-150 p-b-150">
                     <div className="container">
@@ -243,54 +360,54 @@ function RestaurantDetail() {
                             <div className="col-lg-4">
                                 <h5 className="m-b-0">The food</h5>
                                 <h2 className="text-lg font-herr-von-muellerhoff text-colored">Gallery</h2>
-                                <p style={{textAlign:"justify"}}>Step into a visual feast with our gallery of meals, 
+                                <p style={{ textAlign: "justify" }}>Step into a visual feast with our gallery of meals,
                                     showcasing the vibrant and mouthwatering dishes that
-                                     define our restaurant. From beautifully plated Mediterranean
-                                      classics to creative modern delights, 
-                                      each image captures the artistry, freshness,
-                                       and passion that go into every meal we serve. 
-                                       Let your eyes savor the rich colors of our dishes, 
-                                       the perfect sear on our meats, the freshness of our salads, 
-                                       and the indulgent allure of our desserts. It's not just food; 
-                                       it's an experience waiting to be savored.
+                                    define our restaurant. From beautifully plated Mediterranean
+                                    classics to creative modern delights,
+                                    each image captures the artistry, freshness,
+                                    and passion that go into every meal we serve.
+                                    Let your eyes savor the rich colors of our dishes,
+                                    the perfect sear on our meats, the freshness of our salads,
+                                    and the indulgent allure of our desserts. It's not just food;
+                                    it's an experience waiting to be savored.
                                 </p>
                             </div>
 
                             <div className="col-lg-8">
 
-                            <div className="row">
-                    
-                    <div className="col-md-4 mb-3">
-                        <img src="homepages/restaurant/images/gallery/8.jpg" alt="Gallery Image 1" className="img-fluid" />
-                    </div>
-                   
-                    <div className="col-md-4 mb-3">
-                        <img src="homepages/restaurant/images/gallery/7.jpg" alt="Gallery Image 2" className="img-fluid" />
-                    </div>
-                  
-                    <div className="col-md-4 mb-3">
-                        <img src="homepages/restaurant/images/gallery/6.jpg" alt="Gallery Image 3" className="img-fluid" />
-                    </div>
-                   
-                    <div className="col-md-4 mb-3">
-                        <img src="homepages/restaurant/images/gallery/5.jpg" alt="Gallery Image 4" className="img-fluid" />
-                    </div>
-                   
-                    <div className="col-md-4 mb-3">
-                        <img src="homepages/restaurant/images/gallery/4.jpg" alt="Gallery Image 5" className="img-fluid" />
-                    </div>
-                   
-                    <div className="col-md-4 mb-3">
-                        <img src="homepages/restaurant/images/gallery/3.jpg" alt="Gallery Image 6" className="img-fluid" />
-                    </div>
-                </div>
+                                <div className="row">
+
+                                    <div className="col-md-4 mb-3">
+                                        <img src="/homepages/restaurant/images/gallery/8.jpg" alt="Gallery Image 1" className="img-fluid" />
+                                    </div>
+
+                                    <div className="col-md-4 mb-3">
+                                        <img src="/homepages/restaurant/images/gallery/7.jpg" alt="Gallery Image 2" className="img-fluid" />
+                                    </div>
+
+                                    <div className="col-md-4 mb-3">
+                                        <img src="/homepages/restaurant/images/gallery/6.jpg" alt="Gallery Image 3" className="img-fluid" />
+                                    </div>
+
+                                    <div className="col-md-4 mb-3">
+                                        <img src="/homepages/restaurant/images/gallery/5.jpg" alt="Gallery Image 4" className="img-fluid" />
+                                    </div>
+
+                                    <div className="col-md-4 mb-3">
+                                        <img src="/homepages/restaurant/images/gallery/4.jpg" alt="Gallery Image 5" className="img-fluid" />
+                                    </div>
+
+                                    <div className="col-md-4 mb-3">
+                                        <img src="/homepages/restaurant/images/gallery/3.jpg" alt="Gallery Image 6" className="img-fluid" />
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <section id="section-reviews" className="text-light p-t-150 p-b-100" style={{ backgroundImage: "url('homepages/restaurant/images/darkish.jpg')" }}>
+                <section id="section-reviews" className="text-light p-t-150 p-b-100" style={{ backgroundImage: "url('/homepages/restaurant/images/darkish.jpg')" }}>
                     <div className="container">
                         <div className="text-center">
                             <h5 className="m-b-0">Chef Message</h5>
@@ -345,7 +462,7 @@ function RestaurantDetail() {
                     </div>
                 </section>
 
-                <div classNameName="seperator"><i classNameName="fa fa-dot-circle-o"></i></div>
+                <div className="seperator"><i className="fa fa-check-circle"></i></div>
 
                 <Footer2 />
 
@@ -354,7 +471,7 @@ function RestaurantDetail() {
 
 
 
-            <a id="scrollTop"><i classNameName="icon-chevron-up"></i><i classNameName="icon-chevron-up"></i></a>
+            <a id="scrollTop"><i className="icon-chevron-up"></i><i className="icon-chevron-up"></i></a>
 
 
 

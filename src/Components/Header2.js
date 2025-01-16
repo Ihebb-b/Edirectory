@@ -15,21 +15,20 @@ function Header2() {
 
     const { userInfo } = useSelector((state) => state.auth);
 
-    if (!userInfo) {
-        return <div>Please log in to view your profile.</div>; // Or redirect to login
-    }
-
     const handleLogout = () => {
-        dispatch(logout());       
-        setShowModal(false);   
-        setShowSpinner(true);   
-        navigate('/');  
+        navigate('/');
+        dispatch(logout());
+        
+        setShowModal(false);
 
-        // setTimeout(() => {
-        //     setShowSpinner(false);
-        //     navigate('/');
-        //     // You can redirect the user or perform any other action here
-        // }, 2000); // 2000 milliseconds = 2 seconds
+        
+        setShowSpinner(true);
+     
+
+        setTimeout(() => {
+            setShowSpinner(false);
+            // You can redirect the user or perform any other action here
+        }, 2000); // 2000 milliseconds = 2 seconds
     };
 
 
@@ -48,7 +47,7 @@ function Header2() {
 
                         <a href='/'>
                             <img
-                                src="images/moremeddietlogo.png"
+                                src="/images/moremeddietlogo.png"
                                 alt="E-Directory Logo"
                                 style={{
                                     width: "100px",
@@ -99,7 +98,7 @@ function Header2() {
                                                     />
                                                 </div>
                                                 <span>{userInfo.name}</span>
-                                                <p className="text-muted">{userInfo.role }</p>
+                                                <p className="text-muted">{userInfo.role || "Chef"}</p>
                                                 <ul className="text-center">
                                                     <li>
                                                         <NavLink
@@ -271,7 +270,7 @@ function Header2() {
                                         </ul>
                                     </li> */}
                                     <li> <NavLink to="/rlist">Restaurants</NavLink></li>
-                                    <li> <NavLink to="/">Menus</NavLink></li>
+                                    <li> <NavLink to="/menulist">Menus</NavLink></li>
                                     <li> <NavLink to="/">Recipes</NavLink></li>
 
 

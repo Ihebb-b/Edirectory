@@ -80,7 +80,7 @@ function ProfileR() {
                         <div className="container-fullscreen">
                             <div className="text-middle text-center text-end">
                                 <h1 className="text-uppercase text-medium">
-                                    {userInfo.name}
+                                    {userInfo.name || "Guest"}
                                 </h1>
                                 <p className="lead" >{userInfo.role || "Chef"}</p>
                             </div>
@@ -204,33 +204,33 @@ function ProfileR() {
 
                 <section id="page-content">
                     <div class="container">
-                        <div class="grid-layout grid-2-columns" data-margin="20" data-item="grid-item" data-lightbox="gallery">
+                        <div class="grid-layout grid-2-columns"  >
                             <div class="grid-item">
-                                <a class="image-hover-zoom" href="images/gallery/1.jpg" data-lightbox="gallery-image"><img src="images/gallery/1.jpg"/></a>
+                                <a class="image-hover-zoom" href="images/gallery/1.jpg" ><img src="images/gallery/1.jpg"/></a>
                             </div>
                             <div class="grid-item">
-                                <a class="image-hover-zoom" href="images/gallery/2.jpg" data-lightbox="gallery-image"><img src="images/gallery/2.jpg"/></a>
+                                <a class="image-hover-zoom" href="images/gallery/2.jpg" ><img src="images/gallery/2.jpg"/></a>
                             </div>
                             <div class="grid-item">
-                                <a class="image-hover-zoom" href="images/gallery/3.jpg" data-lightbox="gallery-image"><img src="images/gallery/3.jpg"/></a>
+                                <a class="image-hover-zoom" href="images/gallery/3.jpg" ><img src="images/gallery/3.jpg"/></a>
                             </div>
                             <div class="grid-item">
-                                <a class="image-hover-zoom" href="images/gallery/4.jpg" data-lightbox="gallery-image"><img src="images/gallery/4.jpg"/></a>
+                                <a class="image-hover-zoom" href="images/gallery/4.jpg"><img src="images/gallery/4.jpg"/></a>
                             </div>
                             <div class="grid-item">
-                                <a class="image-hover-zoom" href="images/gallery/5.jpg" data-lightbox="gallery-image"><img src="images/gallery/5.jpg"/></a>
+                                <a class="image-hover-zoom" href="images/gallery/5.jpg" ><img src="images/gallery/5.jpg"/></a>
                             </div>
                             <div class="grid-item">
-                                <a class="image-hover-zoom" href="images/gallery/6.jpg" data-lightbox="gallery-image"><img src="images/gallery/6.jpg"/></a>
+                                <a class="image-hover-zoom" href="images/gallery/6.jpg" ><img src="images/gallery/6.jpg"/></a>
                             </div>
                             <div class="grid-item">
-                                <a class="image-hover-zoom" href="images/gallery/7.jpg" data-lightbox="gallery-image"><img src="images/gallery/7.jpg"/></a>
+                                <a class="image-hover-zoom" href="images/gallery/7.jpg" ><img src="images/gallery/7.jpg"/></a>
                             </div>
                             <div class="grid-item">
-                                <a class="image-hover-zoom" href="images/gallery/8.jpg" data-lightbox="gallery-image"><img src="images/gallery/8.jpg"/></a>
+                                <a class="image-hover-zoom" href="images/gallery/8.jpg" ><img src="images/gallery/8.jpg"/></a>
                             </div>
                             <div class="grid-item">
-                                <a class="image-hover-zoom" href="images/gallery/9.jpg" data-lightbox="gallery-image"><img src="images/gallery/9.jpg"/></a>
+                                <a class="image-hover-zoom" href="images/gallery/9.jpg" ><img src="images/gallery/9.jpg"/></a>
                             </div>
                         </div>
                     </div>
