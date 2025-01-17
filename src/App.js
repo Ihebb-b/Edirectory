@@ -21,6 +21,8 @@ import ProfileC from './Pages/ProfileC';
 import ProfileR from './Pages/ProfileR';
 import AddMenu from './Pages/AddMenu';
 import MenuDetail from './Pages/MenuDetail';
+import AddRecipe from './Pages/AddRecipe';
+import ModifyMenu from './Pages/ModifyMenu';
 
 function App() {
 
@@ -43,6 +45,11 @@ function App() {
                 <Route path="/authpage" element= { <AuthPage/> } />
                 <Route path="/role" element= { <Role/> } />
                 <Route path="/addmenu" element= { <AddMenu/> } />
+                <Route path="/addrecipe" element= { <AddRecipe/> } />
+                <Route path="/modifyMenu/:id" element= { <ModifyMenu/> } />
+
+
+
                 
             </Routes>
         </BrowserRouter>

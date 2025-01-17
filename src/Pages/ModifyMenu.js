@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAddMenuMutation } from '../slices/restaurantSlice';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useModifyMenuMutation, useGetMenuByIdQuery } from '../slices/restaurantSlice';
 
-function AddMenu() {
-    const [addMenu, { isLoading }] = useAddMenuMutation(); // Mutation hook
+function ModifyMenu() {
+    const { id } = useParams(); // Get menu ID from route params
+    const navigate = useNavigate();
+
+    const [modifyMenu, { isLoading }] = useModifyMenuMutation();
+    const { data: menuData, isLoading: isFetching } = useGetMenuByIdQuery(id);
+
     const [showSpinner, setShowSpinner] = useState(false);
     const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+
     const [menuImage, setMenuImage] = useState(null);
-    const [menuName, setMenuName] = useState("");
-    const [description, setDescription] = useState("");
-    const [plates, setPlates] = useState([{ name: "", price: "" }]);
-    const navigate = useNavigate(); // Initialize useNavigate
+    const [menuName, setMenuName] = useState('');
+    const [description, setDescription] = useState('');
+    const [plates, setPlates] = useState([{ name: '', price: '' }]);
+
+    // Preload menu data when fetched
+    useEffect(() => {
+        if (menuData) {
+            setMenuName(menuData.name || '');
+            setDescription(menuData.description || '');
+            setPlates(menuData.plates || [{ name: '', price: '' }]);
+        }
+    }, [menuData]);
 
     // Handle adding a new plate field
     const handleAddField = () => {
-        setPlates([...plates, { name: "", price: "" }]);
+        setPlates([...plates, { name: '', price: '' }]);
     };
 
     // Handle removing a plate field
@@ -28,7 +42,7 @@ function AddMenu() {
     const handleFieldChange = (index, field, value) => {
         setPlates(
             plates.map((plate, i) =>
-                i === index ? { ...plate, [field]: field === "price" ? parseFloat(value) || "" : value } : plate
+                i === index ? { ...plate, [field]: field === 'price' ? parseFloat(value) || '' : value } : plate
             )
         );
     };
@@ -50,36 +64,39 @@ function AddMenu() {
 
         // Prepare form data
         const formData = new FormData();
-        formData.append("name", menuName);
-        formData.append("description", description);
-        formData.append("plates", JSON.stringify(plates)); // Convert plates array to JSON string
+        formData.append('name', menuName);
+        formData.append('description', description);
+        formData.append('plates', JSON.stringify(plates)); // Convert plates array to JSON string
         if (menuImage) {
-            formData.append("image", menuImage);
+            formData.append('image', menuImage);
         }
         const token = localStorage.getItem('token');
 
         try {
             // Submit form data
-            await addMenu({ token, formData }).unwrap();
-            setAlert({ show: true, type: 'success', message: 'Menu added successfully!' });
+            await modifyMenu({ token, id, formData }).unwrap();
+            setAlert({ show: true, type: 'success', message: 'Menu modified successfully!' });
             setShowSpinner(true);
 
             // Navigate to profile page after success
             setTimeout(() => {
-                navigate("/profileR");
+                navigate('/profileR');
             }, 2000);
 
             setTimeout(() => setShowSpinner(false), 2000);
         } catch (error) {
-            console.error("Error adding menu:", error);
-            setAlert({ show: true, type: 'danger', message: error?.data?.message || "Failed to add menu." });
+            console.error('Error modifying menu:', error);
+            setAlert({ show: true, type: 'danger', message: error?.data?.message || 'Failed to modify menu.' });
         }
     };
 
-    // Navigate back to the profile page
     const handleReturn = () => {
         navigate('/profileR');
     };
+
+    if (isFetching) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <div className="body-inner">
@@ -107,8 +124,8 @@ function AddMenu() {
                             <i className="fas fa-arrow-left me-2"></i> Back
                         </button>
                         <div className="w-100 px-3 px-sm-5 py-xl-5 px-xl-7">
-                            <h3>Add New Menu</h3>
-                            <p>Create a menu by entering the information below.</p>
+                            <h3>Modify Menu</h3>
+                            <p>Modify the menu by updating the information below.</p>
                             <form className="mt-5" onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="name">Name</label>
@@ -142,74 +159,61 @@ function AddMenu() {
                                         id="image"
                                         accept="image/*"
                                         onChange={handleFileChange}
-                                        required
                                     />
                                 </div>
-                                <label htmlFor="plates" >Plates</label>                          
-                                      {plates.map((plate, index) => (
+                                <label htmlFor="plates">Plates</label>
+                                {plates.map((plate, index) => (
                                     <React.Fragment key={index}>
-                                  <div  className="form-group d-flex align-items-center mb-3">
-                                        <div className="col-8 me-4">
-                                            <input
-                                                type="text"
-                                                className="form-control me-3"
-                                                placeholder={`Plate ${index + 1} Name`}
-                                                value={plate.name || ""}
-                                                onChange={(e) => handleFieldChange(index, "name", e.target.value)}
-                                                required
-                                            />
-                                        </div>
-                                        {/* Plate Price Field */}
-                                        <div className="col-3">
-                                            <input
-                                                type="number"
-                                                className="form-control me-3"
-                                                placeholder="Price $"
-                                                value={plate.price || ""}
-                                                onChange={(e) => handleFieldChange(index, "price", e.target.value)}
-                                                required
-                                            />
-
+                                        <div className="form-group d-flex align-items-center mb-3">
+                                            <div className="col-8 me-4">
+                                                <input
+                                                    type="text"
+                                                    className="form-control me-3"
+                                                    placeholder={`Plate ${index + 1} Name`}
+                                                    value={plate.name || ''}
+                                                    onChange={(e) => handleFieldChange(index, 'name', e.target.value)}
+                                                    required
+                                                />
                                             </div>
-                                            <div className="col-1">
-                                            {plates.length > 1 && (
-                                                <i
-                                                    className="icon-trash text-danger"
-                                                    style={{ cursor: "pointer" }}
-                                                    title="Remove Plate"
-                                                    onClick={() => handleRemoveField(index)}
-                                                ></i>
-                                            )}
+                                            <div className="col-3">
+                                                <input
+                                                    type="number"
+                                                    className="form-control me-3"
+                                                    placeholder="Price $"
+                                                    value={plate.price || ''}
+                                                    onChange={(e) => handleFieldChange(index, 'price', e.target.value)}
+                                                    required
+                                                />
+                                                {plates.length > 1 && (
+                                                    <i
+                                                        className="icon-trash text-danger"
+                                                        style={{ cursor: 'pointer' }}
+                                                        title="Remove Plate"
+                                                        onClick={() => handleRemoveField(index)}
+                                                    ></i>
+                                                )}
+                                            </div>
                                         </div>
-
-                                    </div>
                                     </React.Fragment>
                                 ))}
-                                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                                    {/* Add Icon */}
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                     <i
                                         className="icon-plus-circle text-primary"
                                         style={{
-                                            cursor: "pointer",
-                                            fontSize: "2rem",
-                                            marginBottom: "10px",
+                                            cursor: 'pointer',
+                                            fontSize: '2rem',
+                                            marginBottom: '10px',
                                         }}
                                         onClick={handleAddField}
                                     ></i>
-                                    {/* Submit Button */}
                                     <div className="mt-4">
                                         <button type="submit" className="btn btn-primary me-2" disabled={isLoading}>
-                                            {isLoading ? "Submitting..." : "Submit"}
+                                            {isLoading ? 'Submitting...' : 'Modify'}
                                         </button>
-                                        <button
-                                            type="button"
-                                            className="btn btn-secondary"
-                                            onClick={handleReturn}
-                                        >
+                                        <button type="button" className="btn btn-secondary" onClick={handleReturn}>
                                             Cancel
                                         </button>
                                     </div>
-
                                 </div>
                             </form>
                         </div>
@@ -218,8 +222,8 @@ function AddMenu() {
                         className="col-md-4 col-lg-8 d-none d-md-block"
                         style={{
                             backgroundImage: "url('homepages/restaurant/images/menu2.jpg')",
-                            backgroundPosition: "center",
-                            backgroundSize: "cover",
+                            backgroundPosition: 'center',
+                            backgroundSize: 'cover',
                         }}
                     ></div>
                 </div>
@@ -228,4 +232,4 @@ function AddMenu() {
     );
 }
 
-export default AddMenu;
+export default ModifyMenu;

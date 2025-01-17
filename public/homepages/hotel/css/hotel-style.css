@@ -8,6 +8,7 @@
 	margin-bottom: 10px;
 	position: relative;
 	
+	
 }
 
 .room-image img {
@@ -16,12 +17,18 @@
 	opacity: 1;
 	transition: all ease 0.3s;
 	cursor: pointer;
-	height:30vh; 
-    object-fit: cover;
+	 height:30vh; 
+    object-fit: cover; 
+
+    
 }
 
 .room-image:hover img {
 	opacity: 0.7;
+}
+
+.room:hover .hover-icons {
+    opacity: 1;
 }
 
 .room-image .room-title {

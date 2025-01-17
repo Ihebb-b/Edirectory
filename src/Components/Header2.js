@@ -271,7 +271,7 @@ function Header2() {
                                     </li> */}
                                     <li> <NavLink to="/rlist">Restaurants</NavLink></li>
                                     <li> <NavLink to="/menulist">Menus</NavLink></li>
-                                    <li> <NavLink to="/">Recipes</NavLink></li>
+                                    <li> <NavLink to="/recipelist">Recipes</NavLink></li>
 
 
 

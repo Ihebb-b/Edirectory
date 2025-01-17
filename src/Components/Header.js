@@ -195,7 +195,7 @@ function Header() {
                                             </ul> 
                                         </li>*/}
                                         <li> <NavLink to="/menulist">Menus</NavLink></li>
-                                        <li> <NavLink to="/">Recipes</NavLink></li>
+                                        <li> <NavLink to="/recipelist">Recipes</NavLink></li>
 
                                         {/* <li className="dropdown"><a href="#">Menus</a> */}
                                         {/* <ul className="dropdown-menu">

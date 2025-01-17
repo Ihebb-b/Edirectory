@@ -5,10 +5,10 @@ const RESTAURANTS_URL = "/api/restaurant";
 export const restaurantApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         addMenu: builder.mutation({
-            query: ({ token, ...data }) => ({
+            query: ({ token, formData }) => ({
                 url: `${RESTAURANTS_URL}/addMenu`, // The backend endpoint for adding a menu
                 method: 'POST',
-                body: data, // The menu data sent in the request body
+                body: formData, // The menu data sent in the request body
                 headers: {
                     Authorization: `Bearer ${token}`, // Ensure token is sent
                 },
@@ -22,12 +22,12 @@ export const restaurantApiSlice = apiSlice.injectEndpoints({
             }),
         }),
 
-        getMenuList: builder.query({
-            query: () => ({
-                url: `${RESTAURANTS_URL}/getAllmenus`,
-                method: 'GET',
-            }),
-        }),
+        // getMenuList: builder.query({
+        //     query: () => ({
+        //         url: `${RESTAURANTS_URL}/getAllmenus`,
+        //         method: 'GET',
+        //     }),
+        // }),
 
         getAllMenuPagi: builder.query({
             query: ({ page = 1, limit = 5 }) => ({
@@ -52,13 +52,30 @@ export const restaurantApiSlice = apiSlice.injectEndpoints({
             }),
         }),
 
-        getMenuById: builder.query({
-            query: (id) => ({
-                url: `${RESTAURANTS_URL}/getMenu/${id}`,
-                method: 'GET',
+        modifyMenu: builder.mutation({
+            query: ({ token, id, formData }) => ({
+                url: `${RESTAURANTS_URL}/modifyMenu/${id}`, // The backend endpoint for modifying a menu
+                method: 'PUT', // Use PUT to update an existing menu
+                body: formData, // The updated menu data to be sent in the request body
+                headers: {
+                    Authorization: `Bearer ${token}`, // Ensure token is sent
+                },
             }),
         }),
 
+        deleteMenu: builder.mutation({
+            query: ({ token, id }) => ({
+                url: `${RESTAURANTS_URL}/deleteMenu/${id}`, // The backend endpoint for deleting a menu
+                method: 'DELETE', // Use DELETE to remove the menu
+                headers: {
+                    Authorization: `Bearer ${token}`, // Ensure token is sent
+                },
+            }),
+        }),
+
+
+
+ 
 
 }),
 
@@ -70,4 +87,8 @@ export const {
     useGetAllMenuPagiQuery,
     useGetMenuByIdQuery,
     useGetMenuByUserIdQuery,
+    useModifyMenuMutation,
+    useDeleteMenuMutation,
+
+    
  } = restaurantApiSlice;
