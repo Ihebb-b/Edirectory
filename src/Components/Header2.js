@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, setCredentials } from '../slices/authSlice';
@@ -7,13 +7,24 @@ import { logout, setCredentials } from '../slices/authSlice';
 
 function Header2() {
 
+    const { userInfo } = useSelector((state) => state.auth);
+
+
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
     const navigate = useNavigate();
+    const [userImage, setUserImage] = useState(userInfo?.image || "");
+
+    useEffect(() => {
+        if (userInfo?.image) {
+          setUserImage(userInfo.image);
+        }
+      }, [userInfo]);
+      
 
 
-    const { userInfo } = useSelector((state) => state.auth);
+
 
     const handleLogout = () => {
         navigate('/');
@@ -30,6 +41,8 @@ function Header2() {
             // You can redirect the user or perform any other action here
         }, 2000); // 2000 milliseconds = 2 seconds
     };
+
+   
 
 
 
@@ -93,8 +106,8 @@ function Header2() {
                                                 <div className="d-block">
                                                     <img
                                                         className="avatar avatar-lg"
-                                                        src="images/team/6.jpg"
-                                                        alt="User Avatar"
+                                                        src={userImage || "/homepages/restaurant/images/envt.jpg"}
+                                                        alt={`${userInfo.name}'s Avatar`}
                                                     />
                                                 </div>
                                                 <span>{userInfo.name}</span>

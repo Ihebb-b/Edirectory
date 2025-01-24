@@ -31,11 +31,6 @@ function RestaurantDetail() {
         return () => observer.disconnect(); // Clean up observer
     }, []);
 
-
-
-
-
-
     const { id } = useParams();
     const { data: restaurant, isLoading: isRestaurantLoading, error: restaurantError } = useGetrestaurantByIdQuery(id);
     const { data: menuItems, isLoading: isMenuLoading, error: menuError } = useGetMenuByUserIdQuery(id);
@@ -44,23 +39,25 @@ function RestaurantDetail() {
     if (isRestaurantLoading || isMenuLoading) return <div>Loading...</div>;
     if (restaurantError || menuError) return <div>Error loading restaurant or menu details.</div>;
 
-    const restaurantImages = [
-        // "/homepages/restaurant/images/restaurantmed1.jpg",
-        // "/homepages/restaurant/images/restaurantmed2.jpg",
-        // "/homepages/restaurant/images/restaurantmed3.jpg",
-        // "/homepages/restaurant/images/restaurantmed4.jpg",
-        "/homepages/restaurant/images/restaurant1.jpg",
-        "/homepages/restaurant/images/restaurant2.jpg",
-        "/homepages/restaurant/images/restaurant3.jpg",
-        "/homepages/restaurant/images/restaurant4.jpg",
-    ];
+    // const dietImages = [
 
-    const getRandomImage = () => {
-        const randomIndex = Math.floor(Math.random() * restaurantImages.length);
-        return restaurantImages[randomIndex];
-    };
+    //     "/homepages/restaurant/images/restaurant1.jpg",
+    //     "/homepages/restaurant/images/restaurant2.jpg",
+    //     "/homepages/restaurant/images/restaurant3.jpg",
+    //     "/homepages/restaurant/images/restaurant4.jpg",
+    // ];
 
-    const randomImage = getRandomImage();
+    // const getRandomImage = () => {
+    //     const randomIndex = Math.floor(Math.random() * restaurantImages.length);
+    //     return restaurantImages[randomIndex];
+    // };
+
+    // const randomImage = getRandomImage();
+
+    const imageResto = restaurant?.image
+        ? `http://localhost:5000${restaurant.image}` : "homepages/restaurant/images/darkish.jpg";
+
+
 
 
     return (
@@ -70,8 +67,6 @@ function RestaurantDetail() {
 
                 <Header2 />
 
-            
-
                 <div id="slider" className="inspiro-slider dots-creative" data-height-xs="360">
                     {/* <div
                         className="slide kenburns"
@@ -80,8 +75,12 @@ function RestaurantDetail() {
 
                     <div
                         className="slide kenburns"
-                        style={{ backgroundImage: `url('${randomImage}')` }} // Set the dynamic background image here
-                    >
+                        style={{
+                            backgroundImage: `url(${imageResto})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center'
+                        }}>
+
 
 
                         <div className="bg-overlay"></div>
@@ -96,7 +95,7 @@ function RestaurantDetail() {
                     </div>
                 </div>
 
-                
+
 
                 <div className="seperator"><i className="fa fa-check-circle"></i></div>
 
@@ -189,6 +188,55 @@ function RestaurantDetail() {
 
                 <section>
                     <div className="container">
+                    <h2 className="text-lg font-herr-von-muellerhoff text-colored">Our Supported Diets</h2>
+
+                        <div className="row">
+                            {restaurant?.diet?.map((diet, index) => {
+                                const dietImages = {
+                                    "No-restriction": "/homepages/restaurant/images/norestriction.jpg",
+                                    Flexterian: "/homepages/restaurant/images/flexterian.jpg",
+                                    Vegan: "/homepages/restaurant/images/vegan.jpg",
+                                    Vegetarian: "/homepages/restaurant/images/vegetarian.jpg",
+                                    "Dairy-free": "/homepages/restaurant/images/dairyfree.jpg",
+                                };
+
+                                return (
+                                    <div
+                                        key={index}
+                                        className="col-lg-3 animate-fade-in delay-300"
+                                        style={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            alignItems: "center",
+                                            textAlign: "center",
+                                            marginBottom: "16px",
+                                        }}
+                                    >
+                                        <img
+                                            src={dietImages[diet] || "/homepages/restaurant/images/default-diet.jpg"}
+                                            alt={diet}
+                                            style={{
+                                                width: "15rem",
+                                                height: "15rem",
+                                                objectFit: "cover",
+                                                borderRadius: "8px",
+                                                marginBottom: "16px",
+                                            }}
+                                        />
+                                        <h4 style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "8px" }}>{diet}</h4>
+                                        <p style={{ fontSize: "14px", color: "#555" }}>
+                                            {`Explore our delicious ${diet} options crafted to suit your dietary preferences.`}
+                                        </p>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </section>
+
+
+                <section>
+                    <div className="container">
                         <div className="row">
                             <div className="col-lg-3 animate-fade-in delay-300">
                                 <div className="text-center">
@@ -230,6 +278,10 @@ function RestaurantDetail() {
                         </div>
                     </div>
                 </section>
+
+               
+
+
 
                 {/* <div className="col-lg-6" data-animate="animate__fadeIn">
 

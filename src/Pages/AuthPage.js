@@ -31,6 +31,7 @@ function AuthPage() {
     const [register] = useRegisterMutation();
     const [alert, setAlert] = useState({ show: false, type: '', message: '' });
 
+  
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -234,7 +235,8 @@ function AuthPage() {
                                         )}
 
                                         <div className="mt-4">
-                                            <button type="submit" className="btn btn-primary btn-block">
+                                            <button type="submit" className="btn btn-primary btn-block"
+                                            style={{width:"40%", justifySelf:"center"}}>
                                                 {isSignIn ? "Sign In" : "Sign Up"}
                                             </button>
                                         </div>

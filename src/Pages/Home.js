@@ -6,20 +6,33 @@ import Slider from '../Components/Slider';
 import logo from '../logo.svg';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams, NavLink } from "react-router-dom";
-import { useGetMenuListQuery } from '../slices/restaurantSlice';
+import { useGetAllMenuListQuery, useGetMenuListQuery } from '../slices/restaurantSlice';
 import { useGetAllRestaurantsQuery } from '../slices/userApiSlice';
 import { useDispatch } from 'react-redux';
+import { useGetRecipeListQuery, useGetRecipesQuery } from '../slices/recipeSlice';
 
 
 
 export default function Home() {
+
+    const [filters, setFilters] = useState({
+        country: "",
+        diet: "",
+        averageBill: "",
+    });
+
+    const navigate = useNavigate();
+
+
     //const [restaurants, setRestaurants] = useState([]);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
 
     const { data: restaurants = [], isLoadingResto, errorResto } = useGetAllRestaurantsQuery();
 
-    const { data: menus = [], isLoading, error } = useGetMenuListQuery();
+    const { data: menus = [], isLoading, error } = useGetAllMenuListQuery();
+
+    const { data: recipes = [], isLoadingRecipes, errorRecipes } = useGetRecipesQuery();
 
     const [showSpinner, setShowSpinner] = useState(false);
 
@@ -29,44 +42,30 @@ export default function Home() {
         }
     }, [isLoadingResto, isLoading]);
 
+    const handleInputChange = (e) => {
+        const { id, value } = e.target;
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            [id]: value,
+        }));
+    };
+    const handleSearch = () => {
+        const params = new URLSearchParams(filters).toString();
+        navigate(`/rlist?${params}`);
+    };
 
+// const handleSearch = () => {
+//         const country = document.getElementById("country-select").value;
+//         const diet = document.getElementById("diet-select").value;
+//         const averageBill = document.getElementById("average-bill").value;
 
+//         onSearch({
+//             country,
+//             diet,
+//             averageBill: parseInt(averageBill, 10) || 0,
+//         });
+//     };
 
-
-    const menuImages = [
-        "homepages/restaurant/images/menumed1.jpg",
-        "homepages/restaurant/images/menumed2.jpg",
-        "homepages/restaurant/images/menumed3.jpg",
-        "homepages/restaurant/images/menumed4.jpg",
-    ];
-    const menuDescriptions = [
-        "A selection of traditional Tunisian dishes, including couscous, kebabs, and pastries.",
-        "A variety of salads, including tabbouleh, couscous, and falafel.",
-        "A selection of traditional Tunisian dishes, including couscous, kebabs, and pastries.",
-        "A variety of salads, including tabbouleh, couscous, and falafel.",
-    ];
-    const staticData = [
-        {
-            image: "homepages/restaurant/images/restaurantmed1.jpg",
-            description:
-                "An upscale restaurant in a typical Tunisian setting, located in the medina between the two souks “El Attarine“ and “El Balgagia”.",
-        },
-        {
-            image: "homepages/restaurant/images/restaurantmed4.jpg",
-            description:
-                "This name evokes a cozy, intimate dining experience, suggesting elegance and refinement.",
-        },
-        {
-            image: "homepages/restaurant/images/restaurantmed2.jpg",
-            description:
-                "Meaning 'The Kitchen Party,' this name evokes a lively and festive atmosphere.",
-        },
-        {
-            image: "homepages/restaurant/images/restaurantmed3.jpg",
-            description:
-                "A highly-recommended restaurant in Algiers, known for serving excellent food.",
-        },
-    ];
 
 
 
@@ -103,49 +102,72 @@ export default function Home() {
                                         <div className="col-lg-3 col-6">
                                             <div className="form-group">
                                                 <label className="font-size-lg">Country</label>
-                                                <select className="form-select" defaultValue="">
+                                                <select 
+                                                    id="country"
+                                                    className="form-select" 
+                                                    value={filters.country}
+                                                    onChange={handleInputChange}
+                                                    >
                                                     <option value="" disabled hidden>
                                                         Select a country
                                                     </option>
-                                                    <option>Tunisia</option>
-                                                    <option>Algeria</option>
-                                                    <option>Morroco</option>
+                                                    <option value="Tunisia">Tunisia</option>
+                                                    <option value="Algeria">Algeria</option>
+                                                    <option value="Morocco">Morocco</option>
+                                                    <option value="France">France</option>
+                                                    <option value="Italy">Italy</option>
+                                                    <option value="Spain">Spain</option>
+                                                    <option value="Albania">Albania</option>
+                                                    <option value="Herzegovina">Herzegovina</option>
+                                                    <option value="Cyprus">Cyprus</option>
+                                                    <option value="Greece">Greece</option>
+                                                    <option value="Lebanon">Lebanon</option>
+                                                    <option value="Syria">Syria</option>
+                                                    <option value="Egypt">Egypt</option>
+                                                    <option value="Libya">Libya</option>
+                                                    <option value="Palestine">Palestine</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div className="col-lg-3 col-6">
                                             <div className="form-group">
-                                                <label className="font-size-lg">Region</label>
-                                                <select className="form-select" defaultValue="">
-                                                    <option value="" disabled hidden>
-                                                        Select a region
-                                                    </option>
-                                                    <option>Sidi Bouzid</option>
-                                                    <option>Casablanca</option>
-                                                    <option>Wahran</option>
-                                                    <option>Tahran</option>
-                                                    <option>Ariana</option>
-                                                    <option>Manouba</option>
+                                                <label className="font-size-lg">Diet</label>
+                                                <select 
+                                                    id="diet-select" 
+                                                    className="form-select" 
+                                                    value={filters.diet}
+                                                    onChange={handleInputChange}
+                                                    >
+                                                    <option value="" disabled hidden>Select a diet</option>
+                                                    <option value="Vegetarian">Vegetarian</option>
+                                                    <option value="Vegan">Vegan</option>
+                                                    <option value="Dairy-free">Dairy-free</option>
+                                                    <option value="Flexterian">Flexterian</option>
+                                                    <option value="No-restriction">No Restriction</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div className="col-lg-3 col-6">
                                             <div className="form-group">
-                                                <label className="font-size-lg">Zip</label>
-                                                <select className="form-select" defaultValue="">
-                                                    <option value="" disabled hidden>
-                                                        Select a zip code
-                                                    </option>
-                                                    <option>9100</option>
-                                                    <option>2080</option>
-                                                    <option>2800</option>
-                                                    <option>2022</option>
-                                                </select>
+                                                <label className="font-size-lg">Average Bill (Max)</label>
+                                                <input 
+                                                    id="average-bill" 
+                                                    type="number" 
+                                                    className="form-control" 
+                                                    placeholder="Enter max bill"
+                                                    value={filters.averageBill}
+                                                    onChange={handleInputChange}
+                                                    min="0" />
                                             </div>
                                         </div>
 
                                         <div className="col-lg-3 align-self-end">
-                                            <button type="button" className="btn btn-primary mb-3">Check restaurant</button>
+                                            <button 
+                                                type="button" 
+                                                id="search-button" 
+                                                className="btn btn-primary mb-3"
+                                                onClick={handleSearch}
+                                                >Check restaurant</button>
                                         </div>
                                     </div>
                                 </form>
@@ -457,7 +479,8 @@ export default function Home() {
                                 and whole grains.
                             </p>
 
-                        </div>
+                        </div>  const tagOptions = ["Vegetarian", "Vegan", "Dairy Free", "Flexterian", "No Restriction"];
+
                         <div className="row">
                             <div className="col-lg-3">
                                 <div className="room">
@@ -572,9 +595,15 @@ export default function Home() {
                                     <div className="room">
                                         <div className="room-image">
                                             <img
-                                                src={staticData[index]?.image}
+                                                src={restaurant.image || "/homepages/restaurant/images/envt.jpg"}
                                                 alt={restaurant.name}
                                                 className="img-fluid"
+                                                style={{
+                                                    width: "100%", // Full width relative to its container
+                                                    height: "200px", // Fixed height
+                                                    objectFit: "cover", // Maintain aspect ratio and avoid stretching
+                                                    borderRadius: "8px", // Optional: Rounded corners
+                                                }}
                                             />
                                             <div className="room-title">{restaurant.name}</div>
                                         </div>
@@ -583,9 +612,9 @@ export default function Home() {
                                             <p>{restaurant.description}</p>
                                             <h6>average price: €{restaurant.averageBill}</h6>
                                             <div className="float-center">
-                                                <a href={`/restaurant/${restaurant?._id}`} className="btn btn-outline btn-dark">
+                                                <NavLink to={`/restaurant/${restaurant?._id}`} className="btn btn-outline btn-dark">
                                                     Details
-                                                </a>
+                                                </NavLink>
                                             </div>
                                         </div>
                                     </div>
@@ -622,15 +651,24 @@ export default function Home() {
                                 <div className="col-lg-3" key={menu.id}>
                                     <div className="room">
                                         <div className="room-image">
-                                            <img src={menuImages[index]} alt={menu.name} />
+                                            <img
+                                                className="img-fluid"
+                                                src={menu.image}
+                                                alt={menu.name}
+                                                style={{
+                                                    width: "100%", // Full width relative to its container
+                                                    height: "200px", // Fixed height
+                                                    objectFit: "cover", // Maintain aspect ratio and avoid stretching
+                                                    borderRadius: "8px", // Optional: Rounded corners
+                                                }} />
                                             <div className="room-title">{menu.name}</div>
                                         </div>
                                         <div className="room-details">
                                             <p>{menu.description}</p>
                                             <div className="float-center">
-                                                <a href={`/getMenu/${menu?._id}`} className="btn btn-outline btn-dark">
+                                                <NavLink to={`/getMenu/${menu?._id}`} className="btn btn-outline btn-dark">
                                                     Details
-                                                </a>
+                                                </NavLink>
                                             </div>
                                         </div>
                                     </div>
@@ -648,7 +686,8 @@ export default function Home() {
                                 <h2 className="text-medium m-t-0 mb-0">Popular Recipes</h2>
 
 
-                                <button type="button" className="btn btn-outline btn-dark">Explore More</button>
+                                <NavLink to="/recipelist" className="btn btn-outline btn-dark">Explore More
+                                </NavLink>
                             </div>
                             <div className="seperator"><i className="fa fa-dot-circle-o"></i></div>
                             <p className="lead mb-0">
@@ -661,7 +700,40 @@ export default function Home() {
 
                         </div>
                         <div className="row">
-                            <div className="col-lg-3">
+
+                            {Array.isArray(recipes) && recipes.slice(0, 4).map((recipe, index) => (
+                                <div className="col-lg-3" key={recipe._id}>
+                                    <div className="room">
+                                        <div className="room-image">
+                                            <img
+                                                src={recipe.image || "/homepages/restaurant/images/envt.jpg"}
+                                                alt={recipe.name}
+                                                className="img-fluid"
+                                                style={{
+                                                    width: "100%", // Full width relative to its container
+                                                    height: "200px", // Fixed height
+                                                    objectFit: "cover", // Maintain aspect ratio and avoid stretching
+                                                    borderRadius: "8px", // Optional: Rounded corners
+                                                }}
+                                            />
+                                            <div className="room-title">{recipe.name}</div>
+                                        </div>
+                                        <div className="room-details">
+                                            <h5><b>Ingredients:</b></h5>
+                                            <h5>{recipe.ingredients?.join(', ')}</h5>
+
+                                            <div className="float-center">
+                                                <NavLink to={`/recipeDetail/${recipe?._id}`} className="btn btn-outline btn-dark">
+                                                    Details
+                                                </NavLink>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+
+
+                            {/* <div className="col-lg-3">
                                 <div className="room">
                                     <div className="room-image">
                                         <img src="homepages/restaurant/images/recipemed1.jpg" alt="#" />
@@ -737,7 +809,7 @@ export default function Home() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                         </div>
                     </div>

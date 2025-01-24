@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useModifyMenuMutation, useGetMenuByIdQuery } from '../slices/restaurantSlice';
+import { useModifyMenuMutation, useGetMenuByIdQuery, useGetMenuListQuery } from '../slices/restaurantSlice';
 
 function ModifyMenu() {
     const { id } = useParams(); // Get menu ID from route params
@@ -16,6 +16,10 @@ function ModifyMenu() {
     const [menuName, setMenuName] = useState('');
     const [description, setDescription] = useState('');
     const [plates, setPlates] = useState([{ name: '', price: '' }]);
+    const [existingImage, setExistingImage] = useState(null);
+    const { refetch: refetchMenus} = useGetMenuListQuery();
+
+
 
     // Preload menu data when fetched
     useEffect(() => {
@@ -23,6 +27,7 @@ function ModifyMenu() {
             setMenuName(menuData.name || '');
             setDescription(menuData.description || '');
             setPlates(menuData.plates || [{ name: '', price: '' }]);
+            setExistingImage(menuData.image || null);
         }
     }, [menuData]);
 
@@ -69,7 +74,10 @@ function ModifyMenu() {
         formData.append('plates', JSON.stringify(plates)); // Convert plates array to JSON string
         if (menuImage) {
             formData.append('image', menuImage);
+        } else {
+            formData.append('existingImage', existingImage); // Send existing image path if no new image
         }
+
         const token = localStorage.getItem('token');
 
         try {
@@ -79,6 +87,8 @@ function ModifyMenu() {
             setShowSpinner(true);
 
             // Navigate to profile page after success
+           
+           await refetchMenus();
             setTimeout(() => {
                 navigate('/profileR');
             }, 2000);
@@ -119,6 +129,7 @@ function ModifyMenu() {
             )}
             <div className="container-fluid">
                 <div className="row min-vh-100">
+
                     <div className="col-md-8 col-lg-4 d-flex align-items-center">
                         <button type="button" onClick={handleReturn} className="btn btn-secondary mb-3">
                             <i className="fas fa-arrow-left me-2"></i> Back
@@ -153,10 +164,24 @@ function ModifyMenu() {
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="image">Image</label>
+                                    {/* {existingImage && (
+                                        <div>
+                                            <img
+                                                src={`${process.env.REACT_APP_API_URL}${existingImage}`}
+                                                alt="Existing Menu"
+                                                style={{ maxWidth: '200px', marginBottom: '10px' }}
+                                            />
+                                        </div>
+                                    )} */}
+
+                                    {existingImage && (
+                                        <p className="text-muted">
+                                            Current image will be used unless you upload a new one.
+                                        </p>
+                                    )}
                                     <input
                                         type="file"
                                         className="form-control"
-                                        id="image"
                                         accept="image/*"
                                         onChange={handleFileChange}
                                     />
@@ -175,7 +200,7 @@ function ModifyMenu() {
                                                     required
                                                 />
                                             </div>
-                                            <div className="col-3">
+                                            <div className="col-2 row">
                                                 <input
                                                     type="number"
                                                     className="form-control me-3"
@@ -184,15 +209,16 @@ function ModifyMenu() {
                                                     onChange={(e) => handleFieldChange(index, 'price', e.target.value)}
                                                     required
                                                 />
-                                                {plates.length > 1 && (
-                                                    <i
-                                                        className="icon-trash text-danger"
-                                                        style={{ cursor: 'pointer' }}
-                                                        title="Remove Plate"
-                                                        onClick={() => handleRemoveField(index)}
-                                                    ></i>
-                                                )}
+
                                             </div>
+                                            {plates.length > 1 && (
+                                                <i
+                                                    className="icon-trash text-danger col-2"
+                                                    style={{ cursor: 'pointer' }}
+                                                    title="Remove Plate"
+                                                    onClick={() => handleRemoveField(index)}
+                                                ></i>
+                                            )}
                                         </div>
                                     </React.Fragment>
                                 ))}
@@ -218,14 +244,16 @@ function ModifyMenu() {
                             </form>
                         </div>
                     </div>
+
                     <div
                         className="col-md-4 col-lg-8 d-none d-md-block"
                         style={{
-                            backgroundImage: "url('homepages/restaurant/images/menu2.jpg')",
+                            backgroundImage: "url('/homepages/restaurant/images/menu2.jpg')",
                             backgroundPosition: 'center',
                             backgroundSize: 'cover',
                         }}
                     ></div>
+
                 </div>
             </div>
         </div>

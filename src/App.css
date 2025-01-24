@@ -650,6 +650,21 @@
   opacity: 1;
 }
 
+.tag-link {
+  cursor: pointer;
+  padding: 5px 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.tag-link.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
 
 
 

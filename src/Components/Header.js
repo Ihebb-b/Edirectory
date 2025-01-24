@@ -7,12 +7,24 @@ import { useGetUserProfileQuery } from '../slices/userApiSlice';
 
 
 function Header() {
+
+    const { userInfo } = useSelector((state) => state.auth);
+
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
 
     const navigate = useNavigate();
-    const { userInfo } = useSelector((state) => state.auth);
+
+    const [userImage, setUserImage] = useState(userInfo?.image || "");
+
+    useEffect(() => {
+        if (userInfo?.image) {
+          setUserImage(userInfo.image);
+        }
+      }, [userInfo]);
+      
+
 
 
     
@@ -106,9 +118,9 @@ function Header() {
                                                 <div className="widget-myaccount">
                                                     <div className="d-block">
                                                         <img
-                                                            className="avatar avatar-lg"
-                                                            src="images/team/6.jpg"
-                                                            alt="User Avatar"
+                                                              className="avatar avatar-lg"
+                                                              src={userImage || "/homepages/restaurant/images/envt.jpg"}
+                                                              alt={`${userInfo.name}'s Avatar`}
                                                         />
                                                     </div>
                                                     <span>{userInfo.name}</span>

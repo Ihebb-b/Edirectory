@@ -5,12 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
 import { Provider } from 'react-redux';
+import { LoadScript } from '@react-google-maps/api';
+import 'leaflet/dist/leaflet.css';
+import { GoogleMapsProvider } from './Components/GoogleMapsProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
   <React.StrictMode>
+  <GoogleMapsProvider>
     <App />
+  </GoogleMapsProvider>
   </React.StrictMode>
   </Provider>
 );

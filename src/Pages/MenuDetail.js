@@ -42,20 +42,8 @@ function MenuDetail() {
     if (isMenuLoading) return <div>Loading...</div>;
     if (menuError) return <div>Error loading  menu details.</div>;
 
-    const restaurantImages = [
-
-        "/homepages/restaurant/images/menubackground1.jpg",
-        "/homepages/restaurant/images/menubackground2.jpg",
-        "/homepages/restaurant/images/menubackground3.jpg",
-        "/homepages/restaurant/images/menubackground4.jpg",
-    ];
-
-    const getRandomImage = () => {
-        const randomIndex = Math.floor(Math.random() * restaurantImages.length);
-        return restaurantImages[randomIndex];
-    };
-
-    const randomImage = getRandomImage();
+    // Extract the image URL from the fetched menu data
+    const menuImage = menu.image; // Assuming the API returns the menu image URL in a property named `image`
 
 
     return (
@@ -65,7 +53,7 @@ function MenuDetail() {
 
                 <Header2 />
 
-                <div id="slider" className="inspiro-slider dots-creative" data-height-xs="360" style={{height:"90%"}}>
+                <div id="slider" className="inspiro-slider dots-creative" data-height-xs="360" style={{ height: "90%" }}>
                     {/* <div
                         className="slide kenburns"
                         style={{ backgroundImage: "url('/homepages/restaurant/images/restaurant1.jpg')" }}
@@ -73,7 +61,13 @@ function MenuDetail() {
 
                     <div
                         className="slide kenburns"
-                        style={{ backgroundImage: `url('${randomImage}')` }} // Set the dynamic background image here
+                        style={{
+                            backgroundImage: `url('${menuImage}')`, // Use the menu image from the API
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            borderRadius: '10px', // Optional for styling
+                          }}
+                        
                     >
 
 
@@ -82,7 +76,7 @@ function MenuDetail() {
                             <div className=" text-center text-light">
 
                                 <h1 className="mb-10">Explore Our Delcieous Plates </h1>
-                               
+
 
 
                                 {menu?.plates?.length > 0 ? (

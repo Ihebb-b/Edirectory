@@ -13,15 +13,18 @@ function MenusList() {
     limit: itemsPerPage,
   });
 
-  const menuImages = [
-    "homepages/restaurant/images/menumed1.jpg",
-    "homepages/restaurant/images/menumed2.jpg",
-    "homepages/restaurant/images/menumed3.jpg",
-    "homepages/restaurant/images/menumed4.jpg",
-  ];
+  // const menuImages = [
+  //   "homepages/restaurant/images/menumed1.jpg",
+  //   "homepages/restaurant/images/menumed2.jpg",
+  //   "homepages/restaurant/images/menumed3.jpg",
+  //   "homepages/restaurant/images/menumed4.jpg",
+  // ];
 
   const menus = data?.menus || [];
   const totalPages = data?.totalPages || 1;
+
+  //const menuImage = data.image; // Assuming the API returns the menu image URL in a property named `image`
+
 
   // State to toggle map visibility
   const [isMapVisible, setMapVisible] = useState(false);
@@ -44,12 +47,12 @@ function MenusList() {
 
   // Error state
   if (isError) {
-    return <p>An error occurred while fetching restaurants.</p>;
+    return <p>An error occurred while fetching menus.</p>;
   }
 
   // Empty state
   if (!menus.length) {
-    return <p>No restaurants available.</p>;
+    return <p>No menus available.</p>;
   }
 
 
@@ -117,13 +120,27 @@ function MenusList() {
                           <a href="#">
                             <img
                               alt={menu.name}
-                              src={`/homepages/restaurant/images/menumed${index % 4 + 1}.jpg`} // Cycle through static images
+                              src={menu.image || "/homepages/restaurant/images/default-image.jpg"}
+                              onError={(e) => {
+                                e.target.src = "/homepages/restaurant/images/default-image.jpg";
+                              }}
+
+                              style={{
+                                width: "350px", // Set fixed width
+                                height: "250px", // Set fixed height
+                                objectFit: "cover", // Maintain aspect ratio and avoid stretching
+                                borderRadius: "8px", // Optional: Rounded corners
+                                margin: "0 auto", // Center the image
+                              }}
+                              //src={`url('${menuImage}')`}
+                              //src={menu.image || "/homepages/restaurant/images/envt.jpg"}
+                              //src={`/homepages/restaurant/images/menumed${index % 4 + 1}.jpg`} // Cycle through static images
                             />
                           </a>
                         </div>
                         <div className="post-item-description">
                           <h2>
-                            <a href={`/getMenu/${menu?._id}`}>{menu.name}</a>
+                          <NavLink to={`/getMenu/${menu?._id}`}>{menu.name}</NavLink>
                           </h2>
                           <p style={{ textAlign: "justify" }}>{menu.description}</p>
                           <NavLink

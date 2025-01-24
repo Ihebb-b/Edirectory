@@ -23,6 +23,7 @@ import AddMenu from './Pages/AddMenu';
 import MenuDetail from './Pages/MenuDetail';
 import AddRecipe from './Pages/AddRecipe';
 import ModifyMenu from './Pages/ModifyMenu';
+import ModifyRecipe from './Pages/ModifyRecipe';
 
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
                 <Route path="/recipelist" element= { <RecipesList/> } />
                 <Route path="/restaurant/:id" element= { <RestaurantDetail/> } />
                 <Route path="/getMenu/:id" element= { <MenuDetail/> } />
-                <Route path="/recipedetail" element= { <RecipeDetail/> } />
+                <Route path="/recipedetail/:id" element= { <RecipeDetail/> } />
                 <Route path="/signin" element= { <SignIn/> } />
                 <Route path="/signup" element= { <SignUp/> } />
                 <Route path="/profileC" element= { <ProfileC/> } />
@@ -47,7 +48,7 @@ function App() {
                 <Route path="/addmenu" element= { <AddMenu/> } />
                 <Route path="/addrecipe" element= { <AddRecipe/> } />
                 <Route path="/modifyMenu/:id" element= { <ModifyMenu/> } />
-
+                <Route path="/modifyRecipe/:id" element= { <ModifyRecipe/> } />
 
 
                 

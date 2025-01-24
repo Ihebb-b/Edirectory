@@ -19,6 +19,7 @@ export const restaurantApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: `${RESTAURANTS_URL}/menus`,
                 method: 'GET',
+                
             }),
         }),
 
@@ -73,6 +74,14 @@ export const restaurantApiSlice = apiSlice.injectEndpoints({
             }),
         }),
 
+        getAllMenuList: builder.query({
+            query: () => ({
+                url: `${RESTAURANTS_URL}/getAllMenus`,
+                method: 'GET',
+                
+            }),
+        }),
+
 
 
  
@@ -89,6 +98,7 @@ export const {
     useGetMenuByUserIdQuery,
     useModifyMenuMutation,
     useDeleteMenuMutation,
+    useGetAllMenuListQuery,
 
     
  } = restaurantApiSlice;

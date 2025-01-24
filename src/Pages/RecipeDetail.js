@@ -1,21 +1,31 @@
 import React from 'react'
 import Header2 from '../Components/Header2'
 import Footer2 from '../Components/Footer2'
+import { useGetRecipeByIdQuery } from '../slices/recipeSlice';
+import { useParams } from 'react-router-dom';
 
 function RecipeDetail() {
+
+    const { id } = useParams();
+    const { data: recipe, isLoading, error } = useGetRecipeByIdQuery(id);
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading recipe details.</div>;
+
     return (
         <>
             <div className="body-inner">
                 <Header2 />
 
                 <section class="profile-content">
-                    <div class="profile-image" style={{ backgroundImage: "url('homepages/restaurant/images/shakshouka.jpg')" }}>
+                    <div class="profile-image"
+                        style={{ backgroundImage: `url(${recipe?.image || '/homepages/restaurant/images/shakshouka.jpg'})` }}>
                         <div class="profile-name">
-                            <h3>Shakshouka</h3>
+                            <h3>{recipe?.name || 'Recipe Name'}</h3>
                         </div>
                     </div>
                     <div class="profile-bio">
-                        <h3>Shakshouka recipe</h3>
+                        <h3>{recipe?.name || 'Recipe Details'}</h3>
                         <br />
 
 
@@ -23,7 +33,7 @@ function RecipeDetail() {
                             popular across the Mediterranean. This recipe serves 4 and is perfect for
                             breakfast, brunch, or even a light dinner.</p>
 
-                        <div class="ingredients-list m-t-60">
+                        {/* <div class="ingredients-list m-t-60">
                             <h3 class="text-uppercase text-center">Ingredients</h3>
                             <ul class="ingredients">
                                 <li>
@@ -79,10 +89,27 @@ function RecipeDetail() {
                                     <span class="ingredient-quantity">To serve</span>
                                 </li>
                             </ul>
+                        </div> */}
+
+
+                        <div className="ingredients-list m-t-60">
+                            <h3 className="text-uppercase text-center">Ingredients</h3>
+                            <ul className="ingredients">
+                                {recipe?.ingredients?.length > 0 ? (
+                                    recipe.ingredients.map((ingredient, index) => (
+                                        <li key={index}>
+                                            {ingredient}
+                                            {/* <span className="ingredient-quantity">{ingredient.quantity}</span> */}
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li>No ingredients available.</li>
+                                )}
+                            </ul>
                         </div>
 
 
-                        <div class="instructions-container m-t-60">
+                        {/* <div class="instructions-container m-t-60">
                             <h3 class="text-uppercase">Instructions</h3>
                             <ol class="instruction-list">
                                 <li>
@@ -110,7 +137,23 @@ function RecipeDetail() {
                                     Serve hot with crusty bread or pita for dipping.
                                 </li>
                             </ol>
+                        </div> */}
+
+                        <div className="instructions-container m-t-60">
+                            <h3 className="text-uppercase">Instructions</h3>
+                            <ol className="instruction-list">
+                                {recipe?.instructions?.length > 0 ? (
+                                    recipe.instructions.map((instruction, index) => (
+                                        <li key={index}>{instruction}</li>
+                                    ))
+                                ) : (
+                                    <li>No instructions provided.</li>
+                                )}
+                            </ol>
                         </div>
+
+
+
 
                         <div class="profile-bio-footer">
                             <div class="text-center"> &copy; © 2024 E-Directory - All Rights Reserved.</div>

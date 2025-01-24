@@ -19,10 +19,11 @@ function Role() {
     const dispatch = useDispatch();
     const [alert, setAlert] = useState({ show: false, type: '', message: '' });
     const navigate = useNavigate();
+    const [image, setImage] = useState(null);
     const [showSpinner, setShowSpinner] = useState(false);
-
-
-
+    
+    
+    
     const handleRoleClick = (selectedRole) => {
         setRole(selectedRole);
         setShowDetailsForm(true);
@@ -35,26 +36,56 @@ function Role() {
         setRole(null);
     };
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setImage(file); // Save the file in the component's state
+      };
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const updatedUser = await updateUser({ role, localisation, averageBill, description, diet }).unwrap();
-            dispatch(setCredentials(updatedUser));
-            setAlert({ show: true, type: 'success', message: 'Registration completed successful!' });
-            setShowSpinner(true);
-
-            setTimeout(() => {
-                navigate("/");
-            }, 2000);
-
-            setTimeout(() => {
-                setShowSpinner(false);
-
-            }, 2000);
-
+          // Create FormData object
+          const formData = new FormData();
+          formData.append("role", role);
+          formData.append("localisation", localisation);
+          formData.append("averageBill", averageBill);
+          formData.append("description", description);
+          formData.append("diet", diet);
+      
+          if (image) {
+            formData.append("image", image); // Append the image file
+          }
+      
+          console.log("FormData Content:");
+          for (let pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`); // Log FormData key-value pairs for debugging
+          }
+      
+          // Use updateUser mutation with FormData
+          const updatedUser = await updateUser(formData).unwrap();
+      
+          // Update Redux store
+          dispatch(setCredentials(updatedUser));
+      
+          // Success alert
+          setAlert({
+            show: true,
+            type: "success",
+            message: "Profile updated successfully!",
+          });
+      
+          // Navigate after delay
+          setShowSpinner(true);
+          setTimeout(() => navigate("/"), 2000);
+          setTimeout(() => setShowSpinner(false), 2000);
         } catch (err) {
-            console.error('Failed to update profile:', err);
-            setAlert({ show: true, type: 'danger', message: err?.data?.message || "Login failed." });
+          console.error("Failed to update profile:", err);
+          setAlert({
+            show: true,
+            type: "danger",
+            message: err?.data?.message || "Profile update failed.",
+          });
         }
 
     };
@@ -175,6 +206,18 @@ function Role() {
                                                         </div>
 
                                                         <div className="form-group">
+                                                            <label htmlFor="image">Image</label>
+                                                            <input
+                                                                type="file"
+                                                                className="form-control"
+                                                                id="image"
+                                                                accept="image/*"
+                                                                onChange={handleFileChange}
+                                                                required
+                                                            />
+                                                        </div>
+
+                                                        <div className="form-group">
                                                             <label htmlFor="localisation">Localisation</label>
                                                             <div className="input-group">
                                                                 <select
@@ -197,6 +240,30 @@ function Role() {
                                                                 </select>
                                                                 <span className="input-group-text">
                                                                     <i className="icon-map-pin"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label htmlFor="diet">Diet Type</label>
+                                                            <div className="input-group">
+                                                                <select
+                                                                    className="form-control"
+                                                                    name="diet"
+                                                                    value={diet}
+                                                                    onChange={(e) => setDiet(e.target.value)} // Bind to state
+                                                                    required
+                                                                >
+                                                                    <option value="" disabled>
+                                                                        Select diet type
+                                                                    </option>
+                                                                    {["Vegetarian", "Vegan", "Pescatarian", "Omnivore", "Carnivore"].map((dietOption) => (
+                                                                        <option key={dietOption} value={dietOption}>
+                                                                            {dietOption}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
+                                                                <span className="input-group-text">
+                                                                    <i className="icon-tag"></i>
                                                                 </span>
                                                             </div>
                                                         </div>

@@ -10,6 +10,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 body: data,
             }),
         }),
+        transformResponse: (response) => {
+            localStorage.setItem('authToken', response.token); // Store token in localStorage
+            return response;
+          },
 
         register: builder.mutation({
             query: (data) => ({
@@ -37,12 +41,15 @@ export const userApiSlice = apiSlice.injectEndpoints({
             }),
         }),
 
-        getUserProfile: builder.query({
-            query: () => ({
-                url: "/profile", // Endpoint to fetch user profile
-                method: "GET",
-            }),
-        }),
+        // getUserProfile: builder.query({
+        //     query: () => ({
+        //         url: `${USERS_URL}/profile`, // Endpoint to fetch user profile
+        //         method: "GET",
+        //         headers: {
+        //             Authorization: `Bearer ${localStorage.getItem("token")}`, 
+        //           },
+        //     }),
+        // }),
 
         assignRole: builder.mutation({
             query: (data) => ({
@@ -74,6 +81,22 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+
+        searchRestaurants: builder.query({
+            query: ({ localisation, diet, minBill, maxBill }) =>
+              `search?localisation=${localisation}&diet=${diet}&minBill=${minBill}&maxBill=${maxBill}`,
+          }),
+
+        filterRestaurants: builder.query({
+            query: (filters) => {
+              const queryParams = new URLSearchParams(filters).toString();
+              return `${USERS_URL}/filtered?${queryParams}`;
+            },
+          }),
+
+        
+
+
     }),
 });
 
@@ -82,7 +105,9 @@ export const {
     useLogoutMutation,
     useRegisterMutation,
     useUpdateUserMutation,
-    useGetUserProfileQuery,
     useGetAllRestaurantsQuery,
     useGetAllRestaurantsPagiQuery,
-    useGetrestaurantByIdQuery, } = userApiSlice;
+    useGetrestaurantByIdQuery,
+    useSearchRestaurantsQuery,
+    useFilterRestaurantsQuery,
+ } = userApiSlice;
