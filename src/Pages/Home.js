@@ -7,7 +7,7 @@ import logo from '../logo.svg';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams, NavLink } from "react-router-dom";
 import { useGetAllMenuListQuery, useGetMenuListQuery } from '../slices/restaurantSlice';
-import { useGetAllRestaurantsQuery } from '../slices/userApiSlice';
+import { useGetAllRestaurantsQuery, useGetCountriesQuery, useGetDietQuery } from '../slices/userApiSlice';
 import { useDispatch } from 'react-redux';
 import { useGetRecipeListQuery, useGetRecipesQuery } from '../slices/recipeSlice';
 
@@ -22,6 +22,11 @@ export default function Home() {
     });
 
     const navigate = useNavigate();
+
+    const { data: countries = [], isLoading: isLoadingCountries } = useGetCountriesQuery();
+    const { data: diets = [], isLoading: isLoadingDiets } = useGetDietQuery();
+    console.log("Diets:", diets); // Debug the diets data
+
 
 
     //const [restaurants, setRestaurants] = useState([]);
@@ -111,21 +116,11 @@ export default function Home() {
                                                     <option value="" disabled hidden>
                                                         Select a country
                                                     </option>
-                                                    <option value="Tunisia">Tunisia</option>
-                                                    <option value="Algeria">Algeria</option>
-                                                    <option value="Morocco">Morocco</option>
-                                                    <option value="France">France</option>
-                                                    <option value="Italy">Italy</option>
-                                                    <option value="Spain">Spain</option>
-                                                    <option value="Albania">Albania</option>
-                                                    <option value="Herzegovina">Herzegovina</option>
-                                                    <option value="Cyprus">Cyprus</option>
-                                                    <option value="Greece">Greece</option>
-                                                    <option value="Lebanon">Lebanon</option>
-                                                    <option value="Syria">Syria</option>
-                                                    <option value="Egypt">Egypt</option>
-                                                    <option value="Libya">Libya</option>
-                                                    <option value="Palestine">Palestine</option>
+                                                    {countries.map((country) => (
+                                                        <option key={country} value={country}>
+                                                            {country}
+                                                        </option>
+                                                    ))}
                                                 </select>
                                             </div>
                                         </div>
@@ -139,11 +134,11 @@ export default function Home() {
                                                     onChange={handleInputChange}
                                                     >
                                                     <option value="" disabled hidden>Select a diet</option>
-                                                    <option value="Vegetarian">Vegetarian</option>
-                                                    <option value="Vegan">Vegan</option>
-                                                    <option value="Dairy-free">Dairy-free</option>
-                                                    <option value="Flexterian">Flexterian</option>
-                                                    <option value="No-restriction">No Restriction</option>
+                                                    {diets.map((diet) => (
+                                                        <option key={diet} value={diet}>
+                                                            {diet}
+                                                        </option>
+                                                    ))}
                                                 </select>
                                             </div>
                                         </div>

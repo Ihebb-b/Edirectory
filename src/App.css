@@ -665,6 +665,120 @@
   border-color: #007bff;
 }
 
+.marker-container {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.marker-container:hover {
+  transform: scale(1.2);
+}
+
+.marker-pin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker-shadow {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 15px;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  filter: blur(2px);
+}
+
+/* Custom Popup Styling */
+.custom-popup .leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 0;
+}
+
+.popup-content h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+.popup-content p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Map Container Styling */
+.leaflet-container {
+  background: #f0f2f5; /* Light background for the map */
+}
+
+.custom-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.marker-container {
+  position: relative;
+  display: inline-block;
+}
+
+.marker-pin {
+  position: relative;
+  z-index: 1;
+}
+
+.marker-tooltip {
+  position: absolute;
+  bottom: 100%; /* Position the tooltip above the marker */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 1; /* Always visible */
+  visibility: visible; /* Always visible */
+}
+
+.marker-shadow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+
+
+
 
 
 

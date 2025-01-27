@@ -350,7 +350,7 @@ function ProfileR() {
                                             className="room card position-relative"
                                             style={{
                                                 backgroundColor: "#FFF6F4",
-                                                height: "45vh",
+                                                height: "40vh",
                                                 position: "relative",
                                                 overflow: "hidden", // Ensure icons don't overflow the card
                                             }}
@@ -437,7 +437,7 @@ function ProfileR() {
                                             {/* Menu Image */}
                                             <div
                                                 className="room-image card-img-top"
-                                                style={{ position: "relative" }}
+                                                style={{ position: "relative", padding: "0.75rem 1rem" }} 
                                             >
                                                 <img
                                                     src={`http://localhost:3000${menu.image}`}
@@ -445,13 +445,13 @@ function ProfileR() {
                                                     className="img-fluid"
                                                     style={{
                                                         width: "100%",
-                                                        height: "30vh",
+                                                        height: "25vh",
                                                         objectFit: "cover",
-                                                        borderRadius: "8px",
+                                                        borderRadius: "5px",
                                                     }}
                                                 />
                                                 <div className="room-title card-body">
-                                                    <h4 className="card-title" style={{ color: "white" }}>
+                                                    <h4 className="card-title" style={{ color: "gray-100" }}>
                                                         {menu.name}
                                                     </h4>
                                                 </div>
@@ -538,8 +538,10 @@ function ProfileR() {
                                         <div className="room card  shadow position-relative"
                                             style={{
                                                 backgroundColor: "#FFF6F4",
-                                                height: "30vh",
+                                                height: "38vh",
                                                 position: "relative",
+                                                borderRadius: "10px",   
+                                                padding: "0.75rem 1rem" ,
                                                 overflow: "hidden", // Ensure icons don't overflow the card
                                             }}
                                             onMouseEnter={(e) => {
@@ -630,11 +632,14 @@ function ProfileR() {
                                                         width: '100%',
                                                         height: '30vh',
                                                         objectFit: 'cover',
-                                                        borderRadius: '8px',
+                                                        borderRadius: '4px',
+                                                        backgroundSize: "cover", // Use 'cover' to fill the container while maintaining aspect ratio
+                                                        backgroundPosition: "center", // Center the image
+                                                
                                                     }}
                                                 />
                                                 <div className="room-title card-body">
-                                                    <h5 className="card-title" style={{ color: "white" }}>{recipe.name}</h5>
+                                                    <h5 className="card-title" style={{ color: "gray-400" }}>{recipe.name}</h5>
                                                 </div>
                                             </div>
 

@@ -94,8 +94,19 @@ export const userApiSlice = apiSlice.injectEndpoints({
             },
           }),
 
-        
+          getCountries: builder.query({
+            query: () => ({
+                url: `${USERS_URL}/countries`,
+                method: 'GET',
+            }),
+          }),
 
+          getDiet: builder.query({
+            query: () => ({
+                url: `${USERS_URL}/diets`,
+                method: 'GET',
+            }),
+          }),
 
     }),
 });
@@ -110,4 +121,6 @@ export const {
     useGetrestaurantByIdQuery,
     useSearchRestaurantsQuery,
     useFilterRestaurantsQuery,
+    useGetCountriesQuery,
+    useGetDietQuery,
  } = userApiSlice;

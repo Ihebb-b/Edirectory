@@ -256,7 +256,7 @@ function Role() {
                                                                     <option value="" disabled>
                                                                         Select diet type
                                                                     </option>
-                                                                    {["Vegetarian", "Vegan", "Pescatarian", "Omnivore", "Carnivore"].map((dietOption) => (
+                                                                    {["Vegetarian", "Vegan", "Dairyfree", "Flexterian", "Norestriction"].map((dietOption) => (
                                                                         <option key={dietOption} value={dietOption}>
                                                                             {dietOption}
                                                                         </option>
