@@ -19,7 +19,26 @@ function RecipeDetail() {
 
                 <section class="profile-content">
                     <div class="profile-image"
-                        style={{ backgroundImage: `url(${recipe?.image || '/homepages/restaurant/images/shakshouka.jpg'})` }}>
+                        style={{
+                            backgroundImage: `url(${recipe?.image || '/homepages/restaurant/images/shakshouka.jpg'})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                         
+                        }}
+                    >
+
+                        <div
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'rgba(0, 0, 0, 0.2)', // Adjust opacity (0.4 = 40% darkness)
+                            }}
+                        ></div>
+
+
                         <div class="profile-name">
                             <h3>{recipe?.name || 'Recipe Name'}</h3>
                         </div>

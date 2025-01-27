@@ -240,6 +240,20 @@ function RestaurantList() {
         setCurrentPage(1); // Reset to the first page when a new location is selected
     };
 
+    const handleRefreshFilters = () => {
+        setFilters({
+            location: "",
+            priceRange: "",
+            stars: "",
+            diet: [],
+            reviewScore: "",
+            facilities: [],
+        });
+        setCurrentPage(1); // Reset to the first page
+        refetch(); // Re-fetch data to show the original list
+    };
+
+
     useEffect(() => {
         console.log("Filters updated:", filters);
         refetch();
@@ -287,6 +301,20 @@ function RestaurantList() {
                             <button onClick={toggleMap} className="btn btn-outline btn-dark mt-3">
                                 {isMapVisible ? "Hide Map" : "View on Map"}
                             </button>
+
+                            <button
+                                    className="btn btn-secondary d-flex align-items-center gap-2"
+                                    onClick={handleRefreshFilters}
+                                    style={{
+                                        position: "absolute",
+                                        top: "10px",
+                                        right: "20px",
+                                        zIndex: "1000",
+                                    }}
+                                >
+                                    <i className="icon-refresh-cw"></i> {/* Custom Icon */}
+                                  
+                                </button>
                         </div>
                     </div>
                 </section>
@@ -400,6 +428,8 @@ function RestaurantList() {
                                                             className="form-check-input"
                                                             type="checkbox"
                                                             onChange={(e) => handleFilterChange("stars", category)}
+                                                            checked={filters.stars === category}
+
                                                         />
                                                     </div>
                                                 </li>
@@ -425,6 +455,8 @@ function RestaurantList() {
                                                             onChange={(e) =>
                                                                 handleFilterChange("priceRange", range.value)
                                                             }
+                                                            checked={filters.priceRange === range.value}
+
                                                         />
                                                     </div>
                                                 </li>
@@ -450,6 +482,7 @@ function RestaurantList() {
                                                             onChange={(e) =>
                                                                 handleFilterChange("reviewScore", score.value)
                                                             }
+                                                            checked={filters.reviewScore === score.value}
                                                         />
                                                     </div>
                                                 </li>
@@ -471,6 +504,7 @@ function RestaurantList() {
                                                             onChange={(e) =>
                                                                 handleFilterChange("facilities", facility.toLowerCase())
                                                             }
+                                                            checked={filters.facilities.includes(facility.toLowerCase())}
                                                         />
                                                     </div>
                                                 </li>

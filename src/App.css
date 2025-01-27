@@ -776,6 +776,12 @@
   z-index: 0;
 }
 
+.no-padding {
+  padding: 0 !important; /* Use !important to override Bootstrap's default styles */
+}
+
+
+
 
 
 

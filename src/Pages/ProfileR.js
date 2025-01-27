@@ -144,6 +144,8 @@ function ProfileR() {
     };
 
     const dispatch = useDispatch();
+    const [isExpanded, setIsExpanded] = useState(false);
+
 
     const { userInfo } = useSelector((state) => state.auth);
     console.log(userInfo); // Ensure it contains the expected fields
@@ -203,15 +205,42 @@ function ProfileR() {
                     style={{
                         backgroundImage: `url(${imageResto})`,
                         backgroundSize: 'cover',
-                        backgroundPosition: 'center'
+                        backgroundPosition: 'center',
+                        position: 'relative', // Required for the overlay
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+
                     }}>
-                    <div className="container">
-                        <div className="container-fullscreen">
-                            <div className="text-middle text-center text-end">
-                                <h1 className="text-uppercase text-medium">
-                                    {userInfo.name || "Guest"}
-                                </h1>
-                                <p className="lead" >{userInfo.role || "Chef"}</p>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: 'rgba(0, 0, 0, 0.4)', // Adjust opacity (0.4 = 40% darkness)
+                        }}
+                    ></div>
+
+                    <div style={{ position: 'relative', zIndex: 1, height: '100%' }}>
+
+
+                        <div className="container"
+                            style={{
+                                height: '100%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <div className="container-fullscreen">
+                                <div className="text-middle text-center text-end">
+                                    <h1 className="text-uppercase text-medium">
+                                        {userInfo.name || "Guest"}
+                                    </h1>
+                                    <p className="lead" >{userInfo.role || "Chef"}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -250,17 +279,17 @@ function ProfileR() {
                                 <div className="col-md-6">
 
                                     <h4>Supported Diets</h4>
-                                   
+
                                     <ul>
                                         {userInfo.diet && userInfo.diet.length > 0 ? (
                                             userInfo.diet.map((diet, index) => (
-                                                <li  key={index}><h5>{diet}</h5></li> // Use index as key if diet values are unique
+                                                <li key={index}><h5>{diet}</h5></li> // Use index as key if diet values are unique
                                             ))
                                         ) : (
                                             <li>No supported diets available.</li> // Fallback message if no diets are present
                                         )}
                                     </ul>
-                                    
+
                                 </div>
                             </div>
 
@@ -437,7 +466,7 @@ function ProfileR() {
                                             {/* Menu Image */}
                                             <div
                                                 className="room-image card-img-top"
-                                                style={{ position: "relative", padding: "0.75rem 1rem" }} 
+                                                style={{ position: "relative" }}
                                             >
                                                 <img
                                                     src={`http://localhost:3000${menu.image}`}
@@ -458,10 +487,40 @@ function ProfileR() {
                                             </div>
 
                                             {/* Menu Description */}
-                                            <div className="room-title card-body">
-                                                <h5 className="card-title" style={{ color: "black" }}>
+                                            <div className="room-title card-body no-padding">
+                                                {/* <h5 className="card-title" style={{ color: "black", padding: "0" }}>
+                                                    {menu.description}
+                                                </h5> */}
+
+                                                <h5
+                                                    className="card-title menu-description"
+                                                    style={{
+                                                        color: "black",
+                                                        padding: "0",
+                                                        overflow: "hidden",
+                                                        display: isExpanded ? "block" : "-webkit-box",
+                                                        WebkitBoxOrient: "vertical",
+                                                        WebkitLineClamp: 2,
+                                                    }}
+                                                >
                                                     {menu.description}
                                                 </h5>
+                                                {menu.description.length > 100 && (
+                                                    <a
+                                                        href="#"
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            setIsExpanded(!isExpanded);
+                                                        }}
+                                                        style={{
+                                                            display: "block",
+                                                            color: "#007bff",
+                                                            textDecoration: "none",
+                                                            cursor: "pointer",
+                                                        }}
+                                                    >
+                                                    </a>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -538,10 +597,10 @@ function ProfileR() {
                                         <div className="room card  shadow position-relative"
                                             style={{
                                                 backgroundColor: "#FFF6F4",
-                                                height: "38vh",
+                                                height: "40vh",
                                                 position: "relative",
-                                                borderRadius: "10px",   
-                                                padding: "0.75rem 1rem" ,
+                                                borderRadius: "10px",
+                                                padding: "0.75rem 1rem",
                                                 overflow: "hidden", // Ensure icons don't overflow the card
                                             }}
                                             onMouseEnter={(e) => {
@@ -635,7 +694,7 @@ function ProfileR() {
                                                         borderRadius: '4px',
                                                         backgroundSize: "cover", // Use 'cover' to fill the container while maintaining aspect ratio
                                                         backgroundPosition: "center", // Center the image
-                                                
+
                                                     }}
                                                 />
                                                 <div className="room-title card-body">

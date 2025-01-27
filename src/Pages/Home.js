@@ -20,6 +20,26 @@ export default function Home() {
         diet: "",
         averageBill: "",
     });
+    const [expandedDescriptions, setExpandedDescriptions] = useState({});
+
+    const toggleDescription = (id) => {
+        setExpandedDescriptions((prev) => ({
+            ...prev,
+            [id]: !prev[id], // Toggle the expansion state for the specific restaurant
+        }));
+    };
+    const [expandedIngredients, setExpandedIngredients] = useState({});
+
+    const toggleIngredients = (id) => {
+        setExpandedIngredients((prev) => ({
+            ...prev,
+            [id]: !prev[id], // Toggle the expansion state for the specific recipe
+        }));
+    };
+
+
+
+
 
     const navigate = useNavigate();
 
@@ -59,17 +79,17 @@ export default function Home() {
         navigate(`/rlist?${params}`);
     };
 
-// const handleSearch = () => {
-//         const country = document.getElementById("country-select").value;
-//         const diet = document.getElementById("diet-select").value;
-//         const averageBill = document.getElementById("average-bill").value;
+    // const handleSearch = () => {
+    //         const country = document.getElementById("country-select").value;
+    //         const diet = document.getElementById("diet-select").value;
+    //         const averageBill = document.getElementById("average-bill").value;
 
-//         onSearch({
-//             country,
-//             diet,
-//             averageBill: parseInt(averageBill, 10) || 0,
-//         });
-//     };
+    //         onSearch({
+    //             country,
+    //             diet,
+    //             averageBill: parseInt(averageBill, 10) || 0,
+    //         });
+    //     };
 
 
 
@@ -107,12 +127,12 @@ export default function Home() {
                                         <div className="col-lg-3 col-6">
                                             <div className="form-group">
                                                 <label className="font-size-lg">Country</label>
-                                                <select 
+                                                <select
                                                     id="country"
-                                                    className="form-select" 
+                                                    className="form-select"
                                                     value={filters.country}
                                                     onChange={handleInputChange}
-                                                    >
+                                                >
                                                     <option value="" disabled hidden>
                                                         Select a country
                                                     </option>
@@ -127,12 +147,12 @@ export default function Home() {
                                         <div className="col-lg-3 col-6">
                                             <div className="form-group">
                                                 <label className="font-size-lg">Diet</label>
-                                                <select 
-                                                    id="diet-select" 
-                                                    className="form-select" 
+                                                <select
+                                                    id="diet-select"
+                                                    className="form-select"
                                                     value={filters.diet}
                                                     onChange={handleInputChange}
-                                                    >
+                                                >
                                                     <option value="" disabled hidden>Select a diet</option>
                                                     {diets.map((diet) => (
                                                         <option key={diet} value={diet}>
@@ -145,10 +165,10 @@ export default function Home() {
                                         <div className="col-lg-3 col-6">
                                             <div className="form-group">
                                                 <label className="font-size-lg">Average Bill (Max)</label>
-                                                <input 
-                                                    id="average-bill" 
-                                                    type="number" 
-                                                    className="form-control" 
+                                                <input
+                                                    id="average-bill"
+                                                    type="number"
+                                                    className="form-control"
                                                     placeholder="Enter max bill"
                                                     value={filters.averageBill}
                                                     onChange={handleInputChange}
@@ -157,12 +177,12 @@ export default function Home() {
                                         </div>
 
                                         <div className="col-lg-3 align-self-end">
-                                            <button 
-                                                type="button" 
-                                                id="search-button" 
+                                            <button
+                                                type="button"
+                                                id="search-button"
                                                 className="btn btn-primary mb-3"
                                                 onClick={handleSearch}
-                                                >Check restaurant</button>
+                                            >Check restaurant</button>
                                         </div>
                                     </div>
                                 </form>
@@ -454,6 +474,8 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+                <div className="seperator"><i className="fa fa-building"></i></div>
+
 
                 {/* <section className="red-bg">
                     <div className="container">
@@ -575,7 +597,7 @@ export default function Home() {
                                 </NavLink>
                             </div>
                             <div className="seperator">
-                                <i className="fa fa-dot-circle-o"></i>
+                                <i className="fa fa-dot-circle"></i>
                             </div>
                             <p className="lead mb-0">
                                 Mediterranean restaurants offer a culinary experience inspired by
@@ -600,11 +622,39 @@ export default function Home() {
                                                     borderRadius: "8px", // Optional: Rounded corners
                                                 }}
                                             />
-                                            <div className="room-title">{restaurant.name}</div>
+                                            <div className="room-title" style={{ color: "black", fontSize: "1.2rem", fontWeight: "bold" }}>{restaurant.name}</div>
                                         </div>
                                         <div className="room-details">
                                             <h5>{restaurant.localisation}</h5>
-                                            <p>{restaurant.description}</p>
+                                            <p
+                                                style={{
+                                                    overflow: "hidden",
+                                                    display: expandedDescriptions[restaurant._id]
+                                                        ? "block"
+                                                        : "-webkit-box",
+                                                    WebkitBoxOrient: "vertical",
+                                                    WebkitLineClamp: 2,
+                                                }}
+                                            >
+                                                {restaurant.description}
+                                            </p>
+                                            {restaurant.description.length > 100 && (
+                                                <a
+                                                    href="#"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        toggleDescription(restaurant._id);
+                                                    }}
+                                                    style={{
+                                                        display: "block",
+                                                        color: "#007bff",
+                                                        textDecoration: "none",
+                                                        cursor: "pointer",
+                                                    }}
+                                                >
+
+                                                </a>
+                                            )}
                                             <h6>average price: €{restaurant.averageBill}</h6>
                                             <div className="float-center">
                                                 <NavLink to={`/restaurant/${restaurant?._id}`} className="btn btn-outline btn-dark">
@@ -618,6 +668,8 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+                <div className="seperator"><i className=" icon-menu"></i></div>
+
 
 
 
@@ -631,7 +683,7 @@ export default function Home() {
                                 </NavLink>
                             </div>
                             <div className="seperator">
-                                <i className="fa fa-dot-circle-o"></i>
+                                <i className="fa fa-dot-circle"></i>
                             </div>
                             <p className="lead mb-0">
                                 Menus at Mediterranean restaurants are a vibrant celebration of the
@@ -650,16 +702,44 @@ export default function Home() {
                                                 className="img-fluid"
                                                 src={menu.image}
                                                 alt={menu.name}
+
                                                 style={{
+
                                                     width: "100%", // Full width relative to its container
                                                     height: "200px", // Fixed height
                                                     objectFit: "cover", // Maintain aspect ratio and avoid stretching
                                                     borderRadius: "8px", // Optional: Rounded corners
                                                 }} />
-                                            <div className="room-title">{menu.name}</div>
+                                            <div className="room-title" style={{ color: "black", fontSize: "1.2rem", fontWeight: "bold" }}>{menu.name}</div>
                                         </div>
                                         <div className="room-details">
-                                            <p>{menu.description}</p>
+                                            <p 
+                                             style={{
+                                                overflow: "hidden",
+                                                display: expandedDescriptions[menu._id]
+                                                    ? "block"
+                                                    : "-webkit-box",
+                                                WebkitBoxOrient: "vertical",
+                                                WebkitLineClamp: 2,
+                                            }}
+                                            >{menu.description}</p>
+                                             {menu.description.length > 100 && (
+                                                <a
+                                                    href="#"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        toggleDescription(menu._id);
+                                                    }}
+                                                    style={{
+                                                        display: "block",
+                                                        color: "#007bff",
+                                                        textDecoration: "none",
+                                                        cursor: "pointer",
+                                                    }}
+                                                >
+
+                                                </a>
+                                            )}
                                             <div className="float-center">
                                                 <NavLink to={`/getMenu/${menu?._id}`} className="btn btn-outline btn-dark">
                                                     Details
@@ -672,6 +752,8 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+                <div className="seperator"><i className="fa fa-file"></i></div>
+
 
                 <section className='yellow-bg'>
                     <div className="container">
@@ -684,7 +766,7 @@ export default function Home() {
                                 <NavLink to="/recipelist" className="btn btn-outline btn-dark">Explore More
                                 </NavLink>
                             </div>
-                            <div className="seperator"><i className="fa fa-dot-circle-o"></i></div>
+                            <div className="seperator"><i className="fa fa-dot-circle"></i></div>
                             <p className="lead mb-0">
                                 Mediterranean restaurants offer a culinary experience inspired by the diverse and vibrant
                                 flavors of countries bordering the Mediterranean Sea, such as Greece, Italy, Spain, Turkey,
@@ -711,12 +793,39 @@ export default function Home() {
                                                     borderRadius: "8px", // Optional: Rounded corners
                                                 }}
                                             />
-                                            <div className="room-title">{recipe.name}</div>
+                                            <div className="room-title" style={{ color: "black", fontSize: "1.2rem", fontWeight: "bold" }}>{recipe.name}</div>
                                         </div>
                                         <div className="room-details">
                                             <h5><b>Ingredients:</b></h5>
-                                            <h5>{recipe.ingredients?.join(', ')}</h5>
-
+                                            {/* <h5>{recipe.ingredients?.join(', ')}</h5> */}
+                                            <p
+                                                style={{
+                                                    overflow: "hidden",
+                                                    display: expandedIngredients[recipe._id]
+                                                        ? "block"
+                                                        : "-webkit-box",
+                                                    WebkitBoxOrient: "vertical",
+                                                    WebkitLineClamp: 2,
+                                                }}
+                                            >
+                                                {recipe.ingredients?.join(", ")}
+                                            </p>
+                                            {recipe.ingredients?.length > 5 && ( // Show "Read More" only if there are many ingredients
+                                                <a
+                                                    href="#"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        toggleIngredients(recipe._id);
+                                                    }}
+                                                    style={{
+                                                        display: "block",
+                                                        color: "#007bff",
+                                                        textDecoration: "none",
+                                                        cursor: "pointer",
+                                                    }}
+                                                >
+                                                </a>
+                                            )}
                                             <div className="float-center">
                                                 <NavLink to={`/recipeDetail/${recipe?._id}`} className="btn btn-outline btn-dark">
                                                     Details

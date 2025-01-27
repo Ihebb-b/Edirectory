@@ -61,6 +61,14 @@ export const recipeSlice = apiSlice.injectEndpoints({
             }),
         }),
 
+        getRecipessById: builder.query({
+
+            query: (id) => ({
+                url: `${RECIPE_URL}/recipes/${id}`,
+                method: 'GET',
+            }),
+        }),
+
         getAllRecipePagi: builder.query({
             query: ({ page = 1, limit = 5 }) => ({
               url: `${RECIPE_URL}/getAllrecipePagi?page=${page}&limit=${limit}`,
@@ -80,5 +88,6 @@ export const {
     useDeleteRecipeMutation,
     useGetRecipeByIdQuery,
     useGetAllRecipePagiQuery,
+    useGetRecipessByIdQuery,
 
 } = recipeSlice;

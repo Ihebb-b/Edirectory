@@ -65,7 +65,8 @@ function MenuDetail() {
                             backgroundImage: `url('${menuImage}')`, // Use the menu image from the API
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
-                            borderRadius: '10px', // Optional for styling
+                            borderRadius: '10px', 
+                            height: '80vh', // Optional for styling
                           }}
                         
                     >
